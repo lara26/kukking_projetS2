@@ -6,7 +6,6 @@ import jxl.read.biff.BiffException;
 
 public class Recipe{
 	
-	
 	private Cell title;
 	private Cell ingredientTitle;
 	private Cell categoryTitle;
@@ -15,7 +14,6 @@ public class Recipe{
 	private Cell termostatOvenTitle;
 	private Cell costTitle;
 	private Cell preparationTitle;
-	private Cell firstIngredient;
 	private Cell ingredient;
 	private Cell preparationTime;
 	private Cell preparationTimeHour;
@@ -28,8 +26,8 @@ public class Recipe{
 	private Cell cost;
 	
 	/**
-	 * permet d'obtenir chaque position de case pour chaque titre(pour l'istant apres tout) des categorie des recettes
-	 * @param numberSheetRecipe feuille de recette que l'on souhaite afficher
+	 * methode qui affiche toute la recette sur la console (pour l'instant)
+	 * @param numberSheetRecipe feuille de recette que l'on souhaite afficher (1ère feuille = 0)
 	 * @throws BiffException
 	 * @throws IOException
 	 */
@@ -40,6 +38,7 @@ public class Recipe{
 		
 		title(sheet);
 		indregientTitle(sheet);
+		// on affiche le premier ingredient
 		this.ingredient = sheet.getCell(0,5);
 		this.ingredientQTE = sheet.getCell(1,5);
 		this.ingredientmeasure = sheet.getCell(2,5);
@@ -52,9 +51,16 @@ public class Recipe{
 			this.ingredientmeasure = sheet.getCell(2,i);
 			Ingredient = ingredient.getContents() + " " + ingredientQTE.getContents() + " " + ingredientmeasure.getContents();
 			i ++;
-		}
+		}// Tant qu'il y a des ingredients on les affiche
 		
-		catedoryTitle(sheet);
+		categoryTitle(sheet);
+		String Category = sheet.getCell(3,5).getContents();
+		int c=6;
+		while (Category != ""){
+			System.out.println(Category);
+			Category = sheet.getCell(3, c).getContents();
+			c ++;
+		}
 		
 		preparationTimeTitle(sheet);
 		this.preparationTime = sheet.getCell("F5");
@@ -80,68 +86,93 @@ public class Recipe{
 		System.out.println(Cost);
 		
 		preparationTitle(sheet);
+		// on affiche la première instruction
 		String prepa = sheet.getCell(4,15).getContents();
 		int p=16;
 		while(prepa != ""){
 			System.out.println(prepa);
 			prepa = sheet.getCell(4,p).getContents();
 			p++;	
-		}
+		}// Tant q'il y a des instructions, on les affiche
 		
 
 		
 	}
 
-
+	/**
+	 * methode pour affiche le titre "Preparation"
+	 * @param sheet number of sheet
+	 */
 	private void preparationTitle(Sheet sheet) {
 		this.preparationTitle = sheet.getCell("D15");
 		String PrepaTitle = preparationTitle.getContents();
 		System.out.println(PrepaTitle);
 	}
 
-
+	/**
+	 *  methode pour affiche le titre "Cout"
+	 * @param sheet number of sheet
+	 */
 	private void costTitle(Sheet sheet) {
 		this.costTitle = sheet.getCell("E8");
 		String CostTitle = costTitle.getContents();
 		System.out.println(CostTitle);
 	}
 
-
+	/**
+	 *  methode pour affiche le titre "Termostat Four"
+	 * @param sheet number of sheet
+	 */
 	private void termostatovenTitle(Sheet sheet) {
 		this.termostatOvenTitle = sheet.getCell("E7");
 		String TermostatTitle = termostatOvenTitle.getContents();
 		System.out.println(TermostatTitle);
 	}
 
-
+	/**
+	 *  methode pour affiche le titre "Tps de cuisson"
+	 * @param sheet number of sheet
+	 */
 	private void cookingTimeTitle(Sheet sheet) {
 		this.cookingTimeTitle = sheet.getCell("E6");
 		String CookingTimeTitle = cookingTimeTitle.getContents();
 		System.out.println(CookingTimeTitle);
 	}
 
-
+	/**
+	 * methode pour affiche le titre "Preparation"
+	 * @param sheet number of sheet
+	 */
 	private void preparationTimeTitle(Sheet sheet) {
 		this.preparationTimeTitle = sheet.getCell("E5");
 		String PrepaTimeTitle = preparationTimeTitle.getContents();
 		System.out.println(PrepaTimeTitle);
 	}
 
-
-	private void catedoryTitle(Sheet sheet) {
+	/**
+	 * methode pour affiche le titre "Categorie"
+	 * @param sheet number of sheet
+	 */
+	private void categoryTitle(Sheet sheet) {
 		this.categoryTitle = sheet.getCell("D5");
 		String CategTitle = categoryTitle.getContents();
 		System.out.println(CategTitle);
 	}
 
-
+	/**
+	 * methode pour affiche le titre "Ingredient"
+	 * @param sheet number of sheet
+	 */
 	private void indregientTitle(Sheet sheet) {
 		this.ingredientTitle = sheet.getCell("A5");
 		String IngredientTitle = ingredientTitle.getContents();
 		System.out.println(IngredientTitle);
 	}
 
-
+	/**
+	 * methode pour affiche le titre de la recette
+	 * @param sheet number of sheet
+	 */
 	private void title(Sheet sheet) {
 		this.title = sheet.getCell("D1");
 		String Title = title.getContents();
