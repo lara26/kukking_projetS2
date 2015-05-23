@@ -49,6 +49,7 @@ public class Recipe2 {
 		this.ingredientmeasure = sheet.getCell(2,5);
 		/*int i =6;
 		while( ingredient.getContents() !=""){
+			
 			this.ingredient = sheet.getCell(0,i);
 			this.ingredientQTE = sheet.getCell(1,i);
 			this.ingredientmeasure = sheet.getCell(2,i);
@@ -68,25 +69,13 @@ public class Recipe2 {
 		this.cost = sheet.getCell("F8");
 		this.preparationTitle = sheet.getCell("D15");
 		this.prepa = sheet.getCell(4,15);
-		/*int p=16;
+		int p=16;
 		while(prepa.getContents() != ""){
 			this.prepa = sheet.getCell(4,p);
 			p++;	
-		}*/
+		}
 	
 		
-	}
-
-	
-	public String testIngre(String recette) throws BiffException, IOException{
-		Recipe2 testou = new Recipe2(recette);
-		String Ingredient = ingredient.getContents() + " " + ingredientQTE.getContents() + " " + ingredientmeasure.getContents()  ;
-		int i =6;
-		while( ingredient.getContents() !=""){
-			Ingredient += ingredient.getContents() + " " + ingredientQTE.getContents() + " " + ingredientmeasure.getContents();
-			i ++;
-		}
-		return Ingredient;
 	}
 
 	public String toString(){
@@ -101,12 +90,8 @@ public class Recipe2 {
 		recipe += "\n" + termostatOvenTitle.getContents() + " : " + termostatOven.getContents() + " " + termostatOvenDegre.getContents();
 		recipe += "\n" + preparationTitle.getContents();
 		recipe += "\n" + prepa.getContents();
-		try {
-			recipe += testIngre("PouletMielBalsamique");
-		} catch (BiffException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
 		
 		return recipe;
 		
