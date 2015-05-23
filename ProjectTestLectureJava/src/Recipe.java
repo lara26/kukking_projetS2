@@ -4,6 +4,7 @@ import java.io.IOException;
 import jxl.*;
 import jxl.read.biff.BiffException;
 
+
 public class Recipe{
 	
 	private Cell title;
@@ -24,6 +25,8 @@ public class Recipe{
 	private Cell termostatOven;
 	private Cell termostatOvenDegre;
 	private Cell cost;
+	private Cell nbPerson;
+	private Cell person;
 	
 	/**
 	 * methode qui affiche toute la recette sur la console (pour l'instant)
@@ -31,12 +34,14 @@ public class Recipe{
 	 * @throws BiffException
 	 * @throws IOException
 	 */
-	public Recipe(int numberSheetRecipe)throws BiffException, IOException
+	public Recipe(/*int numberSheetRecipe*/String recipename)throws BiffException, IOException
 	{
 		Workbook workbook = Workbook.getWorkbook(new File("Recettes\\recettes_plat.xls"));
-		Sheet sheet = workbook.getSheet(numberSheetRecipe);
-		
+		Sheet sheet = workbook.getSheet(recipename/*numberSheetRecipe*/);
+
+
 		title(sheet);
+		People(sheet);
 		indregientTitle(sheet);
 		// on affiche le premier ingredient
 		this.ingredient = sheet.getCell(0,5);
@@ -54,13 +59,14 @@ public class Recipe{
 		}// Tant qu'il y a des ingredients on les affiche
 		
 		categoryTitle(sheet);
+		// on affiche la première categorie
 		String Category = sheet.getCell(3,5).getContents();
 		int c=6;
 		while (Category != ""){
 			System.out.println(Category);
 			Category = sheet.getCell(3, c).getContents();
 			c ++;
-		}
+		}// Tant qu'il y a des categories on les affiche
 		
 		preparationTimeTitle(sheet);
 		this.preparationTime = sheet.getCell("F5");
@@ -93,15 +99,25 @@ public class Recipe{
 			System.out.println(prepa);
 			prepa = sheet.getCell(4,p).getContents();
 			p++;	
-		}// Tant q'il y a des instructions, on les affiche
+		}// Tant qu'il y a des instructions, on les affiche
 		
 
 		
 	}
+	/**
+	 * methode pour l'affichage du nombre de personne
+	 * @param sheet name of sheet
+	 */
+	private void People(Sheet sheet) {
+		this.nbPerson = sheet.getCell("F3");
+		this.person =sheet.getCell("G3");
+		String Person = nbPerson.getContents() + " " + person.getContents();
+		System.out.println(Person);
+	}
 
 	/**
 	 * methode pour affiche le titre "Preparation"
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void preparationTitle(Sheet sheet) {
 		this.preparationTitle = sheet.getCell("D15");
@@ -111,7 +127,7 @@ public class Recipe{
 
 	/**
 	 *  methode pour affiche le titre "Cout"
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void costTitle(Sheet sheet) {
 		this.costTitle = sheet.getCell("E8");
@@ -121,7 +137,7 @@ public class Recipe{
 
 	/**
 	 *  methode pour affiche le titre "Termostat Four"
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void termostatovenTitle(Sheet sheet) {
 		this.termostatOvenTitle = sheet.getCell("E7");
@@ -131,7 +147,7 @@ public class Recipe{
 
 	/**
 	 *  methode pour affiche le titre "Tps de cuisson"
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void cookingTimeTitle(Sheet sheet) {
 		this.cookingTimeTitle = sheet.getCell("E6");
@@ -141,7 +157,7 @@ public class Recipe{
 
 	/**
 	 * methode pour affiche le titre "Preparation"
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void preparationTimeTitle(Sheet sheet) {
 		this.preparationTimeTitle = sheet.getCell("E5");
@@ -151,7 +167,7 @@ public class Recipe{
 
 	/**
 	 * methode pour affiche le titre "Categorie"
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void categoryTitle(Sheet sheet) {
 		this.categoryTitle = sheet.getCell("D5");
@@ -161,7 +177,7 @@ public class Recipe{
 
 	/**
 	 * methode pour affiche le titre "Ingredient"
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void indregientTitle(Sheet sheet) {
 		this.ingredientTitle = sheet.getCell("A5");
@@ -171,35 +187,22 @@ public class Recipe{
 
 	/**
 	 * methode pour affiche le titre de la recette
-	 * @param sheet number of sheet
+	 * @param sheet name of sheet
 	 */
 	private void title(Sheet sheet) {
 		this.title = sheet.getCell("D1");
 		String Title = title.getContents();
 		System.out.println(Title);
 	}
-
-
-	/**
-	 * Transforme toutes les données du tableau excel en String
-	 */
-/*	public void transformationToString() {
-		String Title = title.getContents();
-		System.out.println(Title);
-		String IngredientTitle = ingredientTitle.getContents();
-		System.out.println(IngredientTitle);
-		String CategTitle = categoryTitle.getContents();
-		System.out.println(CategTitle);
-	    String PrepaTimeTitle = preparationTimeTitle.getContents();
-		System.out.println(PrepaTimeTitle);
-		String CookingTimeTitle = cookingTimeTitle.getContents();
-		System.out.println(CookingTimeTitle);
-		String TermostatTitle = termostatOvenTitle.getContents();
-		System.out.println(TermostatTitle);
-		String CostTitle = costTitle.getContents();
-		System.out.println(CostTitle);
-		String PrepaTitle = preparationTitle.getContents();
-		System.out.println(PrepaTitle);
-	}*/
-
+	
+	public String toString(){
+		
+		String Recette = title.getContents();
+		Recette += "\n" + nbPerson.getContents() + " " + person.getContents();
+		Recette += "\n" + preparationTimeTitle.getContents() + " : " + preparationTime.getContents() + " " + preparationTimeHour.getContents();
+		Recette += "\n" + cookingTimeTitle.getContents() + " : " + cookingTime.getContents() + " " + cookingTimeHour.getContents();
+		Recette += "\n" + ingredientTitle.getContents();
+		Recette += "\n" + ingredient.getContents() + " " + ingredientQTE.getContents() + " " + ingredientmeasure.getContents();
+		return Recette;
+	}
 }
