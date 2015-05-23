@@ -1,8 +1,7 @@
 import java.io.IOException;
 import jxl.read.biff.BiffException;
 
-
-public class AffichageRecette {
+public class DisplayRecipe {
 
 	public static void main(String[] args) {
 		
@@ -11,8 +10,8 @@ public class AffichageRecette {
 		 * à partir du type recette defini
 		 */
 		try {
-			Recette recette = new Recette(0);
-			System.out.println(recette);
+			Recipe recipe = new Recipe(0);
+			System.out.println(recipe);
 		}
 		catch (BiffException e) {
 			e.printStackTrace();
