@@ -10,12 +10,12 @@ interface IHM_User {
    */
   int demandeNombrePersonne() ;
 
-  char demandeMdp() ;
+  String requestPassword() ;
 
   /**
    * Est réalisée à condition que le mot de passe renvoyé par l'utilisateur soit valide
    */
-  void affichePartieAdministrateur() ;
+  void displayAdministrativePart() ;
 
   void afficheElementsRecette(Recipe recetteAAfficher) ;
 
@@ -23,5 +23,4 @@ interface IHM_User {
    * affiche la liste des recettes (seulement les noms)
    */
   void afficheListeRecettes(Recipe listeRecettes) ;
-
 }

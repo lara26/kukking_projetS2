@@ -9,6 +9,13 @@ class Recipe {
   public String obtenirElemsRecette() {
   }
 
-  private String nomRecette;
+  private String nameRecipe;
+  
+  
+  public String getNameRecipe() {
+	  return nameRecipe;
+  }
+
+  // TODO constructor with parameters (all elements of a Recipe)
 
 }

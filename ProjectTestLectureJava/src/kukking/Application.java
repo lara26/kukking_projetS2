@@ -32,22 +32,24 @@ class Application {
   public void rechercheRecettes(char typeCuisine, char typePlat, int tempsPrepaMax, char niveauCuisine, char[] listeIngredient) {
   }
 
-  public void demandeAccesAdministrateur() {
+  public void requestAdministrativeAccess()
+  {
+	  String password = user.requestPassword();
+	  if (valider(password))
+		  user.displayAdministrativePart();
   }
 
   /**
    * valide ou non le mdp rentré
    */
-  public boolean valider() {
+  public boolean valider(String password) {
   }
-
-  private ReceiptsList listeFavoris;
 
   private IHM_User user;
 
-  private IHM_Administrator admin;
+  private IHM_Administrator admin = new AdministratorConsole();
 
-  private ReceipsList liste_Favoris;
+  private ReceiptsList liste_Favoris;
 
   private Recipe recetteCourante;
 
@@ -57,4 +59,7 @@ class Application {
   public Identifier() {
   }
 
+  public IHM_Administrator getAdmin() {
+	  return admin;
+  }
 }
