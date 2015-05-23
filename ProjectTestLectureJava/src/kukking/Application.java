@@ -40,9 +40,11 @@ class Application {
   }
 
   /**
-   * valide ou non le mdp rentré
+   * valid or not password give in parameter
    */
   public boolean valider(String password) {
+	  if (password=="amodifier") return true;
+		  return false;
   }
 
   private IHM_User user;

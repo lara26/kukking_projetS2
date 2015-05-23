@@ -1,5 +1,6 @@
 package kukking;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 class ReceiptsList {
@@ -10,8 +11,9 @@ class ReceiptsList {
 
 	/**
 	 * Ne s'effectue que si l'utilisateur a valider la suppression
+	 * @throws IOException 
 	 */
-	public void deleteRecipe(Recipe recipeToDelete) {
+	public void deleteRecipe(Recipe recipeToDelete) throws IOException {
 		if (application.getAdmin().ok(recipeToDelete))
 			permanentlyDeleteRecipe(recipeToDelete);
 			

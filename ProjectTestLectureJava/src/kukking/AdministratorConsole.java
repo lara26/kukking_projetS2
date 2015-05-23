@@ -20,6 +20,10 @@ public class AdministratorConsole implements IHM_Administrator {
 		System.out.println("Titre de la recette ?");
 		BufferedReader entree = new BufferedReader (new InputStreamReader(System.in));
 		String title = entree.readLine();
+		System.out.println("Nombre de personnes ?");
+		int nbPers = Integer.parseInt(entree.readLine());
+		System.out.println("Temps de préparation (en min) ?");
+		int preparationTime = Integer.parseInt(entree.readLine());
 		// TODO (Robin) suit of request elements and return Recipe
 	}
 
