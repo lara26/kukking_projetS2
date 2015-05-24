@@ -2,14 +2,13 @@ package kukking;
 
 class Recipe {
   private String cheminSource;
+  private String nameRecipe;
 
   /**
    * renvoie tous les éléments de la recette dans un tableau 
    */
   public String obtenirElemsRecette() {
   }
-
-  private String nameRecipe;
   
   
   public String getNameRecipe() {

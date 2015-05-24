@@ -12,5 +12,5 @@ interface IHM_Administrator {
   /**
    * donne le formulaire qui permet d'ajouter les données de la recette
    */
-  Recipe formAddRecipe() ;
+  Recipe formAddRecipe() throws IOException;
 }

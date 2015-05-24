@@ -23,7 +23,7 @@ class ReceiptsList {
 		this.list.remove(recipeToDelete);
 	}
 
-	public void addRecipe()
+	public void addRecipe() throws IOException
 	{
 		Recipe recipeToAdd = application.getAdmin().formAddRecipe();
 		this.list.add(recipeToAdd);
