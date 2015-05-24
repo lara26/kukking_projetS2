@@ -74,7 +74,7 @@ public class AdministratorConsole implements IHM_Administrator {
 			step = entree.readLine();
 		}
 		
-		return new Recipe();
+		return new Recipe(title, nbPers, preparationTime, cookingTime, cost, categories, ingredients, quantities, units, preparation);
 	}
 
 }
