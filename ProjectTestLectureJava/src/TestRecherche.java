@@ -2,28 +2,30 @@ import java.util.Scanner;
 
 
 
-public class TestRecherche 
+public class TestSea
 {
 	Scanner sc = new Scanner(System.in);
-	String recherche=sc.nextLine();
+	String search=sc.nextLine();
+	int numberOfFiles;
+	int roam;
+	String resultSearch[];
+	int indic=0;
 	
 	
-	public void rechercheUtilisateur(String recherche)
+	public void getNumberOfFiles(int numberOfFiles)
 	{
-	while(recherche != Cell.titre)
-	{
-		
+		this.numberOfFiles=numberOfFiles;
 	}
 	
 	
-	
-	
-	
+	public String searchUser(String search)
+	{
+	for(roam=0;roam<=numberOfFiles;roam++)
+	{
+		if(search == Cell.title || search == Cell.categoryTitle)
+		{
+			resultSearch[indic]=search;
+			indic++;
+		}
 	}
-
-
-
-
-
-
-}
+	
