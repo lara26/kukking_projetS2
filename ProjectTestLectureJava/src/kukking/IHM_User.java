@@ -1,5 +1,7 @@
 package kukking;
 
+import java.io.IOException;
+
 
 /**
  * User interface
@@ -10,14 +12,18 @@ interface IHM_User {
    */
   int demandeNombrePersonne() ;
 
-  String requestPassword() ;
+  String requestPassword() throws IOException;
 
   /**
    * Est réalisée à condition que le mot de passe renvoyé par l'utilisateur soit valide
    */
   void displayAdministrativePart() ;
 
-  void afficheElementsRecette(Recipe recetteAAfficher) ;
+  /**
+   * Display all recipe's elements
+ * @param RecipeToDisplay
+ */
+void afficheElementsRecette(Recipe RecipeToDisplay) ;
 
   /**
    * affiche la liste des recettes (seulement les noms)

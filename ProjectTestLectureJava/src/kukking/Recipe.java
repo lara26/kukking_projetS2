@@ -30,7 +30,7 @@ class Recipe {
 	 */
 	public int getNbPers() {
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			return Integer.parseInt(recipe.getCell("F3").getContents());
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
@@ -41,7 +41,7 @@ class Recipe {
 	 */
 	public int getPreparationTime() {
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			return Integer.parseInt(recipe.getCell("F5").getContents());
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
@@ -53,7 +53,7 @@ class Recipe {
 	 */
 	public int getCookingTime() {
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			return Integer.parseInt(recipe.getCell("F6").getContents());
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
@@ -65,7 +65,7 @@ class Recipe {
 	 */
 	public String getCost() {
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			return recipe.getCell("F6").getContents();
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
@@ -78,7 +78,7 @@ class Recipe {
 	public ArrayList<String> getCategories() {
 		ArrayList <String> categories= new ArrayList<String>();
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 5;
 			while (recipe.getCell(3, numRow).getContents() != ""){
@@ -95,7 +95,7 @@ class Recipe {
 	public ArrayList<String> getIngredients() {
 		ArrayList <String> ingredients= new ArrayList<String>();
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 5;
 			while (recipe.getCell(0, numRow).getContents() != ""){
@@ -112,7 +112,7 @@ class Recipe {
 	public ArrayList<String> getQuantities() {
 		ArrayList <String> quantities= new ArrayList<String>();
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 5;
 			while (recipe.getCell(1, numRow).getContents() != ""){
@@ -129,7 +129,7 @@ class Recipe {
 	public ArrayList<String> getUnits() {
 		ArrayList <String> units= new ArrayList<String>();
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 5;
 			while (recipe.getCell(2, numRow).getContents() != ""){
@@ -146,7 +146,7 @@ class Recipe {
 	public ArrayList<String> getPreparation() {
 		ArrayList <String> preparation= new ArrayList<String>();
 		try {
-			Workbook workbook = Workbook.getWorkbook(new File("./receipts.xls"));
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 15;
 			while (recipe.getCell(4, numRow).getContents() != ""){
