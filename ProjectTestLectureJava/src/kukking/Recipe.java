@@ -34,7 +34,7 @@ class Recipe {
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			return Integer.parseInt(recipe.getCell("F3").getContents());
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
-		return -1;
+		return 0;
 	}
 	/**
 	 * @return preparation time
@@ -45,7 +45,7 @@ class Recipe {
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			return Integer.parseInt(recipe.getCell("F5").getContents());
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
-		return -1;
+		return 0;
 	}
 
 	/**
@@ -55,9 +55,12 @@ class Recipe {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
-			return Integer.parseInt(recipe.getCell("F6").getContents());
+			if (!recipe.getCell("F6").getContents().equals(""))
+			{
+				return Integer.parseInt(recipe.getCell("F6").getContents());
+			}
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
-		return -1;
+		return 0;
 	}
 	
 	/**
@@ -67,9 +70,9 @@ class Recipe {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
-			return recipe.getCell("F6").getContents();
+			if (!recipe.getCell("F6").getContents().equals("")) return recipe.getCell("F6").getContents();
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
-		return "";
+		return "aucun";
 	}
 	
 	/**
@@ -114,10 +117,8 @@ class Recipe {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
-			int numRow = 5;
-			while (recipe.getCell(1, numRow).getContents() != ""){
+			for (int numRow=5;numRow<this.getIngredients().size()+5;numRow++){
 				quantities.add(recipe.getCell(1, numRow).getContents());
-				numRow ++;
 			}
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return quantities;
@@ -131,10 +132,8 @@ class Recipe {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
-			int numRow = 5;
-			while (recipe.getCell(2, numRow).getContents() != ""){
+			for (int numRow=5;numRow<this.getIngredients().size()+5;numRow++){
 				units.add(recipe.getCell(2, numRow).getContents());
-				numRow ++;
 			}
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return units;

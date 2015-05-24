@@ -30,23 +30,23 @@ public class UserConsole implements IHM_User {
 	public void afficheElementsRecette(Recipe recipeToDisplay) {
 		String recipe = recipeToDisplay.getNameRecipe();
 		recipe += "\n" + recipeToDisplay.getNbPers() + " personnes";
-		recipe += "\nTemps de préparation : " + recipeToDisplay.getPreparationTime() + "min";
-		recipe += "\nTemps de cuisson : " + + recipeToDisplay.getCookingTime() + "min";
-		recipe += "\nCout :" + recipeToDisplay.getCost();
+		recipe += "\nTemps de préparation : " + recipeToDisplay.getPreparationTime() + " min";
+		recipe += "\nTemps de cuisson : " + + recipeToDisplay.getCookingTime() + " min";
+		recipe += "\nCout : " + recipeToDisplay.getCost();
 		recipe += "\nCatégories :\n";
 		for (int numRow=0;numRow<recipeToDisplay.getCategories().size();numRow++)
 		{
-			recipe += recipeToDisplay.getCategories().get(numRow)+"\n";
+			recipe += "  " + recipeToDisplay.getCategories().get(numRow)+"\n";
 		}
 		recipe += "Ingredients :\n";
 		for (int numRow=0;numRow<recipeToDisplay.getIngredients().size();numRow++)
 		{
 			recipe += "- ";
-			recipe += recipeToDisplay.getQuantities().get(numRow)+" ";
-			recipe += recipeToDisplay.getUnits().get(numRow)+"   ";
+			if (!recipeToDisplay.getQuantities().get(numRow).equals("")) recipe += recipeToDisplay.getQuantities().get(numRow)+" ";
+			if (!recipeToDisplay.getUnits().get(numRow).equals("")) recipe += recipeToDisplay.getUnits().get(numRow)+" ";
 			recipe += recipeToDisplay.getIngredients().get(numRow)+"\n";
 		}
-		recipe += "\nPréparations\n";
+		recipe += "\nPréparation :\n";
 		for (int numRow=0;numRow<recipeToDisplay.getPreparation().size();numRow++)
 		{
 			recipe += recipeToDisplay.getPreparation().get(numRow)+"\n";

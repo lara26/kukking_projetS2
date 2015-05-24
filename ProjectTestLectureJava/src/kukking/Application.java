@@ -31,10 +31,11 @@ class Application {
 	public void afficheFavoris() {
 	}
 
-	public Recipe recalculRecette(Recipe recetteAAfficher, int nombrePersonnes) {
-	}
+	/*public Recipe recalculRecette(Recipe recetteAAfficher, int nombrePersonnes) {
+	}*/
 
 	public void affichageRecette(Recipe recetteAAfficher) {
+		user.afficheElementsRecette(recetteAAfficher);
 	}
 
 	/**
@@ -63,15 +64,15 @@ class Application {
 	 * valid or not password give in parameter
 	 */
 	public boolean valider(String password) {
-		if (password=="amodifier") return true;
+		if (password.equals("amodifier")) return true;
 		return false;
 	}
 
 	/**
 	 * permet d'indentifier l'admin
 	 */
-	public Identifier() {
-	}
+	/*public Identifier() {
+	}*/
 
 	public IHM_Administrator getAdmin() {
 		return admin;
