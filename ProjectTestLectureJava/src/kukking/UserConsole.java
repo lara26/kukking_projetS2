@@ -49,7 +49,7 @@ public class UserConsole implements IHM_User {
 		recipe += "\nPréparation :\n";
 		for (int numRow=0;numRow<recipeToDisplay.getPreparation().size();numRow++)
 		{
-			recipe += recipeToDisplay.getPreparation().get(numRow)+"\n";
+			recipe += "    "+ recipeToDisplay.getPreparation().get(numRow)+"\n";
 		}
 		
 		System.out.println(recipe);

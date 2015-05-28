@@ -37,7 +37,7 @@ public class AdministratorConsole implements IHM_Administrator {
 		System.out.println("Catégories ? (entrez une catégorie à la fois, puis rappuyez quand vous avez fini)");
 		ArrayList <String> categories = new ArrayList <String>();
 		String category = entree.readLine();
-		while (category!="")
+		while (!category.equals(""))
 		{
 			categories.add(category);
 			category = entree.readLine();			
@@ -52,7 +52,7 @@ public class AdministratorConsole implements IHM_Administrator {
 		System.out.println("Unité :");
 		ArrayList <String> units = new ArrayList <String>();
 		String unit = entree.readLine();
-		while (ingredient!="")
+		while (!ingredient.equals(""))
 		{
 			ingredients.add(ingredient);
 			quantities.add(quantity);
@@ -68,7 +68,7 @@ public class AdministratorConsole implements IHM_Administrator {
 		System.out.println("Préparation ? (De même que pour les catégories, entrez étape par étape)");
 		ArrayList <String> preparation = new ArrayList <String>();
 		String step = entree.readLine();
-		while (step!="")
+		while (!step.equals(""))
 		{
 			preparation.add(step);
 			step = entree.readLine();

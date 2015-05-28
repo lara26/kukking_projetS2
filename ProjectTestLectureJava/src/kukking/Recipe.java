@@ -70,7 +70,7 @@ class Recipe {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
-			if (!recipe.getCell("F6").getContents().equals("")) return recipe.getCell("F6").getContents();
+			if (!recipe.getCell("F8").getContents().equals("")) return recipe.getCell("F6").getContents();
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return "aucun";
 	}
@@ -84,7 +84,7 @@ class Recipe {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 5;
-			while (recipe.getCell(3, numRow).getContents() != ""){
+			while (!recipe.getCell(3, numRow).getContents().equals("")){
 				categories.add(recipe.getCell(3, numRow).getContents());
 				numRow ++;
 			}
@@ -101,7 +101,7 @@ class Recipe {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 5;
-			while (recipe.getCell(0, numRow).getContents() != ""){
+			while (!recipe.getCell(0, numRow).getContents().equals("")){
 				ingredients.add(recipe.getCell(0, numRow).getContents());
 				numRow ++;
 			}
@@ -148,7 +148,7 @@ class Recipe {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameRecipe);
 			int numRow = 15;
-			while (recipe.getCell(4, numRow).getContents() != ""){
+			while (!recipe.getCell(4, numRow).getContents().equals("")){
 				preparation.add(recipe.getCell(4, numRow).getContents());
 				numRow ++;
 			}
@@ -228,7 +228,7 @@ class Recipe {
 			
 			for (int stepNum=0;stepNum<preparation.size();stepNum++)
 			{
-				label = new Label(4, 15+stepNum, preparation.get(stepNum));
+				label = new Label(4, 15+stepNum, (String)preparation.get(stepNum));
 				recipe.addCell(label);
 			}
 			
