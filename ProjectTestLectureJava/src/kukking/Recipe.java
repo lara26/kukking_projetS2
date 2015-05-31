@@ -17,7 +17,7 @@ import jxl.write.biff.RowsExceededException;
 class Recipe {
 	public final static String sourcePath = "./receipts.xls";
 	private String nameRecipe;
-	
+
 
 	/**
 	 * @return recipe name
@@ -62,7 +62,7 @@ class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return 0;
 	}
-	
+
 	/**
 	 * @return recipe's cost
 	 */
@@ -74,7 +74,7 @@ class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return "aucun";
 	}
-	
+
 	/**
 	 * @return categories list
 	 */
@@ -91,7 +91,7 @@ class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return categories;
 	}
-	
+
 	/**
 	 * @return ingredients list
 	 */
@@ -108,7 +108,7 @@ class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return ingredients;
 	}
-	
+
 	/**
 	 * @return quantities list
 	 */
@@ -123,7 +123,7 @@ class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return quantities;
 	}
-	
+
 	/**
 	 * @return units list
 	 */
@@ -138,7 +138,7 @@ class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return units;
 	}
-	
+
 	/**
 	 * @return preparation's steps
 	 */
@@ -155,9 +155,9 @@ class Recipe {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return preparation;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * constructor to the application's launcher to create receipts from already existing receipts in file
 	 * @param nameRecipe
@@ -178,7 +178,7 @@ class Recipe {
 	 * @param units
 	 * @param preparation
 	 */
- 	public Recipe(String title, int nbPers, int preparationTime, int cookingTime, String cost, ArrayList<String> categories, ArrayList<String> ingredients, ArrayList<String> quantities, ArrayList<String> units, ArrayList<String> preparation)
+	public Recipe(String title, int nbPers, int preparationTime, int cookingTime, String cost, ArrayList<String> categories, ArrayList<String> ingredients, ArrayList<String> quantities, ArrayList<String> units, ArrayList<String> preparation)
 	{
 		this.nameRecipe = title;
 		WritableWorkbook workbook = null;
@@ -195,43 +195,46 @@ class Recipe {
 
 			number = new Number(5, 4, preparationTime);
 			recipe.addCell(number);
-			
+
 			number = new Number(5, 5, cookingTime);
 			recipe.addCell(number); 
-			
+
 			label = new Label(5, 7, cost);
 			recipe.addCell(label);
-			
+
 			for (int categorieNum=0;categorieNum<categories.size();categorieNum++)
 			{
 				label = new Label(3, 5+categorieNum, categories.get(categorieNum));
 				recipe.addCell(label);
 			}
-			
+
 			for (int ingredientNum=0;ingredientNum<ingredients.size();ingredientNum++)
 			{
 				label = new Label(0, 5+ingredientNum, ingredients.get(ingredientNum));
 				recipe.addCell(label);
 			}
-			
+
 			for (int quantityNum=0;quantityNum<quantities.size();quantityNum++)
 			{
 				label = new Label(1, 5+quantityNum, quantities.get(quantityNum));
 				recipe.addCell(label);
 			}
-			
+
 			for (int unitNum=0;unitNum<units.size();unitNum++)
 			{
 				label = new Label(2, 5+unitNum, units.get(unitNum));
 				recipe.addCell(label);
 			}
-			
+
+			int indexEndPreparation = 15;
 			for (int stepNum=0;stepNum<preparation.size();stepNum++)
 			{
-				label = new Label(4, 15+stepNum, (String)preparation.get(stepNum));
+				label = new Label(4, 15+stepNum, preparation.get(stepNum));
 				recipe.addCell(label);
+				indexEndPreparation = 16+stepNum;
 			}
-			
+			label = new Label(4, indexEndPreparation, "");
+			recipe.addCell(label);
 			
 			/* On ecrit le classeur */
 			workbook.write(); 
@@ -250,7 +253,6 @@ class Recipe {
 			e.printStackTrace();
 		}
 		finally {
-			if(workbook!=null){
 				/* On ferme le worbook pour libérer la mémoire */
 				try {
 					workbook.close();
@@ -261,7 +263,7 @@ class Recipe {
 				catch (IOException e) {
 					e.printStackTrace();
 				} 
-			}
+			
 		}
 	}
 
