@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 
 
-public class TestSea
+public class TestSearch
 {
 	Scanner sc = new Scanner(System.in);
 	String search=sc.nextLine();
@@ -27,5 +27,6 @@ public class TestSea
 			resultSearch[indic]=search;
 			indic++;
 		}
+
 	}
-	
+}
