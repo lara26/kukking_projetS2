@@ -10,12 +10,17 @@ import javax.swing.JSplitPane;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionListener;
+
+
 
 
 public class RecipeDisplay extends JPanel {
@@ -25,80 +30,111 @@ public class RecipeDisplay extends JPanel {
 	
 	public RecipeDisplay(Recipe recipeToDisplay){
 
-		JPanel recipeD = this;
+		JPanel recipe = this;
+		recipe.setLayout(new GridBagLayout());
+		
 		JLabel title = new JLabel(recipeToDisplay.getNameRecipe());
-		JLabel ingredient = new JLabel("Ingrédients");
-		JLabel preparation = new JLabel("Préparation");
-		JLabel preparationTime = new JLabel("Temps de préparation");
+
 		int nbbpers = recipeToDisplay.getNbPers();
 		JLabel nbpers = new JLabel(Integer.toString(nbbpers));
 		title.setFont(new Font("Courier New", Font.BOLD, 30));
 		
-		Box title2 = Box.createHorizontalBox();
-		title2.add(title);
+		GridBagConstraints gbc = new GridBagConstraints();
 		
-		
-		Box pers = Box.createHorizontalBox();
-		pers.add(nbpers);
-		pers.add(new JLabel(" personnes"));
+	/* titre */
+		gbc.gridx=3;
+		gbc.gridy=0;
+		recipe.add(title, gbc);
+	
+	/* personnes */
+		gbc.gridx=4;
+		gbc.gridy=1;
+		recipe.add(nbpers,gbc);
+		gbc.gridx=5;
+		gbc.gridy=1;
+		recipe.add(new JLabel(" personnes"),gbc);
 		
 	/* ingredients */
-		JPanel yahou = new JPanel();
-			
+		gbc.gridx=0;
+		gbc.gridy=4;
+		recipe.add(new JLabel("Ingredients"),gbc);
+		
 		ArrayList<String> ingre = recipeToDisplay.getIngredients();
 		ArrayList<String> qte = recipeToDisplay.getQuantities();
-		
-		for (int i=0; i<ingre.size();i++){
-			yahou.add(new JLabel(ingre.get(i)));
-			yahou.add(new JLabel(qte.get(i)));
+		ArrayList<String> unit = recipeToDisplay.getUnits();
+		int i;
+		for (i=0; i<ingre.size();i++){
+			gbc.gridx=0;
+			gbc.gridy=5+i;
+			recipe.add(new JLabel(ingre.get(i)),gbc);
+			gbc.gridx=1;
+			gbc.gridy=5+i;
+			recipe.add(new JLabel(qte.get(i)),gbc);
+			gbc.gridx=2;
+			gbc.gridy=5+i;
+			recipe.add(new JLabel(unit.get(i)),gbc);
 		}
 		
-		Box ingredients = Box.createVerticalBox();
-		ingredients.add(ingredient);
-		ingredients.add(yahou);
+	/* categories */
+		gbc.gridx=3;
+		gbc.gridy=4;
+		recipe.add(new JLabel("Catégories"),gbc);
+		
+		ArrayList<String> categ = recipeToDisplay.getCategories();
+		
+		for(int j=0; j<categ.size(); j++){
+			gbc.gridx=3;
+			gbc.gridy=5+j;
+			recipe.add(new JLabel(categ.get(j)), gbc);
+		}
+		
 	/* info complementaire (tps prépa ...) */
-		JPanel yahou2 = new JPanel();
-		yahou2.add(preparationTime);
+		/* tps prepa */
+		gbc.gridx=4;
+		gbc.gridy=4;
+		recipe.add(new JLabel("Temps de préparation"),gbc);
+		gbc.gridx=5;
+		gbc.gridy=4;
+		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getPreparationTime())), gbc);
+		gbc.gridx=6;
+		gbc.gridy=4;
+		recipe.add(new JLabel(" min"),gbc);
 		
-		/*JLabel cout = new JLabel(recipeToDisplay.getCost());
-		yahou2.add(cout);*/
+		/* tps cuisson */
+		gbc.gridx=4;
+		gbc.gridy=5;
+		recipe.add(new JLabel("Temps de cuisson"), gbc);
+		gbc.gridx=5;
+		gbc.gridy=5;
+		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getCookingTime())), gbc);
+		gbc.gridx=6;
+		gbc.gridy=5;
+		recipe.add(new JLabel(" min"), gbc);
 		
-		Box infoComplementaire = Box.createVerticalBox();
-		infoComplementaire.add(yahou2);
+		/* cout */
+		gbc.gridx=4;
+		gbc.gridy=6;
+		recipe.add(new JLabel("Cout"), gbc);
+		gbc.gridx=5;
+		gbc.gridy=6;
+		recipe.add(new JLabel(recipeToDisplay.getCost()), gbc);
+		gbc.gridx=6;
+		gbc.gridy=6;
+		recipe.add(new JLabel(" €"), gbc);
+		
 	/* preparation */
-		JPanel yahou3 = new JPanel();
-		yahou3.add(preparation);
-		
-		Box preparations = Box.createHorizontalBox();
-		preparations.add(yahou3);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		Box recipeTot = Box.createVerticalBox();
-		recipeTot.add(title2);
-		recipeTot.add(pers);
-		recipeTot.add(ingredients);
-		recipeTot.add(infoComplementaire);
-		recipeTot.add(preparations);
-		
-		recipeD.add(recipeTot);
-		
-		
-		
-		
-		
-	}
-	
-	
-	
-	
-	
-
+		gbc.gridx=3;
+		gbc.gridy=7+i;
+		recipe.add(new JLabel("Preparation"), gbc);
+		ArrayList<String> prepa = recipeToDisplay.getPreparation();
+		int k;
+		for( k=0; k<prepa.size(); k++){
+			gbc.gridx=3;
+			gbc.gridy=(8+i)+k;
+			recipe.add(new JLabel(prepa.get(k)), gbc);
+		}
+		gbc.gridx=3;
+		gbc.gridy=(9+i)+k;
+		recipe.add(new JLabel("Bon appetit !"), gbc);
+	}	
 }
