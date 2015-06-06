@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.event.ListSelectionListener;
 
-import jxl.Sheet;
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
 
 public class RecipeDisplay extends JPanel {
 
@@ -27,42 +24,37 @@ public class RecipeDisplay extends JPanel {
 	public final static String sourcePath = "./receipts.xls";
 	
 	public RecipeDisplay(Recipe recipeToDisplay){
-		Workbook workbook;
-		try {
-			workbook = Workbook.getWorkbook(new File(sourcePath));
-			Sheet recipe = workbook.getSheet(recipeToDisplay.getNameRecipe());
-		} catch (BiffException | IOException e) {
-			e.printStackTrace();
-		}
-
 
 		JPanel recipeD = this;
 		JLabel title = new JLabel(recipeToDisplay.getNameRecipe());
 		JLabel ingredient = new JLabel("Ingrédients");
 		JLabel preparation = new JLabel("Préparation");
 		JLabel preparationTime = new JLabel("Temps de préparation");
-		//int nbbpers = recipeToDisplay.getNbPers();
-		//JLabel nbpers = new JLabel(Integer.toString(nbbpers));
+		int nbbpers = recipeToDisplay.getNbPers();
+		JLabel nbpers = new JLabel(Integer.toString(nbbpers));
 		title.setFont(new Font("Courier New", Font.BOLD, 30));
 		
 		Box title2 = Box.createHorizontalBox();
 		title2.add(title);
 		
 		
-		/*Box pers = Box.createHorizontalBox();
+		Box pers = Box.createHorizontalBox();
 		pers.add(nbpers);
-		pers.add(new JLabel("personnes"));*/
+		pers.add(new JLabel(" personnes"));
 		
 	/* ingredients */
 		JPanel yahou = new JPanel();
-		yahou.add(ingredient);
+			
 		ArrayList<String> ingre = recipeToDisplay.getIngredients();
+		ArrayList<String> qte = recipeToDisplay.getQuantities();
 		
 		for (int i=0; i<ingre.size();i++){
 			yahou.add(new JLabel(ingre.get(i)));
+			yahou.add(new JLabel(qte.get(i)));
 		}
 		
 		Box ingredients = Box.createVerticalBox();
+		ingredients.add(ingredient);
 		ingredients.add(yahou);
 	/* info complementaire (tps prépa ...) */
 		JPanel yahou2 = new JPanel();
@@ -91,7 +83,7 @@ public class RecipeDisplay extends JPanel {
 		
 		Box recipeTot = Box.createVerticalBox();
 		recipeTot.add(title2);
-		//recipeTot.add(pers);
+		recipeTot.add(pers);
 		recipeTot.add(ingredients);
 		recipeTot.add(infoComplementaire);
 		recipeTot.add(preparations);

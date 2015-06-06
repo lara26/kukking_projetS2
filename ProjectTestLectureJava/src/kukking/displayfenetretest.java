@@ -13,13 +13,10 @@ public class displayfenetretest implements Runnable {
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fenetre.setSize(600, 600);
 		RecipeDisplay recipe;
-		try {
-			recipe = new RecipeDisplay(new Recipe("Poulet miel balsamique"));
-			recipe.setPreferredSize(new Dimension(600,600));
-			fenetre.getContentPane().add(recipe);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		recipe = new RecipeDisplay(new Recipe("Galette des rois"));
+		recipe.setPreferredSize(new Dimension(600,600));
+		fenetre.getContentPane().add(recipe);
 		
 		fenetre.setVisible(true);
 		
