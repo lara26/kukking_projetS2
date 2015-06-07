@@ -14,7 +14,7 @@ public class KukkingDisplay extends JFrame {
 		JFrame window = this;
 		window.setTitle("Kukking");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(600, 600);
+		window.setSize(1200, 700);
 		
 	/* creation Menu */ 
 		JMenuBar menuBar = new JMenuBar();
@@ -43,6 +43,9 @@ public class KukkingDisplay extends JFrame {
 // c'est juste que la reste de la division n'est pas fini, il faut donc choisir la page a afficher manuellement !!!!!
 		//SearchPage searchPage = new SearchPage();
 		//window.getContentPane().add(searchPage);
+		
+		
+		
 		
 		window.setVisible(true);
 		

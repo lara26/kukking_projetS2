@@ -1,10 +1,14 @@
 package kukking;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 public class RecipeDisplay extends JPanel {
@@ -15,10 +19,11 @@ public class RecipeDisplay extends JPanel {
 
 		JPanel recipe = this;
 		recipe.setLayout(new GridBagLayout());
-		
+		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
+
 		JLabel title = new JLabel(recipeToDisplay.getNameRecipe());
 		JLabel ingredient = new JLabel("Ingredients");
-		JLabel categorie = new JLabel("Catégories");
+		//JLabel categorie = new JLabel("Catégories");
 		JLabel tempsPrepa = new JLabel("Temps de préparation");
 		JLabel tempsCuisson = new JLabel("Temps de cuisson");
 		JLabel cout = new JLabel("Coût");
@@ -29,12 +34,18 @@ public class RecipeDisplay extends JPanel {
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		
+	/* logo */
+		gbc.gridx=0;
+		gbc.gridy=0;
+		recipe.add(kukkingLogo,gbc);
+		
+		
 	/* titre */
-		title.setFont(new Font("Dom", Font.PLAIN, 20));
+		title.setFont(new Font("Dom", Font.PLAIN, 50));
 		gbc.gridx=0;
 		gbc.gridy=0;
 		gbc.gridwidth=8;
-		gbc.gridwidth=GridBagConstraints.REMAINDER;
+		gbc.gridwidth=GridBagConstraints.RELATIVE;
 		gbc.anchor = GridBagConstraints.CENTER;
 		recipe.add(title, gbc);
 	
@@ -46,7 +57,7 @@ public class RecipeDisplay extends JPanel {
 		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getNbPers())),gbc);
 		gbc.gridx=8;
 		gbc.gridy=1;
-		gbc.anchor = GridBagConstraints.CENTER;
+		gbc.anchor = GridBagConstraints.WEST;
 		recipe.add(new JLabel(" personnes"),gbc);
 		
 	/* ingredients */
@@ -77,7 +88,7 @@ public class RecipeDisplay extends JPanel {
 		}
 		
 	/* categories */
-		categorie.setFont(new Font("Century Gothic", Font.PLAIN, 14));
+		/*categorie.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		gbc.gridx=4;
 		gbc.gridy=4;
 		recipe.add(categorie,gbc);
@@ -88,7 +99,7 @@ public class RecipeDisplay extends JPanel {
 			gbc.gridx=4;
 			gbc.gridy=5+j;
 			recipe.add(new JLabel(categ.get(j)), gbc);
-		}
+		}*/
 		
 	/* info complementaire (tps prépa ...) */
 		/* tps prepa */
@@ -96,10 +107,12 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridx=6;
 		gbc.gridy=6;
 		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 375, 0, 0);
 		recipe.add(tempsPrepa,gbc);
 		gbc.gridx=7;
 		gbc.gridy=6;
 		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 0, 0);
 		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getPreparationTime())), gbc);
 		gbc.gridx=8;
 		gbc.gridy=6;
@@ -111,10 +124,12 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridx=6;
 		gbc.gridy=7;
 		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 375, 0, 0);
 		recipe.add(tempsCuisson, gbc);
 		gbc.gridx=7;
 		gbc.gridy=7;
 		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 0, 0);
 		recipe.add(new JLabel(Integer.toString(recipeToDisplay.getCookingTime())), gbc);
 		gbc.gridx=8;
 		gbc.gridy=7;
@@ -126,10 +141,12 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridx=6;
 		gbc.gridy=8;
 		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 375, 0, 0);
 		recipe.add(cout, gbc);
 		gbc.gridx=7;
 		gbc.gridy=8;
 		gbc.anchor = GridBagConstraints.EAST;
+		gbc.insets = new Insets(0, 0, 0, 0);
 		recipe.add(new JLabel(recipeToDisplay.getCost()), gbc);
 		gbc.gridx=8;
 		gbc.gridy=8;
@@ -138,16 +155,18 @@ public class RecipeDisplay extends JPanel {
 		
 	/* preparation */
 		preparation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		gbc.gridx=3;
+		gbc.gridx=0;
 		gbc.gridy=9+i;
 		gbc.anchor = GridBagConstraints.WEST;
+		gbc.insets = new Insets(50, 0, 0, 0);
 		recipe.add(preparation, gbc);
 		ArrayList<String> prepa = recipeToDisplay.getPreparation();
 		int k;
 		for( k=0; k<prepa.size(); k++){
-			gbc.gridx=3;
+			gbc.gridx=0;
 			gbc.gridy=(10+i)+k;
-			gbc.gridwidth=4;
+			gbc.gridwidth=GridBagConstraints.REMAINDER;
+			gbc.insets = new Insets(5, 0, 0, 0);
 			recipe.add(new JLabel(prepa.get(k)), gbc);
 		}
 		bonApp.setFont(new Font("Curlz MT", Font.PLAIN, 30));

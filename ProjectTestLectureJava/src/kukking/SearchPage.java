@@ -1,9 +1,11 @@
 package kukking;
 
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,9 +18,9 @@ public class SearchPage extends JPanel {
 	
 	public SearchPage(){
 		JPanel searchPage = this;
-		
+		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel search = new JLabel("Recherche");
-		search.setFont(new Font("Dom", Font.PLAIN, 20));
+		search.setFont(new Font("Dom", Font.PLAIN, 50));
 		
 		JRadioButton easy = new JRadioButton("Facile");
 		JRadioButton medium = new JRadioButton("Moyen");
@@ -47,40 +49,25 @@ public class SearchPage extends JPanel {
 		nvcuissine.add(medium);
 		nvcuissine.add(hard);
 		
+		Box nbPersonne = Box.createHorizontalBox();
+		nbPersonne.add(new JLabel("Entrer le nombre de personne :"));
+		nbPersonne.add(nbPers);
+		
+		Box title = Box.createHorizontalBox();
+		title.add(kukkingLogo);
+		title.add(Box.createHorizontalStrut(50));
+		title.add(search);
+		
 		Box verticale = Box.createVerticalBox();
-		verticale.add(search);
+		verticale.add(title);
 		verticale.add(new JLabel("Veuillez choisir un niveau de cuisine :"));
 		verticale.add(nvcuissine);
-		//verticale.add(new JLabel("Effectuer la recherche..."));
 		verticale.add(new JLabel("Veuillez choisir un type de cuisine :"));
 		verticale.add(typeCuisine);
 		verticale.add(new JLabel("Veuillez choisir un type de plat :"));
 		verticale.add(typePlat);
-		verticale.add(new JLabel("Entrer le nombre de personne :"));
-		verticale.add(nbPers);
-
-		
-		
-	
-	/*
-		searchPage.add(labelPersonne);
-		searchPage.add(zoneTexteP);
-		searchPage.add(labelRendom);
-		searchPage.add(boutonRecherche);
-		searchPage.add(retourPageAccueilRCH);
-		//pour les aligner/organiser correctement la page de recherche
-				Box AlignementPageRecherche = Box.createVerticalBox();
-				AlignementPageRecherche.add(labelCuisine);
-		        AlignementPageRecherche.add(menuDeroulantCuisineType);
-		        AlignementPageRecherche.add(labelPlat);
-		        AlignementPageRecherche.add(menuDeroulantPlatType);
-		        AlignementPageRecherche.add(labelPersonne);
-		        AlignementPageRecherche.add(zoneTexteP);
-		        AlignementPageRecherche.add(labelRendom);
-		        AlignementPageRecherche.add(boutonRecherche);
-		        AlignementPageRecherche.add(retourPageAccueilRCH);
-		        AlignementPageRecherche.add(Box.createVerticalGlue());
-		        searchPage.add(AlignementPageRecherche);*/
+		verticale.add(nbPersonne);
+		verticale.add(new JButton("Rechercher"));
 		
 		searchPage.add(verticale);
 		
