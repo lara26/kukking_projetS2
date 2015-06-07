@@ -10,19 +10,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+
 public class HomePage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	JButton connection = new JButton("Connexion");
+	JButton search = new JButton("Lancer une recherche");
+	KukkingDisplay kukkingFrame;
 	
-	public HomePage(){
-		JPanel homePage = this;
+	
+	public HomePage(KukkingDisplay kukkingFrame){
+		this.kukkingFrame = kukkingFrame;
 		JPanel favoris = new JPanel();
 		JPanel recettes = new JPanel();
-		JButton search = new JButton("Lancer une recherche");
-		JButton connection = new JButton("Connexion");
+		
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));;
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
-		kukking.setFont(new Font("Curlz MT", Font.PLAIN, 30));
+		kukking.setFont(new Font("Dom", Font.PLAIN, 50));
 		
 		favoris.setBorder(new TitledBorder("Favoris"));
 		favoris.setPreferredSize(new Dimension(450,400));
@@ -52,11 +56,12 @@ public class HomePage extends JPanel{
 		homePageTot.add(button);
 		homePageTot.add(Box.createVerticalStrut(20));
 		homePageTot.add(homePageBody);
+		this.add(homePageTot);
 		
-		homePage.add(homePageTot);
+		connection.addActionListener(kukkingFrame);
+		search.addActionListener(kukkingFrame);
 		
-	    
 	}
-		
-	
+
+
 }

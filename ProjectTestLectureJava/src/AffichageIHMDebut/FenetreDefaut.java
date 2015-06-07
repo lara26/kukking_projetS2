@@ -110,6 +110,7 @@ public class FenetreDefaut extends JFrame{
 	private JLabel labelNewTypeMeal = new JLabel("Choississez un type de plat");
 	private JLabel labelNbPeople = new JLabel("Choississez un nombre de personne par défaut");
 	private JLabel labelTimePrepare = new JLabel("Choississez un temps de préparation (en minutes)");
+
 	/**
 	 * The menu (JMenu) and the submenu(JMenuItem)
 	 */
@@ -397,9 +398,6 @@ public class FenetreDefaut extends JFrame{
         AlignementPageAddRecipe.add(sliderTime);
         AlignementPageAddRecipe.add(buttonGetHeure);
         AlignementPageAddRecipe.add(Heure);
-        AlignementPageAddRecipe.add(buttonValidate);
-        AlignementPageAddRecipe.add(Box.createVerticalGlue());
-        AddRecipe.add(AlignementPageAddRecipe);
 		
 /**
  * Les listeners

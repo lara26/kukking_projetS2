@@ -1,5 +1,5 @@
 package kukking;
-
+ 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 public class RecipeDisplay extends JPanel {
 
+	
 	private static final long serialVersionUID = 1L;
 
 	public RecipeDisplay(Recipe recipeToDisplay){
