@@ -1,6 +1,5 @@
 package kukking;
 
-
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.Box;
@@ -23,13 +22,8 @@ public class HomePage extends JPanel{
 		favoris.setBorder(new TitledBorder("Favoris"));
 		favoris.setPreferredSize(new Dimension(500,500));
 		
-		
 		recettes.setBorder(new TitledBorder("Recettes"));
 		recettes.setPreferredSize(new Dimension(500,500));
-		//homePage.add(kukkingLogo);
-		//homePage.add(kukking);
-		//homePage.add(favoris);
-		//homePage.add(recettes);
 		
 		Box homePageTot = Box.createVerticalBox();
 		
@@ -39,15 +33,12 @@ public class HomePage extends JPanel{
 		kukkingHead.add(kukking);
 		kukkingHead.setPreferredSize(new Dimension(100,100));
 	
-		
 		Box homePageBody = Box.createHorizontalBox();
 		homePageBody.add(favoris);
 		homePageBody.add(Box.createHorizontalStrut(200));
 		homePageBody.add(recettes);
 	
-		
 		homePageTot.add(kukkingHead);
-		
 		homePageTot.add(homePageBody);
 		
 		homePage.add(homePageTot);

@@ -1,9 +1,6 @@
 package kukking;
 
 import javax.swing.JLabel;
-
-import javax.swing.SwingConstants;
-
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -42,7 +39,6 @@ public class RecipeDisplay extends JPanel {
 		recipe.add(title, gbc);
 	
 	/* personnes */
-		
 		gbc.gridx=7;
 		gbc.gridy=1;
 		gbc.gridwidth=1;
