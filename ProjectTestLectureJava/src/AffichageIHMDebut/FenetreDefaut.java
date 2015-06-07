@@ -14,6 +14,11 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -29,6 +34,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 public class FenetreDefaut extends JFrame{
 
@@ -40,6 +47,8 @@ public class FenetreDefaut extends JFrame{
 	private JButton boutonConnexion = new JButton("Connexion");
 	private JButton boutonAdmin = new JButton("Se connecter");
 	private JButton boutonRCH = new JButton("Faire une Recherche");
+	private JButton retourPageAccueil = new JButton("Retour à la page d'accueil");
+	private JButton retourPageAccueilRCH = new JButton("Retour à la page d'accueil");
 	//private JPanel clicable = new JPanel();
 	//une zone de texte//
 	private JTextField zoneTexte = new JTextField("?!?!");
@@ -70,24 +79,43 @@ public class FenetreDefaut extends JFrame{
 	private JMenu menu3 = new JMenu("Aide");
 	private JMenuItem menuConnecter =new JMenuItem("Se connecter en tant que administrateur");
 	private JMenuItem menuQuitter =new JMenuItem("Quitter");
+	//private JMenuItem menuRetour = new JMenuItem("Retour à la page précédente");
 	
+	
+	JPanel pageDeConnexion= new JPanel();
+	JPanel pageGenerale = new JPanel();
+	JPanel pageRecherche = new JPanel();
 	//le constructeur
 	public FenetreDefaut()
 	{
-		//JFrame Fenetre = new JFrame();
+		super();
 		CardLayout cardL = new CardLayout();
 		JPanel content = new JPanel();
+		//CardLayout cardLCo = new CardLayout();
+		//JPanel contentConnexion = new JPanel();
 		setSize(500, 500);
 		setTitle("Kukking");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(/*JFrame.addActionListener (new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent clic)
+			{
+				CloseWindow();
+			}
+		}));*/JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		
-		//le menu//
+/**
+ * Le menu
+ */
 		barMenu.add(menu1);
 		barMenu.add(menu2);
 		barMenu.add(menu3);
+		//le sous-menu//
+		menu1.add(menuConnecter);
+		menu1.add(menuQuitter);
+		//menu1.add(menuRetour);
+		//this.menuConnecter.addActionListener(new EcouteurBoutonChanger());
 		
 /**
  * La page générale
@@ -98,10 +126,12 @@ public class FenetreDefaut extends JFrame{
 	    panFavoris.setBackground(Color.CYAN);
 	    panFavoris.setPreferredSize(new Dimension(100,100));
 	    panFavoris.setBorder(BorderFactory.createLineBorder(Color.black));
+	    
 	    //panel a la con pour séparer les favoris et les recettes aléatoires! pas trouver mieux comme faocn de faire
 	    JPanel panALaCon =new JPanel();
 	    panALaCon.setBackground(Color.LIGHT_GRAY); 
 	    panALaCon.setPreferredSize(new Dimension(100,200));
+	    //----------------------------------------------------------------
 	    //BorderLayout bord = new BorderLayout(100,100);
 	    //panFavoris.setLayout(bord);
 	    JPanel panRecette = new JPanel();
@@ -110,23 +140,19 @@ public class FenetreDefaut extends JFrame{
 	    panRecette.setBorder(BorderFactory.createLineBorder(Color.black));
 	    //BorderLayout bordRecette = new BorderLayout(0,0);
 	    //panRecette.setLayout(bordRecette);
-		JPanel pageGenerale = new JPanel();
-		pageGenerale.setLayout(new BorderLayout());
-		pageGenerale.add(icon);
-		pageGenerale.setBackground(Color.LIGHT_GRAY);
+//		JPanel pageGenerale = new JPanel();
+		this.pageGenerale.setLayout(new BorderLayout());
+		this.pageGenerale.add(icon);
+		this.pageGenerale.setBackground(Color.LIGHT_GRAY);
 		Font font = new Font("Calibri",Font.BOLD,20);
-		pageGenerale.add(labelKukking);
+		this.pageGenerale.add(labelKukking);
 		labelKukking.setFont(font);
-	    pageGenerale.add(boutonAdmin);
-	    pageGenerale.add(boutonRCH);
-	    pageGenerale.add(labelFavoris);
-	    pageGenerale.add(panFavoris);
-	    pageGenerale.add(labelRecetteRendom);
-	    pageGenerale.add(panRecette);
-	    
-		//pageGenerale.setLayout(new BorderLayout());
-	    //pageGenerale.add("North",pageGenerale);
-	    
+	    this.pageGenerale.add(boutonAdmin);
+	    this.pageGenerale.add(boutonRCH);
+	    this.pageGenerale.add(labelFavoris);
+	    this.pageGenerale.add(panFavoris);
+	    this.pageGenerale.add(labelRecetteRendom);
+	    this.pageGenerale.add(panRecette);
 
 	    Box AlignhoriPageLabelFavorisRecette = Box.createHorizontalBox();
 	    AlignhoriPageLabelFavorisRecette.add(labelFavoris);
@@ -136,7 +162,7 @@ public class FenetreDefaut extends JFrame{
 	    AlignhoriPageLabelFavorisRecette.add(Box.createVerticalGlue());
 	    AlignhoriPageLabelFavorisRecette.add(Box.createHorizontalStrut(1));
         pageGenerale.add(AlignhoriPageLabelFavorisRecette);
-        setLocationRelativeTo(this.getParent());
+        //setLocationRelativeTo(this.getParent());
         
         Box AlignhoriPageFavorisRecette = Box.createHorizontalBox();
 	    AlignhoriPageFavorisRecette.add(panFavoris);
@@ -145,21 +171,21 @@ public class FenetreDefaut extends JFrame{
 	    AlignhoriPageFavorisRecette.add(panRecette);
 	    AlignhoriPageFavorisRecette.add(Box.createHorizontalStrut(1));
         pageGenerale.add(AlignhoriPageFavorisRecette);
-        setLocationRelativeTo(this.getParent());
+        //setLocationRelativeTo(this.getParent());
         
 	    Box AlignhoriPageIconTitre = Box.createHorizontalBox();
 	    AlignhoriPageIconTitre.add(icon);
 	    AlignhoriPageIconTitre.add(labelKukking);
 	    AlignhoriPageIconTitre.add(Box.createHorizontalGlue());
         pageGenerale.add(AlignhoriPageIconTitre);
-        setLocationRelativeTo(this.getParent());
+        //setLocationRelativeTo(this.getParent());
 	    
 	    Box AlignhoriPageGenerale = Box.createHorizontalBox();
 	    AlignhoriPageGenerale.add(boutonAdmin);
 	    AlignhoriPageGenerale.add(boutonRCH);
 	    //AlignhoriPageGenerale.add(Box.createHorizontalGlue());
         pageGenerale.add(AlignhoriPageGenerale);
-        setLocationRelativeTo(this.getParent());
+        //setLocationRelativeTo(this.getParent());
 	    
         Box AlignementPageGenerale = Box.createVerticalBox();
         AlignementPageGenerale.add(AlignhoriPageIconTitre);
@@ -168,11 +194,11 @@ public class FenetreDefaut extends JFrame{
 		AlignementPageGenerale.add(AlignhoriPageFavorisRecette);
 		AlignementPageGenerale.add(Box.createVerticalGlue());
         pageGenerale.add(AlignementPageGenerale);
-        setLocationRelativeTo(this.getParent());
+        //setLocationRelativeTo(this.getParent());
 /**
  * La page générale de recherche
  */
-		JPanel pageRecherche = new JPanel();
+		//JPanel pageRecherche = new JPanel();
 		//pageGenerale.setLayout(new BorderLayout());
 		pageRecherche.setBackground(Color.LIGHT_GRAY);
 		pageRecherche.add(new JLabel("Veuillez ch"
@@ -199,35 +225,39 @@ public class FenetreDefaut extends JFrame{
 		pageRecherche.add(zoneTexteP);
 		pageRecherche.add(labelRendom);
 		pageRecherche.add(boutonRecherche);
+		pageRecherche.add(retourPageAccueilRCH);
+		//pour les aligner/organiser correctement la page de recherche
+				Box AlignementPageRecherche = Box.createVerticalBox();
+				AlignementPageRecherche.add(labelCuisine);
+		        AlignementPageRecherche.add(menuDeroulantCuisineType);
+		        AlignementPageRecherche.add(labelPlat);
+		        AlignementPageRecherche.add(menuDeroulantPlatType);
+		        AlignementPageRecherche.add(labelPersonne);
+		        AlignementPageRecherche.add(zoneTexteP);
+		        AlignementPageRecherche.add(labelRendom);
+		        AlignementPageRecherche.add(boutonRecherche);
+		        AlignementPageRecherche.add(retourPageAccueilRCH);
+		        AlignementPageRecherche.add(Box.createVerticalGlue());
+		        pageRecherche.add(AlignementPageRecherche);
+		        //setLocationRelativeTo(this.getParent());
+		        
 		
 /**
  * La page de connexion
  */
-		JPanel pageDeConnexion= new JPanel();
+		//JPanel pageDeConnexion= new JPanel();
 		Font fontConnexion = new Font("Calibri",Font.BOLD,20);
 		labelAccueilConnexion.setFont(fontConnexion);
-		pageDeConnexion.add(labelAccueilConnexion);
-		pageDeConnexion.add(labelLogin);
-		pageDeConnexion.add(zoneTexte2);
-		pageDeConnexion.add(labelPassWord);
-		pageDeConnexion.add(zoneTexte);
-		pageDeConnexion.add(boutonConnexion);
-		pageDeConnexion.setBackground(Color.CYAN);
+		this.pageDeConnexion.add(labelAccueilConnexion);
+		this.pageDeConnexion.add(labelLogin);
+		this.pageDeConnexion.add(zoneTexte2);
+		this.pageDeConnexion.add(labelPassWord);
+		this.pageDeConnexion.add(zoneTexte);
+		this.pageDeConnexion.add(boutonConnexion);
+		this.pageDeConnexion.add(retourPageAccueil);
+		this.pageDeConnexion.setBackground(Color.CYAN);
 		
-		//pour les aligner/organiser correctement la page de recherche
-		Box AlignementPageRecherche = Box.createVerticalBox();
-		AlignementPageRecherche.add(labelCuisine);
-        AlignementPageRecherche.add(menuDeroulantCuisineType);
-        AlignementPageRecherche.add(labelPlat);
-        AlignementPageRecherche.add(menuDeroulantPlatType);
-        AlignementPageRecherche.add(labelPersonne);
-        AlignementPageRecherche.add(zoneTexteP);
-        AlignementPageRecherche.add(labelRendom);
-        AlignementPageRecherche.add(boutonRecherche);
-        AlignementPageRecherche.add(Box.createVerticalGlue());
-        pageRecherche.add(AlignementPageRecherche);
-        setLocationRelativeTo(this.getParent());
-        
+		
       //pour les aligner/organiser correctement la page de connexion
         Box AlignementPageConnexion = Box.createVerticalBox();
 		AlignementPageConnexion.add(labelAccueilConnexion);
@@ -236,30 +266,55 @@ public class FenetreDefaut extends JFrame{
 		AlignementPageConnexion.add(labelPassWord);
 		AlignementPageConnexion.add(zoneTexte);
 		AlignementPageConnexion.add(boutonConnexion);
+		AlignementPageConnexion.add(retourPageAccueil);
 		AlignementPageConnexion.add(Box.createVerticalGlue());
-        pageDeConnexion.add(AlignementPageConnexion);
-        setLocationRelativeTo(this.getParent());
+        this.pageDeConnexion.add(AlignementPageConnexion);
+       // setLocationRelativeTo(this.getParent());
 		
-     // le listener sur le bouton connexion admin//
-     	/*	JPanel boutonAdmin = new JPanel();
-     		boutonAdmin.addFocusListener(new ActionListener() {
-     			@Override
-     			public void actionPerformed(ActionEvent clic){
-     				cardL.next(content);
-     			}
-     		});*/
-		
-		
-		// le listener sur le sous-menu connexion//
-		JPanel boutonPane = new JPanel();
-		menuConnecter.addActionListener(new ActionListener() {
+/**
+ * Les listeners
+ */
+      //bouton retour page accueil pour le bouton de la page recherche pour accéder au panel d'accueil
+        retourPageAccueilRCH.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e){
-				cardL.next(content);
+			public void actionPerformed(ActionEvent clic) {
+				dispose();
+				String[] args= null;
+				AfficherIHM.main(args);
 			}
 		});
+      //bouton retour page accueil pour accéder au panel d'accueil
+        retourPageAccueil.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent clic) {
+				dispose();
+				String[] args= null;
+				AfficherIHM.main(args);				
+			}
+		});
+      //bouton RCH (recherche) pour accéder au panel de recherche
+        boutonRCH.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent clic){
+				GoToSearchPanel();
+			}
+		});
+      //bouton admin pour accéder au panel de connection
+        boutonAdmin.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent clic){
+				GoToConnectionPanel();
+			}
+		});
+        //menu connecter pour accéder au panel de connection
+		menuConnecter.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent clic){
+				GoToConnectionPanel();
+			}
+		});
+		
 		// le listener sur le sous-menu quitter//
-				JPanel boutonClose = new JPanel();
 				menuQuitter.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e){
@@ -267,10 +322,6 @@ public class FenetreDefaut extends JFrame{
 					}
 				});
 		
-		boutonPane.add(menuConnecter);
-		//le sous-menu//
-		menu1.add(menuConnecter);
-		menu1.add(menuQuitter);
 		
 	    content.setBackground(Color.white);
 		content.setLayout(cardL);
@@ -278,69 +329,56 @@ public class FenetreDefaut extends JFrame{
 		content.add(pageRecherche);
 		content.add(pageDeConnexion);
 		
-		getContentPane().add(boutonPane, BorderLayout.NORTH);
 		getContentPane().add(content, BorderLayout.CENTER);
 		
 		setJMenuBar(barMenu);
 		
-		//Pour quitter la fenetre
-		
-		/*
-		content.setLayout(cardL);
-		content.add(pan1);
-		//content.add(pan2);
-		getContentPane().add(content, BorderLayout.CENTER);*/
-		
-		//les boutons, zone de texte et listedéroulante
-		/*clicable.add(bouton);
-		clicable.add(zoneTexte);
-		
-		clicable.add(menu);
-		clicable.add(labelRendom);
-		setContentPane(clicable);*/
-		
 	}
 	
 	public void CloseWindow()
-	{
-	JOptionPane jop = new JOptionPane();            
-	int option = jop.showConfirmDialog(null, "Etes-vous sur de vouloir quitter Kukking ?", "Quitter Kukking", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-	/*if(option != JOptionPane.NO_OPTION && 
-	   option != JOptionPane.CANCEL_OPTION && 
-	   option != JOptionPane.CLOSED_OPTION)
 		{
-	     animated = false;  
-	     bouton.setEnabled(true);
-	     bouton2.setEnabled(false);
-		}*/
-	if (option == JOptionPane.NO_OPTION)
-	{
-		animated = false;  
-	     bouton.setEnabled(true);
-	     bouton2.setEnabled(false);
-	}
-	if (option == JOptionPane.YES_OPTION)
-	{
-		bouton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
+		JOptionPane jop = new JOptionPane();            
+		int option = jop.showConfirmDialog(null, "Etes-vous sur de vouloir quitter Kukking ?", "Quitter Kukking", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (option == JOptionPane.NO_OPTION)
 			{
+				 animated = false;  
+			     bouton.setEnabled(true);
+			     bouton2.setEnabled(false);
+			}
+			if (option == JOptionPane.YES_OPTION)
+			{
+				bouton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					System.exit(0);
+				}
+				});
 				System.exit(0);
 			}
-		});
-	}
-	}
-	/*public void changerMenu(){
-        this.setContentPane(this.pageRecherche);
-        this.revalidate();
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}*/
-}
 
+	}
+
+
+/**
+ * Methode pour changer le panel de la fenetre
+ * Passer de la page générale à la page de connexion
+ */
+
+	  //Méthode qui change le panel de ta fenêtre
+    public void GoToConnectionPanel(){
+    	repaint();
+    	this.setContentPane(this.pageDeConnexion);
+    	pageDeConnexion.setVisible(true);
+    }
+    
+    public void GoToSearchPanel(){
+    	repaint();
+    	this.setContentPane(this.pageRecherche);
+    	pageRecherche.setVisible(true);
+    }
+}
+ 
 
 
 
