@@ -14,17 +14,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import kukking.HomePage.GoToConnectionPage;
 
-public class ConnectionPage extends JPanel{
+public class ConnectionPage extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	JButton returnHomePage = new JButton("Retour à la page d'accueil");	
+	JButton returnHomePage = new JButton("Retour à la page d'accueil");
+	JButton connection = new JButton("Se connecter");
 	JFrame kukkingFrame;
 	HomePage homePage = new HomePage(kukkingFrame);
-	
-	public ConnectionPage(JFrame kukkingFrame){
-		this.kukkingFrame = kukkingFrame;
+		
+	public ConnectionPage(JFrame test1){
+		kukkingFrame = test1;
 		JPanel connectionPage = this;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel connectionTitle = new JLabel(" Connexion en tant qu'administrateur");
@@ -33,7 +33,7 @@ public class ConnectionPage extends JPanel{
 		JTextField loginTextArea = new JTextField("Entrez votre login ici");
 		JLabel passWord = new JLabel("Entrez votre mot de passe");
 		JTextField passWordTextArea = new JTextField("Entrez votre mot de passe ici");
-		JButton connection = new JButton("Se connecter");
+		
 		
 		
 		
@@ -69,21 +69,31 @@ public class ConnectionPage extends JPanel{
 			  });
 	
 		
-		returnHomePage.addActionListener(new GoToHomePage());
+		returnHomePage.addActionListener(this);
+		connection.addActionListener(this);
 	}
 	
+
+	
+	
 	public void ChangePanel(JPanel panel){
-		
 		kukkingFrame.setContentPane(panel);
 		kukkingFrame.revalidate();
 	}
 
 	
-	public class GoToHomePage implements ActionListener{
+	
 		public void actionPerformed(ActionEvent clic){
-			ChangePanel(homePage);
+			JButton source = (JButton)clic.getSource();
+			if (source.getText().equals("Retour à la page d'accueil")){
+				ChangePanel(homePage);
+			}
+			else if (source.getText().equals("Se connecter")){
+				ChangePanel(homePage);
+			}
+			
 		}
-	}
+	
 	
 	
 }

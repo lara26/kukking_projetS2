@@ -14,22 +14,21 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 
-public class HomePage extends JPanel{
+public class HomePage extends JPanel implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	JButton connection = new JButton("Connexion");
 	JButton search = new JButton("Lancer une recherche");
-	JFrame kukkingFrame;
-	ConnectionPage connectionPage = new ConnectionPage();
+	JFrame kukkingFrame = new JFrame();
+	ConnectionPage connectionPage = new ConnectionPage(kukkingFrame);
 	SearchPage searchPage = new SearchPage(kukkingFrame);
-
 	
-	public HomePage(JFrame kukkingFrame){
-		this.kukkingFrame = kukkingFrame;
+	
+	public HomePage(JFrame test){
+		kukkingFrame = test;
 		JPanel homePage = this;
 		JPanel favoris = new JPanel();
 		JPanel recettes = new JPanel();
-		
 		
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));;
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
@@ -65,28 +64,31 @@ public class HomePage extends JPanel{
 		homePageTot.add(homePageBody);
 		homePage.add(homePageTot);
 		
-		connection.addActionListener(new GoToConnectionPage());
-		search.addActionListener(new GoToSearchPage());
+		connection.addActionListener(this);
+		search.addActionListener(this);
 		
 	}
 	
-	public class GoToConnectionPage implements ActionListener{
-		public void actionPerformed(ActionEvent clic){
+
+	
+	
+	public void actionPerformed(ActionEvent clic){
+		JButton source = (JButton)clic.getSource();
+		if (source.getText().equals("Connexion")){
 			ChangePanel(connectionPage);
 		}
-	}
-	
-	public class GoToSearchPage implements ActionListener{
-		public void actionPerformed(ActionEvent clic){
+		else if (source.getText().equals("Lancer une recherche")){
 			ChangePanel(searchPage);
 		}
+			
 	}
+	
 	
 	public void ChangePanel(JPanel panel){
 			
-			kukkingFrame.setContentPane(panel);
-			kukkingFrame.revalidate();
-		}
+		kukkingFrame.setContentPane(panel);
+		kukkingFrame.revalidate();
+	}
 
 
 }

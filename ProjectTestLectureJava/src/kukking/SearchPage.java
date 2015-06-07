@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import kukking.HomePage.GoToConnectionPage;
 
 public class SearchPage extends JPanel {
 
@@ -23,12 +22,12 @@ public class SearchPage extends JPanel {
 	JRadioButton medium = new JRadioButton("Moyen");
 	JRadioButton hard = new JRadioButton("Difficile");
 	JButton returnHomePage = new JButton("Retour à la page d'accueil");
-	JFrame kukkingFrame;
-	HomePage homePage = new HomePage(kukkingFrame);
+	JButton buttonSearch = new JButton("Rechercher");
+	JFrame kukkingFrame = new JFrame();
 	
 	
-	public SearchPage(JFrame kukkingFrame){
-		this.kukkingFrame = kukkingFrame;
+	public SearchPage(JFrame test2){
+		kukkingFrame= test2;
 		JPanel searchPage = this;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel search = new JLabel("Recherche");
@@ -100,14 +99,17 @@ public class SearchPage extends JPanel {
 		searchPageBox.add(new JLabel("Veuillez choisir un type de plat :"));
 		searchPageBox.add(typePlat);
 		searchPageBox.add(nbPersonne);
-		searchPageBox.add(new JButton("Rechercher"));
+		searchPageBox.add(buttonSearch);
 		searchPageBox.add(returnHomePage);
 		
 		searchPage.add(searchPageBox);
 		
-		returnHomePage.addActionListener(new GoToHomePage());
+		//returnHomePage.addActionListener(new GoToOverPage());
 		
 	}
+	
+	/*HomePage homePage = new HomePage(kukkingFrame);
+	
 	
 	/* Les méthodes */
 	public void RadioSelectEasy(){
@@ -142,15 +144,24 @@ public class SearchPage extends JPanel {
     	}
     }  
 		
-    public class GoToHomePage implements ActionListener{
-		public void actionPerformed(ActionEvent clic){
-			ChangePanel(homePage);
-		}
-	}
-	
-	public void ChangePanel(JPanel panel){	
+	public void ChangePanel(JPanel panel){
 		kukkingFrame.setContentPane(panel);
 		kukkingFrame.revalidate();
 	}
+
+	
+	/*public class GoToOverPage implements ActionListener{
+		public void actionPerformed(ActionEvent clic){
+			JButton source = (JButton)clic.getSource();
+			if (source.getText().equals("Retour à la page d'accueil")){
+				ChangePanel(homePage);
+			}
+			else if (source.getText().equals("Rechercher")){
+				ChangePanel(homePage);
+			}
+			
+		}
+	}*/
+	
 
 }

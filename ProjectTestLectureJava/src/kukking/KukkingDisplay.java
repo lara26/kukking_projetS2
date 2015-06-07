@@ -16,13 +16,11 @@ public class KukkingDisplay extends JFrame {
 	private static final long serialVersionUID = 1L;
 	JFrame window = this;
 	HomePage homePage = new HomePage(window);
-	SearchPage searchPage = new SearchPage(window);
-	ConnectionPage connectionPage = new ConnectionPage(window);
-	
-	
 	
 	public KukkingDisplay() {
 		
+		SearchPage searchPage = new SearchPage(window);
+		ConnectionPage connectionPage = new ConnectionPage(window);
 		window.setTitle("Kukking");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(1200, 700);
@@ -51,11 +49,6 @@ public class KukkingDisplay extends JFrame {
 		window.setVisible(true);
 		
 	}
-	 
-	
-	
-		
-		
-		
+	 	
 
 }
