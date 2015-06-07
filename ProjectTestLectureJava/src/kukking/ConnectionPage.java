@@ -14,11 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import kukking.HomePage.GoToConnectionPage;
+
 public class ConnectionPage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	JButton returnHomePage = new JButton("Retour à la page d'accueil");	
 	JFrame kukkingFrame;
-	
+	HomePage homePage = new HomePage(kukkingFrame);
 	
 	public ConnectionPage(JFrame kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
@@ -31,7 +34,7 @@ public class ConnectionPage extends JPanel{
 		JLabel passWord = new JLabel("Entrez votre mot de passe");
 		JTextField passWordTextArea = new JTextField("Entrez votre mot de passe ici");
 		JButton connection = new JButton("Se connecter");
-		JButton returnHomePage = new JButton("Retour à la page d'accueil");	
+		
 		
 		
 		Box title = Box.createHorizontalBox();
@@ -65,7 +68,16 @@ public class ConnectionPage extends JPanel{
 			   }
 			  });
 	
+		
+		returnHomePage.addActionListener(new GoToHomePage());
 	}
+	
+	public void ChangePanel(JPanel panel){
+		
+		kukkingFrame.setContentPane(panel);
+		kukkingFrame.revalidate();
+	}
+
 	
 	public class GoToHomePage implements ActionListener{
 		public void actionPerformed(ActionEvent clic){

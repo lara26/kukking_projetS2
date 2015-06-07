@@ -1,6 +1,5 @@
 package kukking;
 
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,14 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import kukking.KukkingDisplay.GoToConnectionPage;
 
 public class HomePage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	JButton connection = new JButton("Connexion");
+	JButton search = new JButton("Lancer une recherche");
 	JFrame kukkingFrame;
-	ConnectionPage connectionPage = new ConnectionPage(kukkingFrame);
+	ConnectionPage connectionPage = new ConnectionPage();
 	SearchPage searchPage = new SearchPage(kukkingFrame);
 
 	
@@ -30,7 +29,7 @@ public class HomePage extends JPanel{
 		JPanel homePage = this;
 		JPanel favoris = new JPanel();
 		JPanel recettes = new JPanel();
-		JButton search = new JButton("Lancer une recherche");
+		
 		
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));;
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
@@ -67,6 +66,7 @@ public class HomePage extends JPanel{
 		homePage.add(homePageTot);
 		
 		connection.addActionListener(new GoToConnectionPage());
+		search.addActionListener(new GoToSearchPage());
 		
 	}
 	

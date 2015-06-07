@@ -51,36 +51,7 @@ public class KukkingDisplay extends JFrame {
 		window.setVisible(true);
 		
 	}
-	
-	public class GoToConnectionPage implements ActionListener{
-		public void actionPerformed(ActionEvent clic){
-			ChangePanel(connectionPage);
-		}
-	}
-	
-	public class GoToHomePage implements ActionListener{
-		public void actionPerformed(ActionEvent clic){
-			ChangePanel(homePage);
-		}
-	}
-	
-	
-	
-	public class GoToSearchPage implements ActionListener{
-		public void actionPerformed(ActionEvent clic){
-			ChangePanel(searchPage);
-		}
-	}
-	
-	
-	/* changement de panel */
-	public void ChangePanel(JPanel panel){
-		
-		window.setContentPane(panel);
-		window.revalidate();
-	}
-
-		 
+	 
 	
 	
 		

@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import kukking.HomePage.GoToConnectionPage;
+
 public class SearchPage extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -102,6 +104,8 @@ public class SearchPage extends JPanel {
 		searchPageBox.add(returnHomePage);
 		
 		searchPage.add(searchPageBox);
+		
+		returnHomePage.addActionListener(new GoToHomePage());
 		
 	}
 	
