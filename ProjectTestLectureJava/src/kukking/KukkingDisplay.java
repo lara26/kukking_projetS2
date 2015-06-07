@@ -11,16 +11,19 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 
-public class KukkingDisplay extends JFrame {
+public class KukkingDisplay extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	JFrame window = this;
-	HomePage homePage = new HomePage(window);
+	HomePage homePage;
+	SearchPage searchPage;
+	ConnectionPage connectionPage;
 	
 	public KukkingDisplay() {
 		
-		SearchPage searchPage = new SearchPage(window);
-		ConnectionPage connectionPage = new ConnectionPage(window);
+		homePage = new HomePage(this);
+		searchPage = new SearchPage(this);
+		connectionPage = new ConnectionPage(this);
 		window.setTitle("Kukking");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(1200, 700);
@@ -51,4 +54,28 @@ public class KukkingDisplay extends JFrame {
 	}
 	 	
 
+	public void ChangePanel(JPanel panel){
+		this.setContentPane(panel);
+		this.revalidate();
+	}
+	
+	public void actionPerformed(ActionEvent clic){
+		JButton source = (JButton)clic.getSource();
+		if (source.getText().equals("Connexion")){
+			ChangePanel(connectionPage);
+		}
+		else if (source.getText().equals("Lancer une recherche")){
+			ChangePanel(searchPage);
+		}
+		else if (source.getText().equals("Se connecter")){
+			ChangePanel(homePage);
+		}
+		else if (source.getText().equals("Retour à la page d'accueil")){
+			ChangePanel(homePage);
+		}
+		else if (source.getText().equals("Rechercher")){
+			ChangePanel(homePage);
+		}
+			
+	}
 }

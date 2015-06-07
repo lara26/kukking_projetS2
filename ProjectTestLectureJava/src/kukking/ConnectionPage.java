@@ -1,31 +1,26 @@
 package kukking;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class ConnectionPage extends JPanel implements ActionListener {
+public class ConnectionPage extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	JButton returnHomePage = new JButton("Retour à la page d'accueil");
 	JButton connection = new JButton("Se connecter");
-	JFrame kukkingFrame;
-	HomePage homePage = new HomePage(kukkingFrame);
+	KukkingDisplay kukkingFrame;
 		
-	public ConnectionPage(JFrame test1){
-		kukkingFrame = test1;
-		JPanel connectionPage = this;
+	public ConnectionPage(KukkingDisplay kukkingFrame){
+		this.kukkingFrame = kukkingFrame;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel connectionTitle = new JLabel(" Connexion en tant qu'administrateur");
 		connectionTitle.setFont(new Font("Dom", Font.PLAIN, 50));
@@ -54,7 +49,7 @@ public class ConnectionPage extends JPanel implements ActionListener {
 		connectionPageBox.add(title);
 		connectionPageBox.add(data);
 		
-		connectionPage.add(connectionPageBox);
+		this.add(connectionPageBox);
 		
 		loginTextArea.addFocusListener(new FocusAdapter() {
 		   public void focusGained(FocusEvent onclic){
@@ -69,31 +64,8 @@ public class ConnectionPage extends JPanel implements ActionListener {
 			  });
 	
 		
-		returnHomePage.addActionListener(this);
-		connection.addActionListener(this);
+		returnHomePage.addActionListener(kukkingFrame);
+		connection.addActionListener(kukkingFrame);
 	}
-	
-
-	
-	
-	public void ChangePanel(JPanel panel){
-		kukkingFrame.setContentPane(panel);
-		kukkingFrame.revalidate();
-	}
-
-	
-	
-		public void actionPerformed(ActionEvent clic){
-			JButton source = (JButton)clic.getSource();
-			if (source.getText().equals("Retour à la page d'accueil")){
-				ChangePanel(homePage);
-			}
-			else if (source.getText().equals("Se connecter")){
-				ChangePanel(homePage);
-			}
-			
-		}
-	
-	
 	
 }

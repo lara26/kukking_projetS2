@@ -2,31 +2,25 @@ package kukking;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 
-public class HomePage extends JPanel implements ActionListener{
+public class HomePage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 	JButton connection = new JButton("Connexion");
 	JButton search = new JButton("Lancer une recherche");
-	JFrame kukkingFrame = new JFrame();
-	ConnectionPage connectionPage = new ConnectionPage(kukkingFrame);
-	SearchPage searchPage = new SearchPage(kukkingFrame);
+	KukkingDisplay kukkingFrame;
 	
 	
-	public HomePage(JFrame test){
-		kukkingFrame = test;
-		JPanel homePage = this;
+	public HomePage(KukkingDisplay kukkingFrame){
+		this.kukkingFrame = kukkingFrame;
 		JPanel favoris = new JPanel();
 		JPanel recettes = new JPanel();
 		
@@ -62,32 +56,11 @@ public class HomePage extends JPanel implements ActionListener{
 		homePageTot.add(button);
 		homePageTot.add(Box.createVerticalStrut(20));
 		homePageTot.add(homePageBody);
-		homePage.add(homePageTot);
+		this.add(homePageTot);
 		
-		connection.addActionListener(this);
-		search.addActionListener(this);
+		connection.addActionListener(kukkingFrame);
+		search.addActionListener(kukkingFrame);
 		
-	}
-	
-
-	
-	
-	public void actionPerformed(ActionEvent clic){
-		JButton source = (JButton)clic.getSource();
-		if (source.getText().equals("Connexion")){
-			ChangePanel(connectionPage);
-		}
-		else if (source.getText().equals("Lancer une recherche")){
-			ChangePanel(searchPage);
-		}
-			
-	}
-	
-	
-	public void ChangePanel(JPanel panel){
-			
-		kukkingFrame.setContentPane(panel);
-		kukkingFrame.revalidate();
 	}
 
 

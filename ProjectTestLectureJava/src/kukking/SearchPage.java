@@ -8,7 +8,6 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -23,11 +22,10 @@ public class SearchPage extends JPanel {
 	JRadioButton hard = new JRadioButton("Difficile");
 	JButton returnHomePage = new JButton("Retour à la page d'accueil");
 	JButton buttonSearch = new JButton("Rechercher");
-	JFrame kukkingFrame = new JFrame();
+	KukkingDisplay kukkingFrame;
 	
-	
-	public SearchPage(JFrame test2){
-		kukkingFrame= test2;
+	public SearchPage(KukkingDisplay kukkingFrame){
+		this.kukkingFrame = kukkingFrame;
 		JPanel searchPage = this;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel search = new JLabel("Recherche");
@@ -104,11 +102,9 @@ public class SearchPage extends JPanel {
 		
 		searchPage.add(searchPageBox);
 		
-		//returnHomePage.addActionListener(new GoToOverPage());
+		returnHomePage.addActionListener(kukkingFrame);
 		
 	}
-	
-	/*HomePage homePage = new HomePage(kukkingFrame);
 	
 	
 	/* Les méthodes */
@@ -142,26 +138,6 @@ public class SearchPage extends JPanel {
     	{
     		medium.setSelected(false);
     	}
-    }  
-		
-	public void ChangePanel(JPanel panel){
-		kukkingFrame.setContentPane(panel);
-		kukkingFrame.revalidate();
-	}
-
-	
-	/*public class GoToOverPage implements ActionListener{
-		public void actionPerformed(ActionEvent clic){
-			JButton source = (JButton)clic.getSource();
-			if (source.getText().equals("Retour à la page d'accueil")){
-				ChangePanel(homePage);
-			}
-			else if (source.getText().equals("Rechercher")){
-				ChangePanel(homePage);
-			}
-			
-		}
-	}*/
-	
+    }  	
 
 }
