@@ -24,6 +24,7 @@ public class SearchPage extends JPanel {
 	JFrame kukkingFrame;
 	HomePage homePage = new HomePage(kukkingFrame);
 	
+	
 	public SearchPage(JFrame kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		JPanel searchPage = this;

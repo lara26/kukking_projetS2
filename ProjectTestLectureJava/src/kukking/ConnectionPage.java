@@ -19,6 +19,7 @@ public class ConnectionPage extends JPanel{
 	private static final long serialVersionUID = 1L;
 	JFrame kukkingFrame;
 	
+	
 	public ConnectionPage(JFrame kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		JPanel connectionPage = this;

@@ -64,6 +64,8 @@ public class KukkingDisplay extends JFrame {
 		}
 	}
 	
+	
+	
 	public class GoToSearchPage implements ActionListener{
 		public void actionPerformed(ActionEvent clic){
 			ChangePanel(searchPage);
