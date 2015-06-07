@@ -1,12 +1,14 @@
 package kukking;
 
-import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -15,16 +17,44 @@ import javax.swing.JTextField;
 public class SearchPage extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	JRadioButton easy = new JRadioButton("Facile");
+	JRadioButton medium = new JRadioButton("Moyen");
+	JRadioButton hard = new JRadioButton("Difficile");
+	JButton returnHomePage = new JButton("Retour à la page d'accueil");
+	JFrame kukkingFrame;
+	HomePage homePage = new HomePage(kukkingFrame);
 	
-	public SearchPage(){
+	public SearchPage(JFrame kukkingFrame){
+		this.kukkingFrame = kukkingFrame;
 		JPanel searchPage = this;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel search = new JLabel("Recherche");
 		search.setFont(new Font("Dom", Font.PLAIN, 50));
 		
-		JRadioButton easy = new JRadioButton("Facile");
-		JRadioButton medium = new JRadioButton("Moyen");
-		JRadioButton hard = new JRadioButton("Difficile");
+		hard.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent onselect){
+				RadioSelectHard();
+			}
+		});
+		
+		medium.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent onselect){
+				RadioSelectAverage();
+			}
+		});
+		
+		easy.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent onselect){
+				RadioSelectEasy();
+			}
+		});
+		
+		
+		
+		
 		JTextField nbPers = new JTextField("");
 		
 		JComboBox<String> typeCuisine = new JComboBox<String>();
@@ -58,19 +88,64 @@ public class SearchPage extends JPanel {
 		title.add(Box.createHorizontalStrut(50));
 		title.add(search);
 		
-		Box verticale = Box.createVerticalBox();
-		verticale.add(title);
-		verticale.add(new JLabel("Veuillez choisir un niveau de cuisine :"));
-		verticale.add(nvcuissine);
-		verticale.add(new JLabel("Veuillez choisir un type de cuisine :"));
-		verticale.add(typeCuisine);
-		verticale.add(new JLabel("Veuillez choisir un type de plat :"));
-		verticale.add(typePlat);
-		verticale.add(nbPersonne);
-		verticale.add(new JButton("Rechercher"));
+		Box searchPageBox = Box.createVerticalBox();
+		searchPageBox.add(title);
+		searchPageBox.add(new JLabel("Veuillez choisir un niveau de cuisine :"));
+		searchPageBox.add(nvcuissine);
+		searchPageBox.add(new JLabel("Veuillez choisir un type de cuisine :"));
+		searchPageBox.add(typeCuisine);
+		searchPageBox.add(new JLabel("Veuillez choisir un type de plat :"));
+		searchPageBox.add(typePlat);
+		searchPageBox.add(nbPersonne);
+		searchPageBox.add(new JButton("Rechercher"));
+		searchPageBox.add(returnHomePage);
 		
-		searchPage.add(verticale);
+		searchPage.add(searchPageBox);
 		
+	}
+	
+	/* Les méthodes */
+	public void RadioSelectEasy(){
+    	if(medium.isSelected())
+    	{
+    		medium.setSelected(false);
+    	}
+    	if (hard.isSelected())
+    	{
+    		hard.setSelected(false);
+    	}
+    }
+    
+    public void RadioSelectAverage(){
+    	if(easy.isSelected())
+    	{
+    		easy.setSelected(false);
+    	}
+    	if (hard.isSelected())
+    	{
+    		hard.setSelected(false);
+    	}
+    }
+    public void RadioSelectHard(){
+    	if(easy.isSelected())
+    	{
+    		easy.setSelected(false);
+    	}
+    	if (medium.isSelected())
+    	{
+    		medium.setSelected(false);
+    	}
+    }  
+		
+    public class GoToHomePage implements ActionListener{
+		public void actionPerformed(ActionEvent clic){
+			ChangePanel(homePage);
+		}
+	}
+	
+	public void ChangePanel(JPanel panel){	
+		kukkingFrame.setContentPane(panel);
+		kukkingFrame.revalidate();
 	}
 
 }

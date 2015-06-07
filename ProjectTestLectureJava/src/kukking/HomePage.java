@@ -2,27 +2,38 @@ package kukking;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import kukking.KukkingDisplay.GoToConnectionPage;
+
 public class HomePage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	JButton connection = new JButton("Connexion");
+	JFrame kukkingFrame;
+	ConnectionPage connectionPage = new ConnectionPage(kukkingFrame);
+	SearchPage searchPage = new SearchPage(kukkingFrame);
+
 	
-	public HomePage(){
+	public HomePage(JFrame kukkingFrame){
+		this.kukkingFrame = kukkingFrame;
 		JPanel homePage = this;
 		JPanel favoris = new JPanel();
 		JPanel recettes = new JPanel();
 		JButton search = new JButton("Lancer une recherche");
-		JButton connection = new JButton("Connexion");
+		
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));;
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
-		kukking.setFont(new Font("Curlz MT", Font.PLAIN, 30));
+		kukking.setFont(new Font("Dom", Font.PLAIN, 50));
 		
 		favoris.setBorder(new TitledBorder("Favoris"));
 		favoris.setPreferredSize(new Dimension(450,400));
@@ -52,11 +63,29 @@ public class HomePage extends JPanel{
 		homePageTot.add(button);
 		homePageTot.add(Box.createVerticalStrut(20));
 		homePageTot.add(homePageBody);
-		
 		homePage.add(homePageTot);
 		
-	    
-	}
+		connection.addActionListener(new GoToConnectionPage());
 		
+	}
 	
+	public class GoToConnectionPage implements ActionListener{
+		public void actionPerformed(ActionEvent clic){
+			ChangePanel(connectionPage);
+		}
+	}
+	
+	public class GoToSearchPage implements ActionListener{
+		public void actionPerformed(ActionEvent clic){
+			ChangePanel(searchPage);
+		}
+	}
+	
+	public void ChangePanel(JPanel panel){
+			
+			kukkingFrame.setContentPane(panel);
+			kukkingFrame.revalidate();
+		}
+
+
 }

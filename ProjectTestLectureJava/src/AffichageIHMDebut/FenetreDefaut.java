@@ -82,6 +82,11 @@ public class FenetreDefaut extends JFrame{
 	//private JMenuItem menuRetour = new JMenuItem("Retour à la page précédente");
 	
 	
+	
+	
+	
+	
+	
 	JPanel pageDeConnexion= new JPanel();
 	JPanel pageGenerale = new JPanel();
 	JPanel pageRecherche = new JPanel();
@@ -280,7 +285,7 @@ public class FenetreDefaut extends JFrame{
 			public void actionPerformed(ActionEvent clic) {
 				dispose();
 				String[] args= null;
-				AfficherIHM.main(args);
+//				AfficherIHM.main(args);
 			}
 		});
       //bouton retour page accueil pour accéder au panel d'accueil
@@ -289,7 +294,7 @@ public class FenetreDefaut extends JFrame{
 			public void actionPerformed(ActionEvent clic) {
 				dispose();
 				String[] args= null;
-				AfficherIHM.main(args);				
+	//			AfficherIHM.main(args);				
 			}
 		});
       //bouton RCH (recherche) pour accéder au panel de recherche
