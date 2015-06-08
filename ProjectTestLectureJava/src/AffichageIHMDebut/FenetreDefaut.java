@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -68,7 +69,7 @@ public class FenetreDefaut extends JFrame{
 	private JButton backToHomePageHelp = new JButton("Retour à la page d'accueil");
 	private JButton buttonAddRecette = new JButton("Ajouter une recette");
 	private JButton buttonValidate = new JButton("Valider");
-	private JButton buttonGetHeure = new JButton("obtenir les heures");
+	private JButton buttonGetHeure = new JButton("Obtenir les valeurs choisies");
 	/**
 	 * Text area for panel of search, and for panel of connection
 	 */
@@ -76,6 +77,8 @@ public class FenetreDefaut extends JFrame{
 	private JTextField textArea = new JTextField("?!?!");
 	private JTextField textArea2 = new JTextField("??");
 	private JTextField textAreaPeople = new JTextField("nb Personne");
+	private JTextField textAreaNameRecipe = new JTextField("Titre de la recette");
+	private JTextArea textAreaRecipeOfPrepare = new JTextArea("Saisissez la préparation");
 	
 	/**
 	 * The drop down list for the panel of search
@@ -109,9 +112,9 @@ public class FenetreDefaut extends JFrame{
 	private JLabel labelAddRecipe = new JLabel("Ajouter une recette");
 	private JLabel labelNewType = new JLabel("Choississez un type de cuisine");
 	private JLabel labelNewTypeMeal = new JLabel("Choississez un type de plat");
-	private JLabel labelNbPeople = new JLabel("Choississez un nombre de personne par défaut");
-	private JLabel labelTimeCook = new JLabel("Choississez un temps de cuisson (en minutes)");
-	private JLabel labelTimeOfPrepare = new JLabel("Choisissez une temps de préparation (en minutes)");
+	private JLabel labelNbPeople = new JLabel("Nombre de personne par défaut");
+	private JLabel labelTimeCook = new JLabel("Temps de cuisson (en minutes)");
+	private JLabel labelTimeOfPrepare = new JLabel("Temps de préparation (en minutes)");
 
 	/**
 	 * The menu (JMenu) and the submenu(JMenuItem)
@@ -157,6 +160,8 @@ public class FenetreDefaut extends JFrame{
 		this.textArea.setFont(fontForChamps);
 		this.textArea2.setFont(fontForChamps);
 		this.textAreaPeople.setFont(fontForChamps);
+		this.textAreaNameRecipe.setFont(fontForChamps);
+		this.textAreaRecipeOfPrepare.setFont(fontForChamps);
 /**
  * Le menu
  */
@@ -348,12 +353,17 @@ public class FenetreDefaut extends JFrame{
  * La page d'ajout de recette
  */
 		JLabel iconAdd = new JLabel(new ImageIcon("kukkinglogo.png"));
-		//this.AddRecipe.setBackground(Color.magenta);
 		Font fontLabelRecetteAdd = new Font("Calibri", Font.BOLD,20);
 		labelAddRecipe.setFont(fontLabelRecetteAdd);
 		this.AddRecipe.add(labelAddRecipe);
 		this.AddRecipe.add(iconAdd);
 		this.AddRecipe.add(buttonValidate);
+		this.AddRecipe.add(textAreaNameRecipe);
+		this.AddRecipe.add(textAreaRecipeOfPrepare);
+		textAreaRecipeOfPrepare.setPreferredSize(new Dimension(400,100));
+		//textAreaRecipeOfPrepare.setEditable(false);
+		textAreaRecipeOfPrepare.setLineWrap(true);
+		textAreaRecipeOfPrepare.setWrapStyleWord(true);
 		this.AddRecipe.add(labelNewType);
 		this.AddRecipe.add(labelNewTypeMeal);
 		//new drop-down list for new type of meal
@@ -398,8 +408,14 @@ public class FenetreDefaut extends JFrame{
 	    AlignhoriPageAddRecipe.add(labelAddRecipe);
         AddRecipe.add(AlignhoriPageAddRecipe);
         
+        /*Box AlignhoriPageAddRecipeDrop = Box.createHorizontalBox();
+	    AlignhoriPageAddRecipeDrop.add(labelNewType);
+	    AlignhoriPageAddRecipeDrop.add(Drop);
+        AddRecipe.add(AlignhoriPageAddRecipeDrop);*/
+        
         Box AlignementPageAddRecipe = Box.createVerticalBox();
         AlignementPageAddRecipe.add(AlignhoriPageAddRecipe);
+        AlignementPageAddRecipe.add(textAreaNameRecipe);
         AlignementPageAddRecipe.add(labelNewType);
         AlignementPageAddRecipe.add(DropDownListTypeKitchenAdd);
         AlignementPageAddRecipe.add(labelNewTypeMeal);
@@ -412,6 +428,7 @@ public class FenetreDefaut extends JFrame{
         AlignementPageAddRecipe.add(sliderTimePrepare);
         AlignementPageAddRecipe.add(buttonGetHeure);
         AlignementPageAddRecipe.add(Heure);
+        AlignementPageAddRecipe.add(textAreaRecipeOfPrepare);
         AlignementPageAddRecipe.add(buttonValidate);
         AddRecipe.add(AlignementPageAddRecipe);
 		
@@ -434,6 +451,19 @@ public class FenetreDefaut extends JFrame{
 		/**
 		 * Pour les text area pour que leur texte s'efface quand on clique dans le champs
 		 */
+        
+        textAreaRecipeOfPrepare.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent onclic){
+				textAreaRecipeOfPrepare.setText("");
+			}
+		});
+        
+        textAreaNameRecipe.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent onclic){
+				textAreaNameRecipe.setText("");
+			}
+		});
+        
 		textAreaPeople.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent onclic){
 				textAreaPeople.setText("");
