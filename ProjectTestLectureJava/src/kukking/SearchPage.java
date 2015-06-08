@@ -3,7 +3,6 @@ package kukking;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import AffichageIHMDebut.AfficherIHM;
 
 
 public class SearchPage extends JPanel {
@@ -41,7 +42,7 @@ public class SearchPage extends JPanel {
 		medium.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent onselect){
-				RadioSelectAverage();
+				RadioSelectMeduim();
 			}
 		});
 		
@@ -64,6 +65,9 @@ public class SearchPage extends JPanel {
 		typeCuisine.addItem("Recettes asiatiques");
 		typeCuisine.addItem("Recettes classiques");
 		typeCuisine.addItem("Recettes étudiante");
+		
+		typeCuisine.addItem("Recettes fête");
+		
 		typeCuisine.addItem("Tous type de recettes");
 		
 		JComboBox<String> typePlat = new JComboBox<String>();
@@ -104,6 +108,22 @@ public class SearchPage extends JPanel {
 		
 		returnHomePage.addActionListener(kukkingFrame);
 		
+		
+		
+		
+		
+
+	    //bouton RCH (recherche) pour accéder au panel de recherche
+		buttonSearch.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent onselect){
+				
+				SwingUtilities.invokeLater(new displayfenetretest());
+				
+				
+			}
+		});
+		
 	}
 	
 	
@@ -119,7 +139,7 @@ public class SearchPage extends JPanel {
     	}
     }
     
-    public void RadioSelectAverage(){
+    public void RadioSelectMeduim(){
     	if(easy.isSelected())
     	{
     		easy.setSelected(false);
@@ -129,7 +149,8 @@ public class SearchPage extends JPanel {
     		hard.setSelected(false);
     	}
     }
-    public void RadioSelectHard(){
+    public void RadioSelectHard()
+    {
     	if(easy.isSelected())
     	{
     		easy.setSelected(false);
@@ -138,6 +159,8 @@ public class SearchPage extends JPanel {
     	{
     		medium.setSelected(false);
     	}
-    }  	
+    } 
+    
+    
 
 }

@@ -2,12 +2,12 @@ package kukking;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -18,6 +18,11 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 	HomePage homePage;
 	SearchPage searchPage;
 	ConnectionPage connectionPage;
+	
+	private JButton bouton = new JButton()/*("Go")*/;
+	private JButton bouton2 = new JButton()/*("Stop")*/;
+	private boolean animated = true;
+	private JOptionPane jop;
 	
 	public KukkingDisplay() {
 		
@@ -51,6 +56,20 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 		
 		window.setVisible(true);
 		
+		
+		
+		
+		// le listener sur le sous-menu quitter//
+		menuQuitter.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				CloseWindow();
+			}
+			
+		});
+		
 	}
 	 	
 
@@ -59,23 +78,57 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 		this.revalidate();
 	}
 	
-	public void actionPerformed(ActionEvent clic){
+	
+	public void actionPerformed(ActionEvent clic)
+	{
 		JButton source = (JButton)clic.getSource();
-		if (source.getText().equals("Connexion")){
+		if (source.getText().equals("Connexion"))
+		{
 			ChangePanel(connectionPage);
 		}
-		else if (source.getText().equals("Lancer une recherche")){
+		else if (source.getText().equals("Lancer une recherche"))
+		{
 			ChangePanel(searchPage);
 		}
-		else if (source.getText().equals("Se connecter")){
+		else if (source.getText().equals("Se connecter"))
+		{
 			ChangePanel(homePage);
 		}
-		else if (source.getText().equals("Retour à la page d'accueil")){
+		else if (source.getText().equals("Retour à la page d'accueil"))
+		{
 			ChangePanel(homePage);
 		}
-		else if (source.getText().equals("Rechercher")){
+		else if (source.getText().equals("Rechercher"))
+		{
 			ChangePanel(homePage);
 		}
 			
 	}
+	
+	
+	
+	
+	public void CloseWindow()
+	{
+	jop = new JOptionPane();            
+	int option = JOptionPane.showConfirmDialog(null, "Etes-vous sur de vouloir quitter Kukking ?", "Quitter Kukking", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (option == JOptionPane.NO_OPTION)
+		{
+			 animated  = false;  
+		     bouton.setEnabled(true);
+		     bouton2.setEnabled(false);
+		}
+		if (option == JOptionPane.YES_OPTION)
+		{
+			bouton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);
+			}
+			});
+			System.exit(0);
+		}
+
+}
 }
