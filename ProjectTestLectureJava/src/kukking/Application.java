@@ -10,6 +10,9 @@ import kukking.IHM.KukkingDisplay;
 
 public class Application {
 	
+	public final static String[] logins = {"Martin","Laure","Robin","Maud","Alexandra"};
+	public final static String[] passwords = {"AM","CA","EX","LA","LI"};
+	
 	private IHM_User user;
 
 	private IHM_Administrator admin;
@@ -27,6 +30,11 @@ public class Application {
 	}
 
 	private Recipe recetteCourante;
+
+	private boolean accesAdmin;
+	public boolean isAccesAdmin() {
+		return accesAdmin;
+	}
 
 	public Application()
 	{
@@ -73,7 +81,7 @@ public class Application {
 	public void pageSuivante() {
 	}
 
-	public void rechercheRecettes(int tempsPrepaMax, String typeCuisine, String typePlat, String cout)
+	public ArrayList<Recipe> rechercheRecettes(int tempsPrepaMax, String typeCuisine, String typePlat, String cout)
 	{
 		ArrayList<Recipe> listWellReceipts = new ArrayList<Recipe>();
 		for (Recipe currentRecipe: receiptsList.list)
@@ -97,27 +105,36 @@ public class Application {
 				}
 			}
 		}
+		return listWellReceipts;
 		
-		//Cette boucle est juste un test
+		/*Cette boucle est juste un test
 		for(Recipe currentRecipe: listWellReceipts)
 		{
 			System.out.println (currentRecipe.getNameRecipe());
 		}
-		// Fin de la boucle test
+		// Fin de la boucle test*/
 	}
 
-	public void requestAdministrativeAccess() throws IOException
+	/*public void requestAdministrativeAccess(String login, String password) throws IOException
 	{
-		String password = user.requestPassword();
-		if (valider(password))
+		if (valider(login, password))
 			user.displayAdministrativePart();
-	}
+	}*/
 
 	/**
 	 * valid or not password give in parameter
 	 */
-	public boolean valider(String password) {
-		if (password.equals("amodifier")) return true;
+	public boolean valider(String login, String password) {
+		int numLogin = 0;
+		for (String currentLogin:logins)
+		{
+			if (login.equals(currentLogin)&&password.equals(passwords[numLogin]))
+			{
+				accesAdmin = true;
+				return true;
+			}
+			numLogin++;
+		}
 		return false;
 	}
 

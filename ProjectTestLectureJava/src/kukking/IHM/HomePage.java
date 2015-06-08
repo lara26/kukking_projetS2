@@ -35,7 +35,7 @@ public class HomePage extends JPanel{
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
 		kukking.setFont(new Font("Dom", Font.PLAIN, 50));
 		
-		this.kukkingFrame.updateFavoris(this.favoris);
+		this.kukkingFrame.displayListReceipts(this.favoris, this.kukkingFrame.application.getListe_Favoris().list, new Font("Century Gothic", Font.PLAIN, 18));
 		favoris.setBorder(new TitledBorder("Favoris"));
 		favoris.setPreferredSize(new Dimension(450,400));
 		

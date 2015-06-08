@@ -15,19 +15,21 @@ import javax.swing.JTextField;
 public class ConnectionPage extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	JButton returnHomePage = new JButton("Retour à la page d'accueil");
-	JButton connection = new JButton("Se connecter");
-	KukkingDisplay kukkingFrame;
-		
+	private JButton returnHomePage = new JButton("Retour à la page d'accueil");
+	private JButton connection = new JButton("Se connecter");
+	private KukkingDisplay kukkingFrame;
+	private JTextField loginTextArea;
+	private JTextField passWordTextArea;
+
 	public ConnectionPage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel connectionTitle = new JLabel(" Connexion en tant qu'administrateur");
 		connectionTitle.setFont(new Font("Dom", Font.PLAIN, 50));
 		JLabel login = new JLabel("Entrez votre login");
-		JTextField loginTextArea = new JTextField("Entrez votre login ici");
+		loginTextArea = new JTextField("Entrez votre login ici");
 		JLabel passWord = new JLabel("Entrez votre mot de passe");
-		JTextField passWordTextArea = new JTextField("Entrez votre mot de passe ici");
+		passWordTextArea = new JTextField("Entrez votre mot de passe ici");
 		
 		
 		
@@ -68,4 +70,11 @@ public class ConnectionPage extends JPanel {
 		connection.addActionListener(kukkingFrame);
 	}
 	
+	public String getPassword() {
+		return passWordTextArea.getText();
+	}
+	
+	public String getLogin() {
+		return loginTextArea.getText();
+	}
 }
