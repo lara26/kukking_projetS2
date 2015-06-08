@@ -118,20 +118,8 @@ public class SearchPage extends JPanel {
 		returnHomePage.addActionListener(kukkingFrame);
 		
 		
-		
-		
-		
-
 	    //bouton RCH (recherche) pour accéder au panel de recherche
-		buttonSearch.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent onselect){
-				
-				SwingUtilities.invokeLater(new displayfenetretest());
-				
-				
-			}
-		});
+		buttonSearch.addActionListener(kukkingFrame);
 		
 	}
 	
