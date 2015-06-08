@@ -51,8 +51,8 @@ public class Application {
 		this.liste_Favoris.list.add(recetteAAjouter);
 	}
 
-	public void afficheFavoris() {
-	}
+	/*public void afficheFavoris() {
+	}*/
 
 	/*public Recipe recalculRecette(Recipe recetteAAfficher, int nombrePersonnes) {
 	}*/

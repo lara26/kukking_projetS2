@@ -2,6 +2,8 @@ package kukking.IHM;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -14,23 +16,26 @@ import javax.swing.border.TitledBorder;
 public class HomePage extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	JButton connection = new JButton("Connexion");
-	JButton search = new JButton("Lancer une recherche");
-	KukkingDisplay kukkingFrame;
-	JPanel favoris;
-	JPanel recettes;
+	private JButton connection;
+	private JButton search;
+	private KukkingDisplay kukkingFrame;
+	public JPanel favoris;
+	public JPanel recettes;
 	
 	
 	public HomePage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
+		search = new JButton("Lancer une recherche");
 		favoris = new JPanel();
+		favoris.setLayout(new GridBagLayout());
 		recettes = new JPanel();
+		connection = new JButton("Connexion");
 		
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));;
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
 		kukking.setFont(new Font("Dom", Font.PLAIN, 50));
 		
-		this.kukkingFrame.updateFavoris();
+		this.kukkingFrame.updateFavoris(this.favoris);
 		favoris.setBorder(new TitledBorder("Favoris"));
 		favoris.setPreferredSize(new Dimension(450,400));
 		

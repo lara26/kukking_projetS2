@@ -1,8 +1,13 @@
 package kukking.IHM;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,10 +19,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.w3c.dom.events.MouseEvent;
+
 import kukking.*;
 
 
-public class KukkingDisplay extends JFrame implements ActionListener{
+public class KukkingDisplay extends JFrame implements ActionListener, MouseListener{
 
 	private static final long serialVersionUID = 1L;
 	public Application application;
@@ -88,36 +95,60 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent clic)
 	{
-		JButton source = (JButton)clic.getSource();
-		if (source.getText().equals("Connexion"))
+		if (clic.getSource() instanceof JButton)
 		{
-			ChangePanel(connectionPage);
+			JButton source = (JButton)clic.getSource();
+			if (source.getText().equals("Connexion"))
+			{
+				ChangePanel(connectionPage);
+			}
+			else if (source.getText().equals("Lancer une recherche"))
+			{
+				ChangePanel(searchPage);
+			}
+			else if (source.getText().equals("Se connecter"))
+			{
+				ChangePanel(homePage);
+			}
+			else if (source.getText().equals("Retour à la page d'accueil"))
+			{
+				ChangePanel(homePage);
+			}
+			else if (source.getText().equals("Rechercher"))
+			{
+				RecipeDisplay recipe;
+				recipe = new RecipeDisplay(new Recipe("Galette des rois"), this);
+				recipe.setPreferredSize(new Dimension(600,600));
+				ChangePanel(recipe);
+				//SwingUtilities.invokeLater(new displayfenetretest());
+			}
 		}
-		else if (source.getText().equals("Lancer une recherche"))
+	}
+
+	@Override
+	public void mouseClicked(java.awt.event.MouseEvent clic)
+	{
+		if (clic.getSource() instanceof JLabel)
 		{
-			ChangePanel(searchPage);
-		}
-		else if (source.getText().equals("Se connecter"))
-		{
-			ChangePanel(homePage);
-		}
-		else if (source.getText().equals("Retour à la page d'accueil"))
-		{
-			ChangePanel(homePage);
-		}
-		else if (source.getText().equals("Rechercher"))
-		{
+			JLabel source = (JLabel)clic.getSource();
 			RecipeDisplay recipe;
-			recipe = new RecipeDisplay(new Recipe("Galette des rois"), this);
+			recipe = new RecipeDisplay(this.application.getReceiptsList().getRecipeWithName(source.getText()), this);
 			recipe.setPreferredSize(new Dimension(600,600));
 			ChangePanel(recipe);
-			//SwingUtilities.invokeLater(new displayfenetretest());
 		}
-			
 	}
-	
-	
-	
+	@Override
+	public void mouseEntered(java.awt.event.MouseEvent arg0) {
+	}
+	@Override
+	public void mouseExited(java.awt.event.MouseEvent arg0) {
+	}
+	@Override
+	public void mousePressed(java.awt.event.MouseEvent arg0) {
+	}
+	@Override
+	public void mouseReleased(java.awt.event.MouseEvent arg0) {
+	}
 	
 	public void CloseWindow()
 	{
@@ -144,12 +175,20 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 }
 
 
-	public void updateFavoris() {
+	public void updateFavoris(JPanel jpanel) {
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.gridx = 0;
+		int numRow = 0;
 		for (Recipe currentRecipe: this.application.getListe_Favoris().list)
 		{
-			JLabel recipe = new JLabel(currentRecipe.getNameRecipe());
-			homePage.favoris.add(recipe);
+			constraints.gridy = numRow;
+			JLabel recipe = new JLabel(""+currentRecipe.getNameRecipe());
+			recipe.addMouseListener(this);
+			recipe.setFont(new Font("Century Gothic", Font.PLAIN, 18));
+			jpanel.add(recipe,constraints);
+			numRow++;
 		}
 		
 	}
+
 }

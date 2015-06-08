@@ -51,7 +51,7 @@ public class Recipe {
 				} catch (WriteException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 	
 		}
 	}
-	
+
 	/**
 	 * @return recipe name
 	 */

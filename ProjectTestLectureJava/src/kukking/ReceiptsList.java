@@ -41,9 +41,18 @@ public class ReceiptsList {
 			int nbSheet = workbook.getNumberOfSheets();
 			for (int numSheet=0; numSheet<nbSheet; numSheet++)
 			{
-				if (!favoris || workbook.getSheet(numSheet).getCell("D2").equals("Favoris"))
-				list.add(new Recipe(workbook.getSheet(numSheet).getName()));
+				if (!favoris || workbook.getSheet(numSheet).getCell("D2").getContents().equals("Favoris"))
+					list.add(new Recipe(workbook.getSheet(numSheet).getName()));
 			}
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
+	}
+
+	public Recipe getRecipeWithName(String recipeToSearch)
+	{
+		for (Recipe recipe: list)
+		{
+			if (recipe.getNameRecipe().equals(recipeToSearch)) return recipe;
+		}
+		return null;
 	}
 }
