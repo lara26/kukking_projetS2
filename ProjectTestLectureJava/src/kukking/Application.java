@@ -1,6 +1,7 @@
 package kukking;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 class Application {
@@ -50,7 +51,37 @@ class Application {
 	public void pageSuivante() {
 	}
 
-	public void rechercheRecettes(char typeCuisine, char typePlat, int tempsPrepaMax, char niveauCuisine, char[] listeIngredient) {
+	public void rechercheRecettes(int tempsPrepaMax, String typeCuisine, String typePlat, String cout)
+	{
+		ArrayList<Recipe> listWellReceipts = new ArrayList<Recipe>();
+		for (Recipe currentRecipe: receiptsList.list)
+		{
+			if (tempsPrepaMax >= currentRecipe.getPreparationTime())
+			{
+				boolean typeCuisineValide = false;
+				boolean typePlatValide = false;
+				for (String categ: currentRecipe.getCategories())
+				{
+					if (categ.equals(typeCuisine)) typeCuisineValide = true;
+					if (categ.equals(typePlat)) typePlatValide = true;
+				}
+				if (typeCuisine.equals("Tous type de recettes") || typeCuisineValide)
+				{
+					if (typePlat.equals("Tous les plats") || typePlatValide)
+					{
+						if (cout.equals("Variable") || cout.equals(currentRecipe.getCost()))
+						listWellReceipts.add(currentRecipe);
+					}
+				}
+			}
+		}
+		
+		//Cette boucle est juste un test
+		for(Recipe currentRecipe: listWellReceipts)
+		{
+			System.out.println (currentRecipe.getNameRecipe());
+		}
+		// Fin de la boucle test
 	}
 
 	public void requestAdministrativeAccess() throws IOException

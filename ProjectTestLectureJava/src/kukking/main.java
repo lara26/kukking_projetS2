@@ -9,6 +9,7 @@ public class main {
 		//Ce sont des test
 		//myApplication.getAdmin().formAddRecipe();
 		//myApplication.affichageRecette(myApplication.receiptsList.list.get(0));
+		myApplication.rechercheRecettes(50, "Tous type de recettes", "Tous les plats", "Variable");
 	}
 
 }

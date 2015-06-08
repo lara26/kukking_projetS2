@@ -3,106 +3,115 @@ package kukking;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import AffichageIHMDebut.AfficherIHM;
 
 
 public class SearchPage extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	JRadioButton easy = new JRadioButton("Facile");
-	JRadioButton medium = new JRadioButton("Moyen");
-	JRadioButton hard = new JRadioButton("Difficile");
-	JButton returnHomePage = new JButton("Retour à la page d'accueil");
-	JButton buttonSearch = new JButton("Rechercher");
-	KukkingDisplay kukkingFrame;
+	private JButton returnHomePage;
+	private JButton buttonSearch;
+	private JComboBox<String> typeCuisine;
+	private JComboBox<String> typePlat;
+	private JSlider tempsPrepaMax;
+	private JLabel currentTempsPrepaMax;
+	
+	private JPanel cost;
+	public JRadioButton faible;
+	private JRadioButton moyen;
+	private JRadioButton eleve;
+
+	private KukkingDisplay kukkingFrame;
 	
 	public SearchPage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		JPanel searchPage = this;
-		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel search = new JLabel("Recherche");
-		search.setFont(new Font("Dom", Font.PLAIN, 50));
+		search.setFont(new Font("Dom", Font.PLAIN, 50));	
 		
-		hard.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent onselect){
-				RadioSelectHard();
-			}
-		});
+		returnHomePage = new JButton("Retour à la page d'accueil");
+		buttonSearch = new JButton("Rechercher");
 		
-		medium.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent onselect){
-				RadioSelectMeduim();
-			}
-		});
-		
-		easy.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent onselect){
-				RadioSelectEasy();
-			}
-		});
-		
-		
-		
-		
-		JTextField nbPers = new JTextField("");
-		
-		JComboBox<String> typeCuisine = new JComboBox<String>();
-		
-		typeCuisine.addItem("Recettes végétariennes");
-		typeCuisine.addItem("Recettes sans gluten");
-		typeCuisine.addItem("Recettes asiatiques");
-		typeCuisine.addItem("Recettes classiques");
-		typeCuisine.addItem("Recettes étudiante");
-		
-		typeCuisine.addItem("Recettes fête");
+		typeCuisine = new JComboBox<String>();
 		
 		typeCuisine.addItem("Tous type de recettes");
+		typeCuisine.addItem("Végétariennes");
+		typeCuisine.addItem("Sans gluten");
+		typeCuisine.addItem("Tour du monde");
+		typeCuisine.addItem("Classiques");
+		typeCuisine.addItem("Etudiante");
+		typeCuisine.addItem("Fête");
 		
-		JComboBox<String> typePlat = new JComboBox<String>();
+		typePlat = new JComboBox<String>();
 		
+		typePlat.addItem("Tous les plats");
 		typePlat.addItem("Entrée");
 		typePlat.addItem("Plat chaud");
 		typePlat.addItem("Dessert");
 		typePlat.addItem("Cocktails");
-		typePlat.addItem("Tous les plats");
 		
-		Box nvcuissine = Box.createHorizontalBox();
-		nvcuissine.add(easy);
-		nvcuissine.add(medium);
-		nvcuissine.add(hard);
+		cost = new JPanel();
+		ButtonGroup costButtonGroup = new ButtonGroup();
 		
-		Box nbPersonne = Box.createHorizontalBox();
-		nbPersonne.add(new JLabel("Entrer le nombre de personne :"));
-		nbPersonne.add(nbPers);
+		faible = new JRadioButton("Faible");
+		costButtonGroup.add(faible);
+		cost.add(faible);
+		moyen = new JRadioButton("Moyen");
+		costButtonGroup.add(moyen);
+		cost.add(moyen);
+		eleve = new JRadioButton("Elevé");
+		costButtonGroup.add(eleve);
+		cost.add(eleve);
+		
+		currentTempsPrepaMax = new JLabel("Valeur actuelle : 320");
+		tempsPrepaMax = new JSlider(0,320,320);
+	    tempsPrepaMax.setPaintTicks(true);
+	    tempsPrepaMax.setPaintLabels(true);
+	    tempsPrepaMax.setMinorTickSpacing(20);
+	    tempsPrepaMax.setMajorTickSpacing(60);
+	    tempsPrepaMax.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				currentTempsPrepaMax.setText("Valeur actuelle : " + ((JSlider)e.getSource()).getValue());			
+			}
+			});
 		
 		Box title = Box.createHorizontalBox();
-		title.add(kukkingLogo);
+		title.add(new JLabel(new ImageIcon("kukkinglogo.png")));
 		title.add(Box.createHorizontalStrut(50));
 		title.add(search);
 		
 		Box searchPageBox = Box.createVerticalBox();
 		searchPageBox.add(title);
-		searchPageBox.add(new JLabel("Veuillez choisir un niveau de cuisine :"));
-		searchPageBox.add(nvcuissine);
+		searchPageBox.add(new JLabel("Veuillez choisir un coût :"));
+		searchPageBox.add(cost);
 		searchPageBox.add(new JLabel("Veuillez choisir un type de cuisine :"));
 		searchPageBox.add(typeCuisine);
 		searchPageBox.add(new JLabel("Veuillez choisir un type de plat :"));
 		searchPageBox.add(typePlat);
-		searchPageBox.add(nbPersonne);
+		searchPageBox.add(new JLabel("Veuillez choisir un temps de préparation maximum :"));
+		searchPageBox.add(tempsPrepaMax);
+		searchPageBox.add(currentTempsPrepaMax);
 		searchPageBox.add(buttonSearch);
 		searchPageBox.add(returnHomePage);
+		
 		
 		searchPage.add(searchPageBox);
 		
@@ -126,41 +135,31 @@ public class SearchPage extends JPanel {
 		
 	}
 	
-	
-	/* Les méthodes */
-	public void RadioSelectEasy(){
-    	if(medium.isSelected())
-    	{
-    		medium.setSelected(false);
-    	}
-    	if (hard.isSelected())
-    	{
-    		hard.setSelected(false);
-    	}
-    }
-    
-    public void RadioSelectMeduim(){
-    	if(easy.isSelected())
-    	{
-    		easy.setSelected(false);
-    	}
-    	if (hard.isSelected())
-    	{
-    		hard.setSelected(false);
-    	}
-    }
-    public void RadioSelectHard()
-    {
-    	if(easy.isSelected())
-    	{
-    		easy.setSelected(false);
-    	}
-    	if (medium.isSelected())
-    	{
-    		medium.setSelected(false);
-    	}
-    } 
-    
+	public int getTempsPrepaMax() {
+		return tempsPrepaMax.getValue();
+	}
+
+	public String getTypeCuisine() {
+		return this.typeCuisine.getSelectedItem().toString();
+	}
+
+
+	public String getTypePlat() {
+		return this.typePlat.getSelectedItem().toString();
+	}
+
+
+	public String getCost() {
+		String costToReturn="Variable";
+		if (this.faible.isSelected())
+			costToReturn="Faible";
+		else if (this.moyen.isSelected())
+			costToReturn="Moyen";
+		else if (this.eleve.isSelected())
+			costToReturn="Elevé";
+		
+		return costToReturn;
+	}
     
 
 }
