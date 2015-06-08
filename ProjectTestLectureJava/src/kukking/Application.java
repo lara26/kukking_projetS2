@@ -1,8 +1,13 @@
 package kukking;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.read.biff.BiffException;
+import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import kukking.IHM.KukkingDisplay;
@@ -36,17 +41,60 @@ public class Application {
 		return accesAdmin;
 	}
 
-	public Application()
+	public Application() throws RowsExceededException, WriteException, IndexOutOfBoundsException
 	{
 		this.user = new UserConsole();
 		this.admin = new AdministratorConsole();
 		this.receiptsList = new ReceiptsList(this, false);
+		this.initFileReceipts();
 		this.liste_Favoris = new ReceiptsList(this, true);
 		this.kukking = new KukkingDisplay(this);
 		this.kukking.setLocationRelativeTo(null);
 		this.kukking.setVisible(true);
 	}
 	
+	/**
+	 * to avoid bug about get preparation
+	 * @throws IndexOutOfBoundsException 
+	 * @throws WriteException 
+	 * @throws RowsExceededException 
+	 */
+	private void initFileReceipts() throws RowsExceededException, WriteException, IndexOutOfBoundsException
+	{
+		WritableWorkbook workbook = null;
+		try {
+			workbook = Workbook.createWorkbook(new File(Recipe.sourcePath),Workbook.getWorkbook(new File(Recipe.sourcePath)));
+			int nbSheet = workbook.getNumberOfSheets();
+			for (int numSheet=0; numSheet<nbSheet; numSheet++)
+			{
+				Label secure = new Label(0,workbook.getSheet(numSheet).getRows(),"");
+				workbook.getSheet(numSheet).addCell(secure);
+			}
+			
+			workbook.write(); 
+
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		} 
+		catch (BiffException e) {
+			e.printStackTrace();
+		}
+		finally {
+				/* On ferme le worbook pour libérer la mémoire */
+				try {
+					workbook.close();
+				} 
+				catch (WriteException e) {
+					e.printStackTrace();
+				} 
+				catch (IOException e) {
+					e.printStackTrace();
+				} 
+			
+		}
+	}
+
 	public void supprimerFavori(Recipe recetteAAsupprimer) throws RowsExceededException, WriteException
 	{
 		recetteAAsupprimer.deleteFavoris();
@@ -100,7 +148,7 @@ public class Application {
 					if (typePlat.equals("Tous les plats") || typePlatValide)
 					{
 						if (cout.equals("Variable") || cout.equals(currentRecipe.getCost()))
-						listWellReceipts.add(currentRecipe);
+							listWellReceipts.add(currentRecipe);
 					}
 				}
 			}

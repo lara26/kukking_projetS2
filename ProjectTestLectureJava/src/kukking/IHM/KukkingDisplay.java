@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -202,6 +203,9 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;
 		int numRow = 0;
+		jpanel.removeAll();
+		/*JPanel listReceiptsToReplace = new JPanel();
+		listReceiptsToReplace.setLayout(new GridBagLayout());*/
 		for (Recipe currentRecipe: listToDisplay)
 		{
 			constraints.gridy = numRow;

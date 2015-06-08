@@ -2,9 +2,12 @@ package kukking;
 
 import java.io.IOException;
 
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
 public class main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, RowsExceededException, WriteException, IndexOutOfBoundsException {
 		Application myApplication = new Application();
 		//Ce sont des test
 		//myApplication.getAdmin().formAddRecipe();

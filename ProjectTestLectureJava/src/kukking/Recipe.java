@@ -25,7 +25,7 @@ public class Recipe {
 			WritableSheet recipe = workbook.getSheet(this.nameSheetRecipe);
 			Label label= new Label(3, 1, "Favoris");
 			recipe.addCell(label);
-			
+			workbook.write();
 		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
 		finally {
 				/* On ferme le worbook pour libérer la mémoire */
@@ -42,7 +42,7 @@ public class Recipe {
 			WritableSheet recipe = workbook.getSheet(this.nameSheetRecipe);
 			Label label= new Label(3, 1, "");
 			recipe.addCell(label);
-			
+			workbook.write();
 		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
 		finally {
 				/* On ferme le worbook pour libérer la mémoire */
@@ -305,4 +305,5 @@ public class Recipe {
 		}
 	}
 
+	
 }
