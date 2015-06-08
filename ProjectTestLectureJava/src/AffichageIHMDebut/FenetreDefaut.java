@@ -53,7 +53,8 @@ public class FenetreDefaut extends JFrame{
 	 * Les JSlider
 	 */
 	private JSlider sliderPeople = new JSlider(JSlider.HORIZONTAL,0,100,0);
-	private JSlider sliderTime = new JSlider(JSlider.HORIZONTAL,0,100,0);
+	private JSlider sliderTimeCook = new JSlider(JSlider.HORIZONTAL,0,100,0);
+	private JSlider sliderTimePrepare = new JSlider(JSlider.HORIZONTAL,0,100,0);
 	/**
 	 * importants buttons for the class WindowsDefault
 	 * 
@@ -109,7 +110,8 @@ public class FenetreDefaut extends JFrame{
 	private JLabel labelNewType = new JLabel("Choississez un type de cuisine");
 	private JLabel labelNewTypeMeal = new JLabel("Choississez un type de plat");
 	private JLabel labelNbPeople = new JLabel("Choississez un nombre de personne par défaut");
-	private JLabel labelTimePrepare = new JLabel("Choississez un temps de préparation (en minutes)");
+	private JLabel labelTimeCook = new JLabel("Choississez un temps de cuisson (en minutes)");
+	private JLabel labelTimeOfPrepare = new JLabel("Choisissez une temps de préparation (en minutes)");
 
 	/**
 	 * The menu (JMenu) and the submenu(JMenuItem)
@@ -346,38 +348,48 @@ public class FenetreDefaut extends JFrame{
  * La page d'ajout de recette
  */
 		JLabel iconAdd = new JLabel(new ImageIcon("kukkinglogo.png"));
+		//this.AddRecipe.setBackground(Color.magenta);
+		Font fontLabelRecetteAdd = new Font("Calibri", Font.BOLD,20);
+		labelAddRecipe.setFont(fontLabelRecetteAdd);
 		this.AddRecipe.add(labelAddRecipe);
 		this.AddRecipe.add(iconAdd);
 		this.AddRecipe.add(buttonValidate);
 		this.AddRecipe.add(labelNewType);
 		this.AddRecipe.add(labelNewTypeMeal);
+		//new drop-down list for new type of meal
 		this.AddRecipe.add(DropDownListTypeMealAdd);
 				DropDownListTypeMealAdd.addItem("Une nouvelle Entrée");
 				DropDownListTypeMealAdd.addItem("Un nouveau Plat chaud");
 				DropDownListTypeMealAdd.addItem("Un nouveau Dessert");
 				DropDownListTypeMealAdd.addItem("Un nouveau Cocktail");
+		//new drop-down list for new type of kitchen
 		this.AddRecipe.add(DropDownListTypeKitchenAdd);
 				DropDownListTypeKitchenAdd.addItem("Un repas végétarien");
 				DropDownListTypeKitchenAdd.addItem("Un repas sans gluten");
 				DropDownListTypeKitchenAdd.addItem("Un repas classique");
 				DropDownListTypeKitchenAdd.addItem("Un repas asiatique");
+		//new JSlider for nb personnes
 		this.AddRecipe.add(sliderPeople);
 		sliderPeople.setPaintLabels(true);
 		sliderPeople.setMajorTickSpacing(10);
 		sliderPeople.setMinorTickSpacing(5);
 		sliderPeople.setPaintTicks(true);
-//		int valeurOfSliderPeople = sliderPeople.getValue();
-		//changeHeure(valeurOfSliderPeople);
 		this.AddRecipe.add(buttonGetHeure);
-		this.AddRecipe.add(sliderTime);
-		sliderTime.setPaintLabels(true);
-		sliderTime.setMajorTickSpacing(10);
-		sliderTime.setMinorTickSpacing(5);
-		sliderTime.setPaintTicks(true);
-	//	int valeurOfSliderTime = sliderTime.getValue();
-		//changeHeure(valeurOfSliderTime);
+		//new JSlider for time of cook
+		this.AddRecipe.add(sliderTimeCook);
+		sliderTimeCook.setPaintLabels(true);
+		sliderTimeCook.setMajorTickSpacing(10);
+		sliderTimeCook.setMinorTickSpacing(5);
+		sliderTimeCook.setPaintTicks(true);
+		//new JSlider for time of preparation
+		this.AddRecipe.add(sliderTimePrepare);
+		sliderTimePrepare.setPaintLabels(true);
+		sliderTimePrepare.setMajorTickSpacing(10);
+		sliderTimePrepare.setMinorTickSpacing(5);
+		sliderTimePrepare.setPaintTicks(true);
 		this.AddRecipe.add(labelNbPeople);
-		this.AddRecipe.add(labelTimePrepare);
+		this.AddRecipe.add(labelTimeCook);
+		this.AddRecipe.add(labelTimeOfPrepare);
 		JLabel Heure = new JLabel("Aucune heure choisi");
 		AddRecipe.add(Heure);
 		
@@ -394,10 +406,14 @@ public class FenetreDefaut extends JFrame{
         AlignementPageAddRecipe.add(DropDownListTypeMealAdd);
         AlignementPageAddRecipe.add(labelNbPeople);
         AlignementPageAddRecipe.add(sliderPeople);
-        AlignementPageAddRecipe.add(labelTimePrepare);
-        AlignementPageAddRecipe.add(sliderTime);
+        AlignementPageAddRecipe.add(labelTimeCook);
+        AlignementPageAddRecipe.add(sliderTimeCook);
+        AlignementPageAddRecipe.add(labelTimeOfPrepare);
+        AlignementPageAddRecipe.add(sliderTimePrepare);
         AlignementPageAddRecipe.add(buttonGetHeure);
         AlignementPageAddRecipe.add(Heure);
+        AlignementPageAddRecipe.add(buttonValidate);
+        AddRecipe.add(AlignementPageAddRecipe);
 		
 /**
  * Les listeners
@@ -405,12 +421,13 @@ public class FenetreDefaut extends JFrame{
         buttonGetHeure.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String tempsCuisson, nbPersonne;
+				String tempsCuisson, tempsPrepare;
 				int valeurOfSliderPeople = sliderPeople.getValue();
-				int valeurOfSliderTime = sliderTime.getValue();
-				nbPersonne = changeHeure(valeurOfSliderPeople);
+				int valeurOfSliderTimePrepare = sliderTimePrepare.getValue();
+				int valeurOfSliderTime = sliderTimeCook.getValue();
+				tempsPrepare = changeHeure(valeurOfSliderTimePrepare);
 				tempsCuisson = changeHeure(valeurOfSliderTime);
-				Heure.setText("Un nombre de personne = "+nbPersonne+" et nn temps de cuisson =" +tempsCuisson);
+				Heure.setText("Nombre de personne ="+valeurOfSliderPeople+" et un temps de préparation = "+tempsPrepare+" et un temps de cuisson =" +tempsCuisson);
 				Heure.setVisible(true);
 			}
 		});
