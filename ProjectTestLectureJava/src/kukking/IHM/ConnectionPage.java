@@ -1,4 +1,4 @@
-package kukking;
+package kukking.IHM;
 
 import java.awt.Font;
 import java.awt.event.FocusAdapter;

@@ -1,4 +1,4 @@
-package kukking;
+package kukking.IHM;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,17 +17,20 @@ public class HomePage extends JPanel{
 	JButton connection = new JButton("Connexion");
 	JButton search = new JButton("Lancer une recherche");
 	KukkingDisplay kukkingFrame;
+	JPanel favoris;
+	JPanel recettes;
 	
 	
 	public HomePage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
-		JPanel favoris = new JPanel();
-		JPanel recettes = new JPanel();
+		favoris = new JPanel();
+		recettes = new JPanel();
 		
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));;
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
 		kukking.setFont(new Font("Dom", Font.PLAIN, 50));
 		
+		this.kukkingFrame.updateFavoris();
 		favoris.setBorder(new TitledBorder("Favoris"));
 		favoris.setPreferredSize(new Dimension(450,400));
 		

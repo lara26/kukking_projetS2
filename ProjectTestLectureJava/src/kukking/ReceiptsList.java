@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-class ReceiptsList {
+public class ReceiptsList {
 	
-	Application application;
+	private Application application;
 	
-	ArrayList <Recipe> list;
+	public ArrayList <Recipe> list;
 
 	/**
 	 * Ne s'effectue que si l'utilisateur a valider la suppression
@@ -33,7 +33,7 @@ class ReceiptsList {
 		this.list.add(recipeToAdd);
 	}
 
-	public ReceiptsList(Application application) {
+	public ReceiptsList(Application application, boolean favoris) {
 		this.application=application;
 		this.list = new ArrayList<Recipe>();
 		try {
@@ -41,9 +41,9 @@ class ReceiptsList {
 			int nbSheet = workbook.getNumberOfSheets();
 			for (int numSheet=0; numSheet<nbSheet; numSheet++)
 			{
+				if (!favoris || workbook.getSheet(numSheet).getCell("D2").equals("Favoris"))
 				list.add(new Recipe(workbook.getSheet(numSheet).getName()));
 			}
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
-		
 	}
 }

@@ -14,11 +14,44 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
-class Recipe {
+public class Recipe {
 	public final static String sourcePath = "./receipts.xls";
 	private String nameSheetRecipe;
-
-
+	
+	public void setFavoris () throws RowsExceededException, WriteException {
+		WritableWorkbook workbook = null;
+		try {
+			workbook = Workbook.createWorkbook(new File(sourcePath),Workbook.getWorkbook(new File(sourcePath)));
+			WritableSheet recipe = workbook.getSheet(this.nameSheetRecipe);
+			Label label= new Label(3, 1, "Favoris");
+			recipe.addCell(label);
+			
+		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
+		finally {
+				/* On ferme le worbook pour libérer la mémoire */
+				try {
+					workbook.close();
+				} catch (WriteException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 	
+		}
+	}
+	
+	public void deleteFavoris () throws RowsExceededException, WriteException {
+		WritableWorkbook workbook = null;
+		try {
+			workbook = Workbook.createWorkbook(new File(sourcePath),Workbook.getWorkbook(new File(sourcePath)));
+			WritableSheet recipe = workbook.getSheet(this.nameSheetRecipe);
+			Label label= new Label(3, 1, "");
+			recipe.addCell(label);
+			
+		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
+		finally {
+				/* On ferme le worbook pour libérer la mémoire */
+				try {
+					workbook.close();
+				} catch (WriteException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 	
+		}
+	}
+	
 	/**
 	 * @return recipe name
 	 */

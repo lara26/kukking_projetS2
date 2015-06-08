@@ -1,10 +1,12 @@
-package kukking;
+package kukking.IHM;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -12,10 +14,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import kukking.*;
+
 
 public class KukkingDisplay extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
+	public Application application;
 	JFrame window = this;
 	HomePage homePage;
 	SearchPage searchPage;
@@ -26,8 +31,8 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 	private boolean animated = true;
 	private JOptionPane jop;
 	
-	public KukkingDisplay() {
-		
+	public KukkingDisplay(Application application) {
+		this.application=application;
 		homePage = new HomePage(this);
 		searchPage = new SearchPage(this);
 		connectionPage = new ConnectionPage(this);
@@ -102,8 +107,11 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 		}
 		else if (source.getText().equals("Rechercher"))
 		{
-			ChangePanel(homePage);
-			SwingUtilities.invokeLater(new displayfenetretest());
+			RecipeDisplay recipe;
+			recipe = new RecipeDisplay(new Recipe("Galette des rois"), this);
+			recipe.setPreferredSize(new Dimension(600,600));
+			ChangePanel(recipe);
+			//SwingUtilities.invokeLater(new displayfenetretest());
 		}
 			
 	}
@@ -134,4 +142,14 @@ public class KukkingDisplay extends JFrame implements ActionListener{
 		}
 
 }
+
+
+	public void updateFavoris() {
+		for (Recipe currentRecipe: this.application.getListe_Favoris().list)
+		{
+			JLabel recipe = new JLabel(currentRecipe.getNameRecipe());
+			homePage.favoris.add(recipe);
+		}
+		
+	}
 }

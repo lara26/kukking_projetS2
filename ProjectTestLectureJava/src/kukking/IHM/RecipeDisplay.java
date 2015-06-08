@@ -1,6 +1,7 @@
-package kukking;
+package kukking.IHM;
  
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import java.awt.Font;
@@ -11,13 +12,17 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import kukking.*;
+
 public class RecipeDisplay extends JPanel {
 
 	
 	private static final long serialVersionUID = 1L;
-
-	public RecipeDisplay(Recipe recipeToDisplay){
-
+	private JButton returnHomePage;
+	private KukkingDisplay kukkingFrame;
+	
+	public RecipeDisplay(Recipe recipeToDisplay, KukkingDisplay kukkingFrame){
+		this.kukkingFrame = kukkingFrame;
 		JPanel recipe = this;
 		recipe.setLayout(new GridBagLayout());
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
@@ -176,5 +181,9 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridwidth=GridBagConstraints.REMAINDER;
 		gbc.anchor = GridBagConstraints.CENTER;
 		recipe.add(bonApp, gbc);
+		returnHomePage = new JButton("Retour à la page d'accueil");
+		returnHomePage.addActionListener(kukkingFrame);
+		recipe.add(returnHomePage, gbc);
+		
 	}	
 }
