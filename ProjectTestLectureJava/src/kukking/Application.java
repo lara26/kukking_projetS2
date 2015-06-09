@@ -135,10 +135,6 @@ public class Application {
 		ArrayList<Recipe> listWellReceipts = new ArrayList<Recipe>();
 		for (Recipe currentRecipe: receiptsList.list)
 		{
-			System.out.println(currentRecipe.getNameRecipe());
-		}
-		for (Recipe currentRecipe: receiptsList.list)
-		{
 			if (tempsPrepaMax >= currentRecipe.getPreparationTime())
 			{
 				boolean typeCuisineValide = false;

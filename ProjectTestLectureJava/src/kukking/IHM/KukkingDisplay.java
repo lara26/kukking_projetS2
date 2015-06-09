@@ -124,6 +124,7 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 			}
 			else if (source.getText().equals("Retour à la page d'accueil"))
 			{
+				this.displayListReceipts(homePage.recettes, homePage.newListRandom(this), new Font("Century Gothic", Font.PLAIN, 18));
 				ChangePanel(homePage);
 			}
 			else if (source.getText().equals("Rechercher"))
