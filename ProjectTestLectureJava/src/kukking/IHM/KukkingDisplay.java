@@ -40,6 +40,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 	private JLabel messageAdmin;
 	private boolean requestDelete;
 	private JMenu menuEdit;
+	private Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
 	public KukkingDisplay(Application application)
 	{
@@ -54,7 +55,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 		
 		window.setTitle("Kukking");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(1200, 700);
+		window.setSize((int)dimension.getWidth(), (int)dimension.getHeight());
 		window.setResizable(false);
 		
 		/* creation Menu */
@@ -147,7 +148,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 						connectionPage.getPassword());
 				if (application.isAccesAdmin())
 				{
-					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0,850, 0, 0));
+					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0,(int)this.dimension.getWidth()-350, 0, 0));
 					messageAdmin.setText("Connecté en tant qu'administrateur");
 					menuEdit.setVisible(true);
 				}
@@ -197,27 +198,20 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 		{
 			JLabel source = (JLabel) clic.getSource();
 			source.setForeground(Color.BLACK);
-			if (source
-					.getText()
-					.substring(source.getText().length() - 10,
-							source.getText().length() - 1).equals(" (delete)"))
+			if (source.getText().substring(source.getText().length() - 9,source.getText().length()).equals(" (delete)"))
 			{
-				String nameRecipe = source.getText().substring(
-						source.getText().length() - 10);
-				int option = JOptionPane.showConfirmDialog(null,
-						"Etes-vous sur de vouloir supprimer la recette :\n"
-								+ nameRecipe, "Supprimer recette",
-						JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				String nameRecipe = source.getText().substring(0,source.getText().length() - 9);
+				int option = JOptionPane.showConfirmDialog(null,"Etes-vous sur de vouloir supprimer la recette :\n"+ nameRecipe, "Supprimer recette",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 				if (option == JOptionPane.YES_OPTION)
-					this.application.getReceiptsList().permanentlyDeleteRecipe(
-							this.application.getReceiptsList()
-									.getRecipeWithName(nameRecipe));
+					this.application.getReceiptsList().permanentlyDeleteRecipe(this.application.getReceiptsList().getRecipeWithName(nameRecipe));
 			}
-			RecipeDisplay recipe;
-			recipe = new RecipeDisplay(this.application.getReceiptsList()
-					.getRecipeWithName(source.getText()), this);
-			recipe.setPreferredSize(new Dimension(600, 600));
-			ChangePanel(recipe);
+			else
+			{
+				RecipeDisplay recipe;
+				recipe = new RecipeDisplay(this.application.getReceiptsList().getRecipeWithName(source.getText()), this);
+				recipe.setPreferredSize(new Dimension(900, 700));
+				ChangePanel(recipe);
+			}
 		}
 	}
 
