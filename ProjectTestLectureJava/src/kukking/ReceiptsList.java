@@ -60,9 +60,8 @@ public class ReceiptsList {
 		this.list.remove(recipeToDelete);
 	}
 
-	public void addRecipe() throws IOException
+	public void addRecipe(Recipe recipeToAdd) throws IOException
 	{
-		Recipe recipeToAdd = application.getAdmin().formAddRecipe();
 		this.list.add(recipeToAdd);
 	}
 

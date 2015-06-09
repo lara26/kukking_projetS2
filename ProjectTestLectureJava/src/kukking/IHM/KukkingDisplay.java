@@ -7,7 +7,9 @@ import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import kukking.*;
 
 
@@ -39,8 +42,8 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 	private JMenuBar menuBar;
 	private JLabel messageAdmin;
 	private boolean requestDelete;
-	private JMenu menuEdit;
 	public final static Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+	private JMenu menuEdit;
 
 	public KukkingDisplay(Application application)
 	{
@@ -62,18 +65,22 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 		/* creation Menu */
 		menuBar = new JMenuBar();
 		JMenu menuFile = new JMenu("Fichier");
+		JMenu menuAccueil = new JMenu("Accueil");
 		JMenu menuHelp = new JMenu("Aide");
 		menuEdit = new JMenu("Editer");
 		messageAdmin = new JLabel("");
 		
 		JMenuItem menuConnexion = new JMenuItem("Se connecter en tant que administrateur");
 		menuConnexion.addActionListener(this);
-		
 		JMenuItem menuQuitter = new JMenuItem("Quitter");
 		menuQuitter.addActionListener(this);
 		menuFile.add(menuConnexion);
 		menuFile.addSeparator();
 		menuFile.add(menuQuitter);
+		
+		JMenuItem backToHome = new JMenuItem("Retourner à l'accueil");
+		backToHome.addActionListener(this);
+		menuAccueil.add(backToHome);
 		
 		JMenuItem needHelp = new JMenuItem("Obtenir de l'aide");
 		needHelp.addActionListener(this);
@@ -87,6 +94,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 		
 		
 		menuBar.add(menuFile);
+		menuBar.add(menuAccueil);
 		menuBar.add(menuHelp);
 		menuBar.add(menuEdit);
 		menuBar.add(messageAdmin);
@@ -124,6 +132,10 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			else if(source.getText().equals("Saisie et suppression recette"))
 			{
 				ChangePanel(addDeleteRecipePage);
+			}
+			else if(source.getText().equals("Retourner à l'accueil"))
+			{
+				ChangePanel(homePage);
 			}
 		}
 		
@@ -170,11 +182,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 				String typeCuisine = searchPage.getTypeCuisine();
 				String typePlat = searchPage.getTypePlat();
 				String cout = searchPage.getCost();
-				displayListReceipts(recipeListPage.listReceipts,
-						application.rechercheRecettes(tempsPrepaMax,
-								typeCuisine, typePlat, cout), new Font(
-								"Century Gothic", Font.PLAIN, 18),
-						requestDelete);
+				displayListReceipts(recipeListPage.listReceipts,application.rechercheRecettes(tempsPrepaMax,typeCuisine, typePlat, cout), new Font("Century Gothic", Font.PLAIN, 18),requestDelete);
 				requestDelete = false;
 				ChangePanel(recipeListPage);
 			}
@@ -205,6 +213,26 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 					numChar+=currentString.length()+1;
 					ingredients.add(currentString);
 				}
+				numChar  = 0;
+				while (numChar<this.formAddRecipePage.getTextAreaQuantities().length())
+				{
+					String currentString = extractStringWithSeparatorFromList(numChar,this.formAddRecipePage.getTextAreaQuantities(), ';');
+					numChar+=currentString.length()+1;
+					ingredients.add(currentString);
+				}
+				numChar  = 0;
+				while (numChar<this.formAddRecipePage.getTextAreaUnits().length())
+				{
+					String currentString = extractStringWithSeparatorFromList(numChar,this.formAddRecipePage.getTextAreaUnits(), ';');
+					numChar+=currentString.length()+1;
+					ingredients.add(currentString);
+				}
+				try {
+					application.getReceiptsList().addRecipe(new Recipe(this.formAddRecipePage.getTextAreaNameRecipe(), this.formAddRecipePage.getSliderPeople(), this.formAddRecipePage.getSliderTimePrepare(), this.formAddRecipePage.getSliderTimeCook(), this.formAddRecipePage.getCost(), categories, ingredients, quantities, units, preparation));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				ChangePanel(homePage);
 			}
 		}
 	}
@@ -213,7 +241,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 		String currentIngredient = "";
 		while (numChar<whereExtract.length() && whereExtract.charAt(numChar)!=separator)
 		{
-			currentIngredient+=this.formAddRecipePage.getTextAreaIngredients().charAt(numChar);
+			currentIngredient+=whereExtract.charAt(numChar);
 			numChar++;
 		}
 		return currentIngredient;

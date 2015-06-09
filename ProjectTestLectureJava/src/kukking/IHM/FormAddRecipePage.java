@@ -60,19 +60,19 @@ public class FormAddRecipePage extends JPanel {
 		this.textAreaIngredients = new JTextField("Saisissez les ingrédients (séparés par des \" ; \")");
 		this.textAreaIngredients.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent onclic){
-				textAreaIngredients.setText("");
+				textAreaIngredients.selectAll();
 			}
 		});
 		this.textAreaQuantities = new JTextField("Saisissez les quantités (séparés par des \" ; \")");
 		this.textAreaQuantities.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent onclic){
-				textAreaQuantities.setText("");
+				textAreaQuantities.selectAll();
 			}
 		});
 		this.textAreaUnits = new JTextField("Saisissez les unités (séparés par des \" ; \")");
 		this.textAreaUnits.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent onclic){
-				textAreaUnits.setText("");
+				textAreaUnits.selectAll();
 			}
 		});
 		this.textAreaRecipeOfPrepare = new JTextArea("Saisissez la préparation");
@@ -178,6 +178,8 @@ public class FormAddRecipePage extends JPanel {
 		addPageBox.add(new JLabel("Veuillez choisir un coût :"));
 		addPageBox.add(cost);
 		addPageBox.add(textAreaIngredients);
+		addPageBox.add(textAreaQuantities);
+		addPageBox.add(textAreaUnits);
 		addPageBox.add(new JLabel(""));
 		addPageBox.add(textAreaRecipeOfPrepare);
 		addPageBox.add(buttonAdd);
@@ -187,6 +189,14 @@ public class FormAddRecipePage extends JPanel {
 		buttonAdd.addActionListener(kukkingFrame);
 	}
 
+	public String getTextAreaQuantities() {
+		return textAreaQuantities.getText();
+	}
+
+	public String getTextAreaUnits() {
+		return textAreaUnits.getText();
+	}
+	
 	public String getTextAreaNameRecipe() {
 		return textAreaNameRecipe.getText();
 	}
