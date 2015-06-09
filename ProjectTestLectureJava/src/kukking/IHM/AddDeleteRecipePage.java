@@ -1,17 +1,14 @@
 package kukking.IHM;
 
 import java.awt.Font;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 
-public class AddDeleteRecipe extends JPanel
+public class AddDeleteRecipePage extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	private JButton returnHomePage = new JButton("Retour à la page d'accueil");
@@ -20,7 +17,7 @@ public class AddDeleteRecipe extends JPanel
 	private KukkingDisplay kukkingFrame;
 
 	
-	public AddDeleteRecipe(KukkingDisplay kukkingFrame)
+	public AddDeleteRecipePage(KukkingDisplay kukkingFrame)
 	{
 		this.kukkingFrame = kukkingFrame;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));

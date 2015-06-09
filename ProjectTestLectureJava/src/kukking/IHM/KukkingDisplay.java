@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -34,13 +33,14 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 	ConnectionPage connectionPage;
 	RecipeListPage recipeListPage;
 	HelpPage helpPage;
-	AddDeleteRecipe addDeleteRecipe;
+	AddDeleteRecipePage addDeleteRecipePage;
+	FormAddRecipePage formAddRecipePage;
 	
 	private JMenuBar menuBar;
 	private JLabel messageAdmin;
 	private boolean requestDelete;
 	private JMenu menuEdit;
-	private Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+	public final static Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
 	public KukkingDisplay(Application application)
 	{
@@ -51,7 +51,8 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 		connectionPage = new ConnectionPage(this);
 		recipeListPage = new RecipeListPage(this);
 		helpPage = new HelpPage(this);
-		addDeleteRecipe = new AddDeleteRecipe(this);
+		addDeleteRecipePage = new AddDeleteRecipePage(this);
+		formAddRecipePage = new FormAddRecipePage(this);
 		
 		window.setTitle("Kukking");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,7 +123,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			}
 			else if(source.getText().equals("Saisie et suppression recette"))
 			{
-				ChangePanel(addDeleteRecipe);
+				ChangePanel(addDeleteRecipePage);
 			}
 		}
 		
@@ -148,7 +149,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 						connectionPage.getPassword());
 				if (application.isAccesAdmin())
 				{
-					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0,(int)this.dimension.getWidth()-350, 0, 0));
+					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0,(int)dimension.getWidth()-350, 0, 0));
 					messageAdmin.setText("Connecté en tant qu'administrateur");
 					menuEdit.setVisible(true);
 				}
@@ -180,15 +181,42 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			
 			else if (source.getText().equals("Ajouter une recette"))
 			{
-				/* Ajouter le formulaire de création de recette */
-				ChangePanel(homePage);
+				ChangePanel(formAddRecipePage);
 			}
 			else if (source.getText().equals("Supprimer une recette"))
 			{
 				requestDelete = true;
 				ChangePanel(searchPage);
 			}
+			else if (source.getText().equals("Valider"))
+			{
+				ArrayList<String> categories = new ArrayList<String>();
+				ArrayList<String> ingredients = new ArrayList<String>();
+				ArrayList<String> quantities = new ArrayList<String>();
+				ArrayList<String> units = new ArrayList<String>();
+				ArrayList<String> preparation = new ArrayList<String>();
+				categories.add(this.formAddRecipePage.getDropDownListTypeKitchenAdd());
+				categories.add(this.formAddRecipePage.getDropDownListTypeMealAdd());
+				preparation.add(this.formAddRecipePage.getTextAreaRecipeOfPrepare());
+				int numChar  = 0;
+				while (numChar<this.formAddRecipePage.getTextAreaIngredients().length())
+				{
+					String currentString = extractStringWithSeparatorFromList(numChar,this.formAddRecipePage.getTextAreaIngredients(), ';');
+					numChar+=currentString.length()+1;
+					ingredients.add(currentString);
+				}
+			}
 		}
+	}
+
+	private String extractStringWithSeparatorFromList(int numChar,String whereExtract, char separator) {
+		String currentIngredient = "";
+		while (numChar<whereExtract.length() && whereExtract.charAt(numChar)!=separator)
+		{
+			currentIngredient+=this.formAddRecipePage.getTextAreaIngredients().charAt(numChar);
+			numChar++;
+		}
+		return currentIngredient;
 	}
 
 	@Override

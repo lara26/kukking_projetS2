@@ -1,11 +1,6 @@
 package kukking.IHM;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -15,12 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import AffichageIHMDebut.AfficherIHM;
 
 
 public class SearchPage extends JPanel {
@@ -34,7 +25,7 @@ public class SearchPage extends JPanel {
 	private JLabel currentTempsPrepaMax;
 	
 	private JPanel cost;
-	public JRadioButton faible;
+	private JRadioButton faible;
 	private JRadioButton moyen;
 	private JRadioButton eleve;
 
@@ -42,7 +33,6 @@ public class SearchPage extends JPanel {
 	
 	public SearchPage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
-		JPanel searchPage = this;
 		JLabel search = new JLabel("Recherche");
 		search.setFont(new Font("Dom", Font.PLAIN, 50));	
 		
@@ -113,7 +103,7 @@ public class SearchPage extends JPanel {
 		searchPageBox.add(returnHomePage);
 		
 		
-		searchPage.add(searchPageBox);
+		this.add(searchPageBox);
 		
 		returnHomePage.addActionListener(kukkingFrame);
 		

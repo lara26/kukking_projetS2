@@ -4,6 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -48,7 +49,7 @@ public class RecipeDisplay extends JPanel {
 		
 	/* titre */
 		title.setFont(new Font("Dom", Font.PLAIN, 50));
-		gbc.gridx=0;
+		gbc.gridx=1;
 		gbc.gridy=0;
 		gbc.gridwidth=8;
 		gbc.gridwidth=GridBagConstraints.RELATIVE;
@@ -166,23 +167,34 @@ public class RecipeDisplay extends JPanel {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.insets = new Insets(50, 0, 0, 0);
 		recipe.add(preparation, gbc);
+		JPanel listStep = new JPanel();
 		ArrayList<String> prepa = recipeToDisplay.getPreparation();
-		int k;
-		for( k=0; k<prepa.size(); k++){
+		int numStep;
+		/*for( numStep=0; numStep<prepa.size(); numStep++){
 			gbc.gridx=0;
-			gbc.gridy=(10+i)+k;
+			gbc.gridy=(10+i)+numStep;
 			gbc.gridwidth=GridBagConstraints.REMAINDER;
 			gbc.insets = new Insets(5, 0, 0, 0);
-			recipe.add(new JLabel(prepa.get(k)), gbc);
+			listStep.add(new JLabel(prepa.get(numStep)), gbc);
+		}*/
+		for( numStep=0; numStep<prepa.size(); numStep++){
+			listStep.add(new JLabel(prepa.get(numStep)));
 		}
+		listStep.setOpaque(false); 
+		listStep.setFocusable(false);
+		listStep.setPreferredSize(new Dimension((int)KukkingDisplay.dimension.getWidth()-100,numStep*10));
+		gbc.gridx=0;
+		gbc.gridy=10+i;
+		gbc.gridwidth=GridBagConstraints.REMAINDER;
+		recipe.add(listStep, gbc);
 		bonApp.setFont(new Font("Curlz MT", Font.PLAIN, 30));
 		gbc.gridx=0;
-		gbc.gridy=(12+i)+k;
+		gbc.gridy=(12+i)+numStep;
 		gbc.gridwidth=GridBagConstraints.REMAINDER;
 		gbc.anchor = GridBagConstraints.CENTER;
 		recipe.add(bonApp, gbc);
 		gbc.gridx=0;
-		gbc.gridy=(13+i)+k;
+		gbc.gridy=(13+i)+numStep;
 		returnHomePage = new JButton("Retour à la page d'accueil");
 		returnHomePage.addActionListener(kukkingFrame);
 		recipe.add(returnHomePage, gbc);

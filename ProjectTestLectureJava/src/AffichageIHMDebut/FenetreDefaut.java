@@ -112,7 +112,7 @@ public class FenetreDefaut extends JFrame{
 	private JLabel labelAddRecipe = new JLabel("Ajouter une recette");
 	private JLabel labelNewType = new JLabel("Choississez un type de cuisine");
 	private JLabel labelNewTypeMeal = new JLabel("Choississez un type de plat");
-	private JLabel labelNbPeople = new JLabel("Nombre de personne par défaut");
+	private JLabel labelNbPeople = new JLabel("Nombre de personne");
 	private JLabel labelTimeCook = new JLabel("Temps de cuisson (en minutes)");
 	private JLabel labelTimeOfPrepare = new JLabel("Temps de préparation (en minutes)");
 
