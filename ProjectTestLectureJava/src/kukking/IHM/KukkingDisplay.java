@@ -116,8 +116,10 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 			{
 				application.valider(connectionPage.getLogin(), connectionPage.getPassword());
 				if (application.isAccesAdmin())
+				{
 					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0, 850, 0, 0));
 					messageAdmin.setText("Connecté en tant qu'administrateur");
+				}
 				ChangePanel(homePage);
 			}
 			else if (source.getText().equals("Retour à la page d'accueil"))
@@ -206,6 +208,13 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		jpanel.removeAll();
 		/*JPanel listReceiptsToReplace = new JPanel();
 		listReceiptsToReplace.setLayout(new GridBagLayout());*/
+		if (listToDisplay.size()==0)
+		{
+			JLabel recipe = new JLabel("Aucune recette");
+			recipe.addMouseListener(this);
+			recipe.setFont(font);
+			jpanel.add(recipe,constraints);
+		}
 		for (Recipe currentRecipe: listToDisplay)
 		{
 			constraints.gridy = numRow;

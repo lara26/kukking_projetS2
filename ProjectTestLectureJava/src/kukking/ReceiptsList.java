@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import jxl.Workbook;
+import jxl.Sheet;
 import jxl.read.biff.BiffException;
 
 public class ReceiptsList {
@@ -38,13 +39,14 @@ public class ReceiptsList {
 		this.list = new ArrayList<Recipe>();
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(Recipe.sourcePath));
-			int nbSheet = workbook.getNumberOfSheets();
-			for (int numSheet=0; numSheet<nbSheet; numSheet++)
+			for (Sheet currentSheet: workbook.getSheets())
 			{
-				if (!favoris || workbook.getSheet(numSheet).getCell("D2").getContents().equals("Favoris"))
-					list.add(new Recipe(workbook.getSheet(numSheet).getName()));
+				if (!favoris || currentSheet.getCell("D2").getContents().equals("Favoris"))
+				{
+					this.list.add(new Recipe(currentSheet.getName()));
+				}
 			}
-		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
+		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
 	}
 
 	public Recipe getRecipeWithName(String recipeToSearch)

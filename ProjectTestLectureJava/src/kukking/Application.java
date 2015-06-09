@@ -129,9 +129,14 @@ public class Application {
 	public void pageSuivante() {
 	}
 
+	
 	public ArrayList<Recipe> rechercheRecettes(int tempsPrepaMax, String typeCuisine, String typePlat, String cout)
 	{
 		ArrayList<Recipe> listWellReceipts = new ArrayList<Recipe>();
+		for (Recipe currentRecipe: receiptsList.list)
+		{
+			System.out.println(currentRecipe.getNameRecipe());
+		}
 		for (Recipe currentRecipe: receiptsList.list)
 		{
 			if (tempsPrepaMax >= currentRecipe.getPreparationTime())
@@ -148,7 +153,9 @@ public class Application {
 					if (typePlat.equals("Tous les plats") || typePlatValide)
 					{
 						if (cout.equals("Variable") || cout.equals(currentRecipe.getCost()))
+						{
 							listWellReceipts.add(currentRecipe);
+						}			
 					}
 				}
 			}
