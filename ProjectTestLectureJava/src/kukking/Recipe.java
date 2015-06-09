@@ -16,8 +16,11 @@ import jxl.write.biff.RowsExceededException;
 
 public class Recipe {
 	public final static String sourcePath = "./receipts.xls";
-	private String nameSheetRecipe;
-	
+	private String nameSheetRecipe;	
+	public String getNameSheetRecipe() {
+		return nameSheetRecipe;
+	}
+
 	public void setFavoris () throws RowsExceededException, WriteException {
 		WritableWorkbook workbook = null;
 		try {

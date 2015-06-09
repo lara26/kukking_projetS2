@@ -32,14 +32,14 @@ public class HomePage extends JPanel{
 		favoris.setLayout(new GridBagLayout());
 		recettes = new JPanel();
 		recettes.setLayout(new GridBagLayout());
-		connection = new JButton("Connexion");
+		connection = new JButton("Connexion en tant qu'administrateur");
 		
-		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));;
+		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 		JLabel kukking = new JLabel("Bienvenue sur Kukking !");
 		kukking.setFont(new Font("Dom", Font.PLAIN, 50));
 		
-		this.kukkingFrame.displayListReceipts(this.recettes, newListRandom(kukkingFrame), new Font("Century Gothic", Font.PLAIN, 18));
-		this.kukkingFrame.displayListReceipts(this.favoris, this.kukkingFrame.application.getListe_Favoris().list, new Font("Century Gothic", Font.PLAIN, 18));
+		this.kukkingFrame.displayListReceipts(this.recettes, newListRandom(kukkingFrame), new Font("Century Gothic", Font.PLAIN, 18), false);
+		this.kukkingFrame.displayListReceipts(this.favoris, this.kukkingFrame.application.getListe_Favoris().list, new Font("Century Gothic", Font.PLAIN, 18), false);
 		favoris.setBorder(new TitledBorder("Favoris"));
 		favoris.setPreferredSize(new Dimension(450,400));
 		

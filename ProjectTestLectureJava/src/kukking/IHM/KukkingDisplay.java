@@ -32,21 +32,20 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 	SearchPage searchPage;
 	ConnectionPage connectionPage;
 	RecipeListPage recipeListPage;
+	HelpPage helpPage;
 	
-	
-	private JButton bouton = new JButton()/*("Go")*/;
-	private JButton bouton2 = new JButton()/*("Stop")*/;
-	private boolean animated = true;
-	private JOptionPane jop;
 	private JMenuBar menuBar;
 	private JLabel messageAdmin;
+	private boolean requestDelete;
 	
 	public KukkingDisplay(Application application) {
 		this.application=application;
+		this.requestDelete=false;
 		homePage = new HomePage(this);
 		searchPage = new SearchPage(this);
 		connectionPage = new ConnectionPage(this);
 		recipeListPage = new RecipeListPage(this);
+		helpPage = new HelpPage(this);
 		window.setTitle("Kukking");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setSize(1200, 700);
@@ -59,11 +58,18 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		JMenu menuHelp = new JMenu("Aide");
 		messageAdmin = new JLabel("");
 		JMenuItem menuConnexion = new JMenuItem("Se connecter en tant que administrateur");
+		menuConnexion.addActionListener(this);
 		JMenuItem menuQuitter = new JMenuItem("Quitter");
+		menuQuitter.addActionListener(this);
 
 		menuFile.add(menuConnexion);
 		menuFile.addSeparator();
 		menuFile.add(menuQuitter);
+		
+		JMenuItem needHelp = new JMenuItem("Obtenir de l'aide");
+		needHelp.addActionListener(this);
+		
+		menuHelp.add(needHelp);
 		
 		menuBar.add(menuFile);
 		menuBar.add(menuEdit);
@@ -76,20 +82,6 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		
 		window.setVisible(true);
 		
-		
-		
-		
-		// le listener sur le sous-menu quitter//
-		menuQuitter.addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				CloseWindow();
-			}
-			
-		});
-		
 	}
 	 	
 
@@ -101,10 +93,26 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 	
 	public void actionPerformed(ActionEvent clic)
 	{
+		if (clic.getSource() instanceof JMenuItem)
+		{
+			JMenuItem source = (JMenuItem)clic.getSource();
+			if (source.getText().equals("Se connecter en tant que administrateur"))
+			{
+				ChangePanel(connectionPage);
+			}
+			else if (source.getText().equals("Quitter"))
+			{
+				CloseWindow();
+			}
+			else if (source.getText().equals("Obtenir de l'aide"))
+			{
+				ChangePanel(helpPage);
+			}
+		}
 		if (clic.getSource() instanceof JButton)
 		{
 			JButton source = (JButton)clic.getSource();
-			if (source.getText().equals("Connexion"))
+			if (source.getText().equals("Connexion en tant qu'administrateur"))
 			{
 				ChangePanel(connectionPage);
 			}
@@ -124,7 +132,7 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 			}
 			else if (source.getText().equals("Retour à la page d'accueil"))
 			{
-				this.displayListReceipts(homePage.recettes, homePage.newListRandom(this), new Font("Century Gothic", Font.PLAIN, 18));
+				this.displayListReceipts(homePage.recettes, homePage.newListRandom(this), new Font("Century Gothic", Font.PLAIN, 18), false);
 				ChangePanel(homePage);
 			}
 			else if (source.getText().equals("Rechercher"))
@@ -133,7 +141,8 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 				String typeCuisine = searchPage.getTypeCuisine();
 				String typePlat = searchPage.getTypePlat();
 				String cout = searchPage.getCost();
-				displayListReceipts(recipeListPage.listReceipts, application.rechercheRecettes(tempsPrepaMax, typeCuisine, typePlat, cout), new Font("Century Gothic", Font.PLAIN, 18));
+				displayListReceipts(recipeListPage.listReceipts, application.rechercheRecettes(tempsPrepaMax, typeCuisine, typePlat, cout), new Font("Century Gothic", Font.PLAIN, 18),requestDelete);
+				requestDelete = false;
 				ChangePanel(recipeListPage);
 			}
 		}
@@ -146,6 +155,13 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		{
 			JLabel source = (JLabel)clic.getSource();
 			source.setForeground(Color.BLACK);
+			if (source.getText().substring(source.getText().length()-10, source.getText().length()-1).equals(" (delete)"))
+			{
+				String nameRecipe = source.getText().substring(source.getText().length()-10);
+				int option = JOptionPane.showConfirmDialog(null, "Etes-vous sur de vouloir supprimer la recette :\n"+nameRecipe, "Supprimer recette", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+				if (option == JOptionPane.YES_OPTION)
+					this.application.getReceiptsList().permanentlyDeleteRecipe(this.application.getReceiptsList().getRecipeWithName(nameRecipe));
+			}
 			RecipeDisplay recipe;
 			recipe = new RecipeDisplay(this.application.getReceiptsList().getRecipeWithName(source.getText()), this);
 			recipe.setPreferredSize(new Dimension(600,600));
@@ -178,30 +194,13 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 	}
 	
 	public void CloseWindow()
-	{
-	jop = new JOptionPane();            
-	int option = JOptionPane.showConfirmDialog(null, "Etes-vous sur de vouloir quitter Kukking ?", "Quitter Kukking", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		if (option == JOptionPane.NO_OPTION)
-		{
-			 animated  = false;  
-		     bouton.setEnabled(true);
-		     bouton2.setEnabled(false);
-		}
+	{           
+		int option = JOptionPane.showConfirmDialog(null, "Etes-vous sur de vouloir quitter Kukking ?", "Quitter Kukking", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if (option == JOptionPane.YES_OPTION)
-		{
-			bouton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				System.exit(0);
-			}
-			});
 			System.exit(0);
-		}
+	}
 
-}
-
-	public void displayListReceipts(JPanel jpanel, ArrayList<Recipe> listToDisplay, Font font)
+	public void displayListReceipts(JPanel jpanel, ArrayList<Recipe> listToDisplay, Font font, boolean administrator)
 	{
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.gridx = 0;
@@ -218,8 +217,10 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		}
 		for (Recipe currentRecipe: listToDisplay)
 		{
+			constraints.gridx = 0;
 			constraints.gridy = numRow;
 			JLabel recipe = new JLabel(""+currentRecipe.getNameRecipe());
+			if (administrator) recipe.setText(recipe.getText()+" (delete)");
 			recipe.addMouseListener(this);
 			recipe.setFont(font);
 			jpanel.add(recipe,constraints);

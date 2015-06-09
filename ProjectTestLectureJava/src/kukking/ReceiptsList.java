@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import jxl.Workbook;
 import jxl.Sheet;
 import jxl.read.biff.BiffException;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 public class ReceiptsList {
 	
@@ -25,6 +27,36 @@ public class ReceiptsList {
 	}
 
 	public void permanentlyDeleteRecipe(Recipe recipeToDelete) {
+		WritableWorkbook workbook = null;
+		try {
+			workbook = Workbook.createWorkbook(new File(Recipe.sourcePath),Workbook.getWorkbook(new File(Recipe.sourcePath)));
+			
+			for (int indexSheet=0;indexSheet<workbook.getNumberOfSheets();indexSheet++)
+				{
+					if (workbook.getSheet(recipeToDelete.getNameSheetRecipe())==workbook.getSheet(indexSheet))
+					{
+						workbook.removeSheet(indexSheet);
+						break;
+					}
+				}
+			
+			/* On ecrit le classeur */
+			workbook.write(); 
+
+		} catch (IOException e) {e.printStackTrace();} catch (BiffException e) {e.printStackTrace();}
+		finally {
+				/* On ferme le worbook pour libérer la mémoire */
+				try {
+					workbook.close();
+				} 
+				catch (WriteException e) {
+					e.printStackTrace();
+				} 
+				catch (IOException e) {
+					e.printStackTrace();
+				} 
+			
+		}
 		this.list.remove(recipeToDelete);
 	}
 
