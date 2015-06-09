@@ -5,7 +5,7 @@ import java.io.IOException;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
-public class main {
+public class Main {
 
 	public static void main(String[] args) throws IOException, RowsExceededException, WriteException, IndexOutOfBoundsException {
 		Application myApplication = new Application();
