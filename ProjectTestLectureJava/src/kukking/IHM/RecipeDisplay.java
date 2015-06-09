@@ -181,6 +181,8 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridwidth=GridBagConstraints.REMAINDER;
 		gbc.anchor = GridBagConstraints.CENTER;
 		recipe.add(bonApp, gbc);
+		gbc.gridx=0;
+		gbc.gridy=(13+i)+k;
 		returnHomePage = new JButton("Retour à la page d'accueil");
 		returnHomePage.addActionListener(kukkingFrame);
 		recipe.add(returnHomePage, gbc);

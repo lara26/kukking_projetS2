@@ -1,13 +1,16 @@
 package kukking.IHM;
 
-import java.awt.Color;
+
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
+import javax.swing.JTextPane;
 
 public class HelpPage extends JPanel{
 	/**
@@ -15,31 +18,63 @@ public class HelpPage extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private KukkingDisplay kukkingFrame;
-	private JLabel kukkingLogo;
-	private JButton backToHome;
-	
-	public HelpPage(KukkingDisplay kukkingFrame)
-	{
-		this.setLayout(new GridBagLayout());
-		this.setBackground(Color.green);
-		this.backToHome = new JButton("Retour à la page d'accueil");
-		this.backToHome.addActionListener(kukkingFrame);
-		this.kukkingFrame=kukkingFrame;
-		this.kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
+	 private JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
+	 private JButton backToHome = new JButton("Retour à la page d'accueil");;
+	 
+	 public HelpPage(KukkingDisplay kukkingFrame)
+	 {
+	  
+	  
+	  JTextPane help = new JTextPane();
+	  JLabel title = new JLabel("Bienvenue sur la page d'aide");
+	  title.setFont(new Font("Calibri", Font.BOLD, 27));
+	  
+	  
+	  
+	  Box titleBox = Box.createHorizontalBox();
+	  titleBox.add(kukkingLogo); 
+	  titleBox.add(title);
+	  
+	  Box tot = Box.createVerticalBox();
+	  tot.add(titleBox);
+	  tot.add(help);
+	  tot.add(backToHome);
+	  
+	  
+	  
+
+		help.setOpaque(false); 
+		help.setFocusable(false);
+		help.setText("\n"
+				+ "\nL'application Java Kukking a pour objectif premier d'aider n'importe quel utilisateur à trouver des recettes de cuisines et ce quelque soit le type de cuisine (végétarienne, sans gluten, classique, …), ou même le type de plat recherché (dessert, plat chaud, entrée,…)."
+				+ "\nCette application fait pour vous les modifications de quantités au sein des recettes selon votre choix. "
+				+ "\n"
+				+ "\nFaire une recherche :"
+				+ "\nPour effectuer une recherche au sein de notre application, vous devez cliquer sur le bouton «Effectuer une recherche». "
+				+ "\nUn formulaire se présentera alors à vous. Vous n'êtes pas obligé de remplir le formulaire, vous pouvez directement cliquer sur «Rechercher» et la liste de toutes nos recettes s'afficheront."
+				+ "\nSi vous remplissez des champs du formulaire correctement, puis cliquez sur «Rechercher», la liste de toutes les recettes correspondant à votre recherche s'afficheront. "
+				+ "\n"
+				+ "\nSe connecter en tant qu'administrateur :"
+				+ "\nVous pouvez vous connecter en tant qu'administrateur quand vous le souhaitez grâce au menu"
+				+ "\n> Fichier > Se connecter en tant qu'administrateur"
+				+ "\n"
+				+ "\nIl vous sera donc possible de rentrer votre login et votre mot de passe."
+				+ "\nEn cliquant sur «Connexion», vous serez alors connecter en tant qu'administrateur. Et vous pourrez retournez sur n'importe quelle page de l'application."
+				+ "\n \n");
 		
-		GridBagConstraints gbc = new GridBagConstraints();
-			gbc.gridx=0;
-			gbc.gridy=0;
-		this.add(kukkingLogo,gbc);
 		
-			gbc.gridx=0;
-			gbc.gridy=1;
-		JLabel title = new JLabel("Bienvenue sur la page d'aide");
-		title.setFont(new Font("Calibri", Font.BOLD, 27));
-		this.add(title,gbc);
-		
-			gbc.gridx=0;
-			gbc.gridy=3;
-		this.add(backToHome,gbc);
-	}
+		help.setPreferredSize(new Dimension(800,400));
+	  
+	  
+	  
+	  this.backToHome.addActionListener(kukkingFrame);
+	  this.kukkingFrame=kukkingFrame;
+	  this.add(tot);
+	  
+	  
+	 
+	  
+	 }
 }
+
+
