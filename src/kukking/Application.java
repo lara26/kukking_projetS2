@@ -28,7 +28,10 @@ public class Application {
 	public ReceiptsList getListe_Favoris() {
 		return liste_Favoris;
 	}
-
+	public void setListe_Favoris(ReceiptsList liste_Favoris) {
+		this.liste_Favoris = liste_Favoris;
+	}
+	
 	private ReceiptsList receiptsList;
 	public ReceiptsList getReceiptsList() {
 		return receiptsList;
@@ -52,7 +55,7 @@ public class Application {
 		this.kukking.setLocationRelativeTo(null);
 		this.kukking.setVisible(true);
 	}
-	
+
 	/**
 	 * to avoid bug about get preparation
 	 * @throws IndexOutOfBoundsException 

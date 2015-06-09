@@ -308,5 +308,13 @@ public class Recipe {
 		}
 	}
 
-	
+	public boolean isFavoris()
+	{
+		try {
+			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
+			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
+			if (recipe.getCell("D2").getContents().equals("Favoris")) return true;
+		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
+		return false;
+	}
 }

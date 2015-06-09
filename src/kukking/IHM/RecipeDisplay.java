@@ -2,33 +2,43 @@ package kukking.IHM;
  
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import jxl.write.WriteException;
 import kukking.*;
 
-public class RecipeDisplay extends JPanel {
+public class RecipeDisplay extends JPanel implements ActionListener{
 
 	
 	private static final long serialVersionUID = 1L;
 	private JButton returnHomePage;
-	private KukkingDisplay kukkingFrame;
+	public KukkingDisplay kukkingFrame;
+	public JLabel title;
 	
 	public RecipeDisplay(Recipe recipeToDisplay, KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
+		this.title = new JLabel(recipeToDisplay.getNameRecipe());
 		JPanel recipe = this;
 		recipe.setLayout(new GridBagLayout());
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
 
-		JLabel title = new JLabel(recipeToDisplay.getNameRecipe());
+		JCheckBox favoris = new JCheckBox("Favoris");
+		
 		JLabel ingredient = new JLabel("Ingredients");
 		//JLabel categorie = new JLabel("Catégories");
 		JLabel tempsPrepa = new JLabel("Temps de préparation");
@@ -41,13 +51,13 @@ public class RecipeDisplay extends JPanel {
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-	/* logo */
+		/* logo */
 		gbc.gridx=0;
 		gbc.gridy=0;
 		recipe.add(kukkingLogo,gbc);
-		
-		
-	/* titre */
+
+
+		/* titre */
 		title.setFont(new Font("Dom", Font.PLAIN, 50));
 		gbc.gridx=1;
 		gbc.gridy=0;
@@ -55,8 +65,21 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridwidth=GridBagConstraints.RELATIVE;
 		gbc.anchor = GridBagConstraints.CENTER;
 		recipe.add(title, gbc);
-	
-	/* personnes */
+
+		/* favoris */
+		favoris.setFont(new Font("Dom", Font.PLAIN, 13));
+		favoris.addActionListener(this);
+		gbc.gridx=2;
+		gbc.gridy=1;
+		gbc.gridwidth=GridBagConstraints.RELATIVE;
+		recipe.add(favoris, gbc);
+		if (recipeToDisplay.isFavoris())
+		{
+			favoris.setSelected(true);
+		}
+			
+
+		/* personnes */
 		gbc.gridx=7;
 		gbc.gridy=1;
 		gbc.gridwidth=1;
@@ -66,47 +89,39 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridy=1;
 		gbc.anchor = GridBagConstraints.WEST;
 		recipe.add(new JLabel(" personnes"),gbc);
-		
-	/* ingredients */
+
+		/* ingredients */
 		ingredient.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.gridx=0;
-		gbc.gridy=4;
+		gbc.gridy=1;
 		recipe.add(ingredient,gbc);
-		
+
 		ArrayList<String> ingre = recipeToDisplay.getIngredients();
 		ArrayList<String> qte = recipeToDisplay.getQuantities();
 		ArrayList<String> unit = recipeToDisplay.getUnits();
-		
+
 		int i;
 		for (i=0; i<ingre.size();i++){
 			gbc.gridx=0;
-			gbc.gridy=5+i;
+			gbc.gridy=2+i;
 			gbc.anchor = GridBagConstraints.WEST;
-			recipe.add(new JLabel(ingre.get(i)),gbc);
+			JLabel ingredients = new JLabel(ingre.get(i));
+			ingredients.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+			recipe.add(ingredients,gbc);
 			gbc.gridx=1;
-			gbc.gridy=5+i;
+			gbc.gridy=2+i;
 			gbc.anchor = GridBagConstraints.CENTER;
-			recipe.add(new JLabel(qte.get(i)),gbc);
+			JLabel quantities = new JLabel(qte.get(i));
+			quantities.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+			recipe.add(quantities,gbc);
 			gbc.gridx=2;
-			gbc.gridy=5+i;
-			gbc.ipadx=5;
-			recipe.add(new JLabel(unit.get(i)),gbc);
+			gbc.gridy=2+i;
+			gbc.ipadx=2;
+			JLabel units = new JLabel(unit.get(i));
+			units.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+			recipe.add(units,gbc);
 		}
-		
-	/* categories */
-		/*categorie.setFont(new Font("Century Gothic", Font.PLAIN, 14));
-		gbc.gridx=4;
-		gbc.gridy=4;
-		recipe.add(categorie,gbc);
-		
-		ArrayList<String> categ = recipeToDisplay.getCategories();
-		
-		for(int j=0; j<categ.size(); j++){
-			gbc.gridx=4;
-			gbc.gridy=5+j;
-			recipe.add(new JLabel(categ.get(j)), gbc);
-		}*/
 		
 	/* info complementaire (tps prépa ...) */
 		/* tps prepa */
@@ -165,24 +180,21 @@ public class RecipeDisplay extends JPanel {
 		gbc.gridx=0;
 		gbc.gridy=9+i;
 		gbc.anchor = GridBagConstraints.WEST;
-		gbc.insets = new Insets(50, 0, 0, 0);
+		gbc.insets = new Insets(5, 0, 0, 0);
 		recipe.add(preparation, gbc);
-		JPanel listStep = new JPanel();
+		JTextPane listStep = new JTextPane();
 		ArrayList<String> prepa = recipeToDisplay.getPreparation();
 		int numStep;
-		/*for( numStep=0; numStep<prepa.size(); numStep++){
-			gbc.gridx=0;
-			gbc.gridy=(10+i)+numStep;
-			gbc.gridwidth=GridBagConstraints.REMAINDER;
-			gbc.insets = new Insets(5, 0, 0, 0);
-			listStep.add(new JLabel(prepa.get(numStep)), gbc);
-		}*/
 		for( numStep=0; numStep<prepa.size(); numStep++){
-			listStep.add(new JLabel(prepa.get(numStep)));
+			listStep.setText(listStep.getText()+prepa.get(numStep));
+			if (numStep+1<prepa.size()) listStep.setText(listStep.getText()+"\n");
 		}
 		listStep.setOpaque(false); 
 		listStep.setFocusable(false);
-		listStep.setPreferredSize(new Dimension((int)KukkingDisplay.dimension.getWidth()-100,numStep*10));
+		int width = (int)KukkingDisplay.dimension.getWidth()-15;
+		listStep.setMinimumSize(new Dimension(width,listStep.getText().length()/(23/2)));
+		listStep.setFont(new Font("Calibri", Font.PLAIN, 14));
+		gbc.insets = new Insets(0, 0, 0, 0);
 		gbc.gridx=0;
 		gbc.gridy=10+i;
 		gbc.gridwidth=GridBagConstraints.REMAINDER;
@@ -199,5 +211,30 @@ public class RecipeDisplay extends JPanel {
 		returnHomePage.addActionListener(kukkingFrame);
 		recipe.add(returnHomePage, gbc);
 		
-	}	
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JCheckBox source = (JCheckBox)e.getSource();
+		if (source.isSelected())
+		{
+			try {
+				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).setFavoris();
+			} catch (WriteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		else
+		{
+			try {
+				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).deleteFavoris();
+			} catch (WriteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		this.kukkingFrame.application.setListe_Favoris(new ReceiptsList(this.kukkingFrame.application, true));
+		this.kukkingFrame.displayListReceipts(this.kukkingFrame.homePage.favoris, this.kukkingFrame.application.getListe_Favoris().list, new Font("Century Gothic", Font.PLAIN, 18), false);
+	}
 }

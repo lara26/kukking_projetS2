@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,11 +20,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import kukking.*;
 
 
-public class KukkingDisplay extends JFrame implements ActionListener,
-		MouseListener
+public class KukkingDisplay extends JFrame implements ActionListener, MouseListener
 {
 	private static final long serialVersionUID = 1L;
 
@@ -138,9 +139,6 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			}
 		}
 		
-		
-		
-		
 		if (clic.getSource() instanceof JButton)
 		{
 			JButton source = (JButton) clic.getSource();
@@ -169,9 +167,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			
 			else if (source.getText().equals("Retour à la page d'accueil"))
 			{
-				this.displayListReceipts(homePage.recettes, homePage
-						.newListRandom(this), new Font("Century Gothic",
-						Font.PLAIN, 18), false);
+				this.displayListReceipts(homePage.recettes, homePage.newListRandom(this), new Font("Century Gothic", Font.PLAIN, 18), false);
 				ChangePanel(homePage);
 			}
 			
@@ -253,7 +249,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 		{
 			JLabel source = (JLabel) clic.getSource();
 			source.setForeground(Color.BLACK);
-			if (source.getText().substring(source.getText().length() - 9,source.getText().length()).equals(" (delete)"))
+			if (source.getText().length()>=9 && source.getText().substring(source.getText().length() - 9,source.getText().length()).equals(" (delete)"))
 			{
 				String nameRecipe = source.getText().substring(0,source.getText().length() - 9);
 				int option = JOptionPane.showConfirmDialog(null,"Etes-vous sur de vouloir supprimer la recette :\n"+ nameRecipe, "Supprimer recette",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -310,8 +306,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			System.exit(0);
 	}
 
-	public void displayListReceipts(JPanel jpanel,
-			ArrayList<Recipe> listToDisplay, Font font, boolean administrator)
+	public void displayListReceipts(JPanel jpanel,ArrayList<Recipe> listToDisplay, Font font, boolean administrator)
 	{
 		GridBagConstraints constraints = new GridBagConstraints();
 		JPanel intermediatePanel = new JPanel();
