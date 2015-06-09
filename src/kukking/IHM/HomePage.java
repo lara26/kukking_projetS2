@@ -41,10 +41,10 @@ public class HomePage extends JPanel{
 		this.kukkingFrame.displayListReceipts(this.recettes, newListRandom(kukkingFrame), new Font("Century Gothic", Font.PLAIN, 18), false);
 		this.kukkingFrame.displayListReceipts(this.favoris, this.kukkingFrame.application.getListe_Favoris().list, new Font("Century Gothic", Font.PLAIN, 18), false);
 		favoris.setBorder(new TitledBorder("Favoris"));
-		favoris.setPreferredSize(new Dimension(450,400));
+		favoris.setPreferredSize(new Dimension(600,550));
 		
 		recettes.setBorder(new TitledBorder("Recettes"));
-		recettes.setPreferredSize(new Dimension(450,400));
+		recettes.setPreferredSize(new Dimension(600,550));
 		
 		Box button = Box.createHorizontalBox();
 		button.add(search);

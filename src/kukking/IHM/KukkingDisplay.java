@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +18,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import javax.swing.JScrollPane;
 import kukking.*;
 
 
@@ -315,6 +314,12 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			ArrayList<Recipe> listToDisplay, Font font, boolean administrator)
 	{
 		GridBagConstraints constraints = new GridBagConstraints();
+		JPanel intermediatePanel = new JPanel();
+		intermediatePanel.setLayout(jpanel.getLayout());
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setPreferredSize(new Dimension(575,525));
+		scrollPane.setBorder(null);
+		
 		constraints.gridx = 0;
 		int numRow = 0;
 		jpanel.removeAll();
@@ -327,7 +332,7 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 			JLabel recipe = new JLabel("Aucune recette");
 			recipe.addMouseListener(this);
 			recipe.setFont(font);
-			jpanel.add(recipe, constraints);
+			intermediatePanel.add(recipe, constraints);
 		}
 		for (Recipe currentRecipe : listToDisplay)
 		{
@@ -338,8 +343,10 @@ public class KukkingDisplay extends JFrame implements ActionListener,
 				recipe.setText(recipe.getText() + " (delete)");
 			recipe.addMouseListener(this);
 			recipe.setFont(font);
-			jpanel.add(recipe, constraints);
+			intermediatePanel.add(recipe, constraints);
 			numRow++;
 		}
+		scrollPane.setViewportView(intermediatePanel);
+		jpanel.add(scrollPane);
 	}
 }
