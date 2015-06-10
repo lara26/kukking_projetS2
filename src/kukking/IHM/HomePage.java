@@ -29,7 +29,10 @@ public class HomePage extends JPanel{
 	public JPanel favoris;
 	public JPanel recettes;
 	
-	
+	/**
+	 * constructor of page
+	 * @param kukkingFrame
+	 */
 	public HomePage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		search = new JButton("Lancer une recherche");
@@ -81,6 +84,11 @@ public class HomePage extends JPanel{
 	}
 
 
+	/**
+	 * to get new listRandom
+	 * @param kukkingFrame
+	 * @return
+	 */
 	public ArrayList<Recipe> newListRandom(KukkingDisplay kukkingFrame) {
 		ArrayList<Recipe> listRandom= new ArrayList<Recipe>();
 		for (int nbReceipts=0;nbReceipts<5;nbReceipts++)

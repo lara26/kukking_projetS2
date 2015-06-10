@@ -49,6 +49,10 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 	public final static Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 	private JMenu menuEdit;
 
+	/**
+	 * constructor of main frame
+	 * @param kukkingFrame
+	 */
 	public KukkingDisplay(Application application)
 	{
 		this.application = application;
@@ -110,12 +114,19 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		menuEdit.setVisible(false);
 	}
 
+	/**
+	 * to change panel
+	 * @param panel
+	 */
 	public void ChangePanel(JPanel panel)
 	{
 		this.setContentPane(panel);
 		this.revalidate();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent clic)
 	{
 		if (clic.getSource() instanceof JMenuItem)
@@ -162,7 +173,7 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 						connectionPage.getPassword());
 				if (application.isAccesAdmin())
 				{
-					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0,(int)dimension.getWidth()-350, 0, 0));
+					messageAdmin.setBorder(BorderFactory.createEmptyBorder(0,(int)dimension.getWidth()-375, 0, 0));
 					messageAdmin.setText("Connecté en tant qu'administrateur");
 					menuEdit.setVisible(true);
 				}
@@ -236,6 +247,13 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		}
 	}
 
+	/**
+	 * extract first part of a string (separate by a special char)
+	 * @param numChar
+	 * @param whereExtract
+	 * @param separator
+	 * @return
+	 */
 	private String extractStringWithSeparatorFromList(int numChar,String whereExtract, char separator) {
 		String currentIngredient = "";
 		while (numChar<whereExtract.length() && whereExtract.charAt(numChar)!=separator)
@@ -246,6 +264,9 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		return currentIngredient;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent clic)
 	{
@@ -270,6 +291,9 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(java.awt.event.MouseEvent clic)
 	{
@@ -280,6 +304,9 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(java.awt.event.MouseEvent clic)
 	{
@@ -290,16 +317,25 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(java.awt.event.MouseEvent arg0)
 	{
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent arg0)
 	{
 	}
 
+	/**
+	 * to request confirmation at close windows (by the menuItem QUITTER)
+	 */
 	public void CloseWindow()
 	{
 		int option = JOptionPane.showConfirmDialog(null,
@@ -310,6 +346,13 @@ public class KukkingDisplay extends JFrame implements ActionListener, MouseListe
 			System.exit(0);
 	}
 
+	/**
+	 * to display receipts list
+	 * @param jpanel
+	 * @param listToDisplay
+	 * @param font
+	 * @param administrator
+	 */
 	public void displayListReceipts(JPanel jpanel,ArrayList<Recipe> listToDisplay, Font font, boolean administrator)
 	{
 		GridBagConstraints constraints = new GridBagConstraints();

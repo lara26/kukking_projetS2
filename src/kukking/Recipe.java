@@ -15,17 +15,26 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 /**
- * class to get every eelments recipe and write in (to favoris)
+ * class to get every elments recipe and write in (to favoris)
  * @author RO
  *
  */
 public class Recipe {
 	public final static String sourcePath = "./receipts.xls";
 	private String nameSheetRecipe;	
+	/**
+	 * get name of the recipe
+	 * @return
+	 */
 	public String getNameSheetRecipe() {
 		return nameSheetRecipe;
 	}
 
+	/**
+	 * to set recipe of favoris
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 */
 	public void setFavoris () throws RowsExceededException, WriteException {
 		WritableWorkbook workbook = null;
 		try {
@@ -43,6 +52,11 @@ public class Recipe {
 		}
 	}
 	
+	/**
+	 * to delete recipe of favoris
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 */
 	public void deleteFavoris () throws RowsExceededException, WriteException {
 		WritableWorkbook workbook = null;
 		try {
@@ -61,6 +75,7 @@ public class Recipe {
 	}
 
 	/**
+	 * to get recipe name
 	 * @return recipe name
 	 */
 	public String getNameRecipe() {
@@ -313,6 +328,10 @@ public class Recipe {
 		}
 	}
 
+	/**
+	 * to know if the recipe is favoris
+	 * @return
+	 */
 	public boolean isFavoris()
 	{
 		try {

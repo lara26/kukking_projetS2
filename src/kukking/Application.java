@@ -30,14 +30,26 @@ public class Application {
 	private KukkingDisplay kukking;
 
 	private ReceiptsList liste_Favoris;
+	/**
+	 * to get liste favoris
+	 * @return
+	 */
 	public ReceiptsList getListe_Favoris() {
 		return liste_Favoris;
 	}
+	/**
+	 * to set liste favoris
+	 * @param liste_Favoris
+	 */
 	public void setListe_Favoris(ReceiptsList liste_Favoris) {
 		this.liste_Favoris = liste_Favoris;
 	}
 	
 	private ReceiptsList receiptsList;
+	/**
+	 * to get receiptslist
+	 * @return
+	 */
 	public ReceiptsList getReceiptsList() {
 		return receiptsList;
 	}
@@ -45,10 +57,20 @@ public class Application {
 	private Recipe recetteCourante;
 
 	private boolean accesAdmin;
+	/**
+	 * to kwnow if user is connect in mode administrator
+	 * @return
+	 */
 	public boolean isAccesAdmin() {
 		return accesAdmin;
 	}
 
+	/**
+	 * constructor application which call several init
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 * @throws IndexOutOfBoundsException
+	 */
 	public Application() throws RowsExceededException, WriteException, IndexOutOfBoundsException
 	{
 		this.user = new UserConsole();
@@ -103,24 +125,34 @@ public class Application {
 		}
 	}
 
+	/**
+	 * to delete favoris
+	 * @param recetteAAsupprimer
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 */
 	public void supprimerFavori(Recipe recetteAAsupprimer) throws RowsExceededException, WriteException
 	{
 		recetteAAsupprimer.deleteFavoris();
 		this.liste_Favoris.list.remove(recetteAAsupprimer);
 	}
 
+	/**
+	 * to add favoris
+	 * @param recetteAAjouter
+	 * @throws RowsExceededException
+	 * @throws WriteException
+	 */
 	public void ajouterFavori(Recipe recetteAAjouter) throws RowsExceededException, WriteException
 	{
 		recetteAAjouter.setFavoris();
 		this.liste_Favoris.list.add(recetteAAjouter);
 	}
 
-	/*public void afficheFavoris() {
-	}*/
-
-	/*public Recipe recalculRecette(Recipe recetteAAfficher, int nombrePersonnes) {
-	}*/
-
+	/**
+	 * display recipe to console
+	 * @param recetteAAfficher
+	 */
 	public void affichageRecette(Recipe recetteAAfficher) {
 		user.afficheElementsRecette(recetteAAfficher);
 	}
@@ -138,6 +170,14 @@ public class Application {
 	}
 
 	
+	/**
+	 * to search receipts with parameters
+	 * @param tempsPrepaMax
+	 * @param typeCuisine
+	 * @param typePlat
+	 * @param cout
+	 * @return
+	 */
 	public ArrayList<Recipe> rechercheRecettes(int tempsPrepaMax, String typeCuisine, String typePlat, String cout)
 	{
 		ArrayList<Recipe> listWellReceipts = new ArrayList<Recipe>();
@@ -198,11 +238,9 @@ public class Application {
 	}
 
 	/**
-	 * permet d'indentifier l'admin
+	 * to get IHM_Administrator
+	 * @return
 	 */
-	/*public Identifier() {
-	}*/
-
 	public IHM_Administrator getAdmin() {
 		return admin;
 	}

@@ -20,6 +20,11 @@ public class RecipeListPage extends JPanel {
 	private KukkingDisplay kukkingFrame;
 	public JPanel listReceipts;
 	
+	
+	/**
+	 * constructor of page
+	 * @param kukkingFrame
+	 */
 	public RecipeListPage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		this.listReceipts= new JPanel();

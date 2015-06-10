@@ -33,6 +33,11 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 	public KukkingDisplay kukkingFrame;
 	public JLabel title;
 	
+	/**
+	 * constructor of Recipe display
+	 * @param recipeToDisplay
+	 * @param kukkingFrame
+	 */
 	public RecipeDisplay(Recipe recipeToDisplay, KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		this.title = new JLabel(recipeToDisplay.getNameRecipe());
@@ -212,6 +217,9 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JCheckBox source = (JCheckBox)e.getSource();

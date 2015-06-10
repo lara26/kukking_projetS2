@@ -36,6 +36,11 @@ public class SearchPage extends JPanel {
 
 	private KukkingDisplay kukkingFrame;
 	
+	
+	/**
+	 * constructor of page
+	 * @param kukkingFrame
+	 */
 	public SearchPage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		JLabel search = new JLabel("Recherche");
@@ -118,20 +123,36 @@ public class SearchPage extends JPanel {
 		
 	}
 	
+	/**
+	 * to get time Prepa max
+	 * @return
+	 */
 	public int getTempsPrepaMax() {
 		return tempsPrepaMax.getValue();
 	}
 
+	/**
+	 * to get type cook
+	 * @return
+	 */
 	public String getTypeCuisine() {
 		return this.typeCuisine.getSelectedItem().toString();
 	}
 
 
+	/**
+	 * to get type meal
+	 * @return
+	 */
 	public String getTypePlat() {
 		return this.typePlat.getSelectedItem().toString();
 	}
 
 
+	/**
+	 * to get cost
+	 * @return
+	 */
 	public String getCost() {
 		String costToReturn="Variable";
 		if (this.faible.isSelected())

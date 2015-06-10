@@ -49,6 +49,10 @@ public class FormAddRecipePage extends JPanel {
 
 	private KukkingDisplay kukkingFrame;
 	
+	/**
+	 * constructor of page
+	 * @param kukkingFrame
+	 */
 	public FormAddRecipePage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		JLabel titleAdd = new JLabel("Ajouter une recette");
@@ -193,46 +197,90 @@ public class FormAddRecipePage extends JPanel {
 		buttonAdd.addActionListener(kukkingFrame);
 	}
 
+	/**
+	 * to get quantities in String
+	 * @return
+	 */
 	public String getTextAreaQuantities() {
 		return textAreaQuantities.getText();
 	}
 
+	/**
+	 * to get units in String
+	 * @return
+	 */
 	public String getTextAreaUnits() {
 		return textAreaUnits.getText();
 	}
 	
+	/**
+	 * to get nameRecipe in String
+	 * @return
+	 */
 	public String getTextAreaNameRecipe() {
 		return textAreaNameRecipe.getText();
 	}
 
+	/**
+	 * to get ingredients in String
+	 * @return
+	 */
 	public String getTextAreaIngredients() {
 		return textAreaIngredients.getText();
 	}
 
+	/**
+	 * to get preparation in String
+	 * @return
+	 */
 	public String getTextAreaRecipeOfPrepare() {
 		return textAreaRecipeOfPrepare.getText();
 	}
 
+	/**
+	 * to get type meal in String
+	 * @return
+	 */
 	public String getDropDownListTypeMealAdd() {
 		return DropDownListTypeMealAdd.getSelectedItem().toString();
 	}
 
+	/**
+	 * to get type kitchen in String
+	 * @return
+	 */
 	public String getDropDownListTypeKitchenAdd() {
 		return DropDownListTypeKitchenAdd.getSelectedItem().toString();
 	}
 
+	/**
+	 * to get nbPeople in int
+	 * @return
+	 */
 	public int getSliderPeople() {
 		return sliderPeople.getValue();
 	}
 
+	/**
+	 * to get time cook in int
+	 * @return
+	 */
 	public int getSliderTimeCook() {
 		return sliderTimeCook.getValue();
 	}
 
+	/**
+	 * to get time prepare in int
+	 * @return
+	 */
 	public int getSliderTimePrepare() {
 		return sliderTimePrepare.getValue();
 	}
 
+	/**
+	 * to get cost in String
+	 * @return
+	 */
 	public String getCost() {
 		String costToReturn="Variable";
 		if (this.faible.isSelected())

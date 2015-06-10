@@ -23,30 +23,34 @@ public class HelpPage extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	private KukkingDisplay kukkingFrame;
-	 private JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
-	 private JButton backToHome = new JButton("Retour à la page d'accueil");;
-	 
-	 public HelpPage(KukkingDisplay kukkingFrame)
-	 {
-	  
-	  
-	  JTextPane help = new JTextPane();
-	  JLabel title = new JLabel("Bienvenue sur la page d'aide");
-	  title.setFont(new Font("Calibri", Font.BOLD, 27));
-	  
-	  
-	  
-	  Box titleBox = Box.createHorizontalBox();
-	  titleBox.add(kukkingLogo); 
-	  titleBox.add(title);
-	  
-	  Box tot = Box.createVerticalBox();
-	  tot.add(titleBox);
-	  tot.add(help);
-	  tot.add(backToHome);
-	  
-	  
-	  
+	private JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
+	private JButton backToHome = new JButton("Retour à la page d'accueil");;
+
+	/**
+	 * constructor of page
+	 * @param kukkingFrame
+	 */
+	public HelpPage(KukkingDisplay kukkingFrame)
+	{
+
+
+		JTextPane help = new JTextPane();
+		JLabel title = new JLabel("Bienvenue sur la page d'aide");
+		title.setFont(new Font("Calibri", Font.BOLD, 27));
+
+
+
+		Box titleBox = Box.createHorizontalBox();
+		titleBox.add(kukkingLogo); 
+		titleBox.add(title);
+
+		Box tot = Box.createVerticalBox();
+		tot.add(titleBox);
+		tot.add(help);
+		tot.add(backToHome);
+
+
+
 
 		help.setOpaque(false); 
 		help.setFocusable(false);
@@ -66,20 +70,20 @@ public class HelpPage extends JPanel{
 				+ "\nIl vous sera donc possible de rentrer votre login et votre mot de passe."
 				+ "\nEn cliquant sur «Connexion», vous serez alors connecter en tant qu'administrateur. Et vous pourrez retournez sur n'importe quelle page de l'application."
 				+ "\n \n");
-		
-		
+
+
 		help.setPreferredSize(new Dimension(800,400));
-	  
-	  
-	  
-	  this.backToHome.addActionListener(kukkingFrame);
-	  this.kukkingFrame=kukkingFrame;
-	  this.add(tot);
-	  
-	  
-	 
-	  
-	 }
+
+
+
+		this.backToHome.addActionListener(kukkingFrame);
+		this.kukkingFrame=kukkingFrame;
+		this.add(tot);
+
+
+
+
+	}
 }
 
 

@@ -25,6 +25,10 @@ public class ConnectionPage extends JPanel {
 	private JTextField loginTextArea;
 	private JTextField passWordTextArea;
 
+	/**
+	 * constructor of page
+	 * @param kukkingFrame
+	 */
 	public ConnectionPage(KukkingDisplay kukkingFrame){
 		this.kukkingFrame = kukkingFrame;
 		JLabel kukkingLogo = new JLabel(new ImageIcon("kukkinglogo.png"));
@@ -74,10 +78,18 @@ public class ConnectionPage extends JPanel {
 		connection.addActionListener(kukkingFrame);
 	}
 	
+	/**
+	 * to get password
+	 * @return password
+	 */
 	public String getPassword() {
 		return passWordTextArea.getText();
 	}
 	
+	/**
+	 * to get login
+	 * @return login
+	 */
 	public String getLogin() {
 		return loginTextArea.getText();
 	}

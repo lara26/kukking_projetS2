@@ -21,6 +21,10 @@ public class AddDeleteRecipePage extends JPanel
 	private KukkingDisplay kukkingFrame;
 
 	
+	/**
+	 * constructor of page
+	 * @param kukkingFrame
+	 */
 	public AddDeleteRecipePage(KukkingDisplay kukkingFrame)
 	{
 		this.kukkingFrame = kukkingFrame;

@@ -31,6 +31,10 @@ public class ReceiptsList {
 			
 	}
 
+	/**
+	 * to delete recipe
+	 * @param recipeToDelete
+	 */
 	public void permanentlyDeleteRecipe(Recipe recipeToDelete) {
 		WritableWorkbook workbook = null;
 		try {
@@ -65,11 +69,21 @@ public class ReceiptsList {
 		this.list.remove(recipeToDelete);
 	}
 
+	/**
+	 * to add recipe
+	 * @param recipeToAdd
+	 * @throws IOException
+	 */
 	public void addRecipe(Recipe recipeToAdd) throws IOException
 	{
 		this.list.add(recipeToAdd);
 	}
 
+	/**
+	 * constructor to init receipts list or favoris list
+	 * @param application
+	 * @param favoris
+	 */
 	public ReceiptsList(Application application, boolean favoris) {
 		this.application=application;
 		this.list = new ArrayList<Recipe>();
@@ -85,6 +99,11 @@ public class ReceiptsList {
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
 	}
 
+	/**
+	 * to get name of a recipe with the recipe (class)
+	 * @param recipeToSearch
+	 * @return
+	 */
 	public Recipe getRecipeWithName(String recipeToSearch)
 	{
 		for (Recipe recipe: list)
