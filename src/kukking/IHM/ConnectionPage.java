@@ -11,7 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+/**
+ * Interface who allow someone (User or Admin) to connect to Kukking
+ * @author Martin
+ *
+ */
 public class ConnectionPage extends JPanel {
 
 	private static final long serialVersionUID = 1L;

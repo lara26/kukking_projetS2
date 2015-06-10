@@ -15,6 +15,11 @@ import javax.swing.border.TitledBorder;
 
 import kukking.*;
 
+/**
+ * Inferface of the home page 
+ * @author Martin
+ *
+ */
 public class HomePage extends JPanel{
 
 	private static final long serialVersionUID = 1L;

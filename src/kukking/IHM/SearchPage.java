@@ -14,6 +14,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
+/**
+ * interface where the user can research receipts
+ * @author RO
+ *
+ */
 public class SearchPage extends JPanel {
 
 	private static final long serialVersionUID = 1L;

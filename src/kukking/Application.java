@@ -13,6 +13,11 @@ import jxl.write.biff.RowsExceededException;
 import kukking.IHM.KukkingDisplay;
 
 
+/**
+ * principal class which init IHM and has list of receipts and favoris
+ * @author RO
+ *
+ */
 public class Application {
 	
 	public final static String[] logins = {"Martin","Laure","Robin","Maud","Alexandra"};

@@ -4,8 +4,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import java.awt.Dimension;
@@ -22,6 +20,11 @@ import javax.swing.JPanel;
 import jxl.write.WriteException;
 import kukking.*;
 
+/**
+ * class where the recipe is completely display
+ * @author RO
+ *
+ */
 public class RecipeDisplay extends JPanel implements ActionListener{
 
 	
@@ -217,7 +220,6 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 			try {
 				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).setFavoris();
 			} catch (WriteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -226,7 +228,6 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 			try {
 				this.kukkingFrame.application.getReceiptsList().getRecipeWithName(this.title.getText()).deleteFavoris();
 			} catch (WriteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

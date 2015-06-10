@@ -23,7 +23,11 @@ import javax.swing.JScrollPane;
 
 import kukking.*;
 
-
+/**
+ * Frame who support all the panel and the menu
+ * @author Martin
+ *
+ */
 public class KukkingDisplay extends JFrame implements ActionListener, MouseListener
 {
 	private static final long serialVersionUID = 1L;

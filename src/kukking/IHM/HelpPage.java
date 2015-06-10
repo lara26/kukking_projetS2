@@ -12,6 +12,11 @@ import javax.swing.JButton;
 
 import javax.swing.JTextPane;
 
+/**
+ * Interface who give to the User a short help about the application  
+ * @author Martin
+ *
+ */
 public class HelpPage extends JPanel{
 	/**
 	 * 

@@ -19,7 +19,11 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
+/**
+ * Interface who manage the format of an add recipe
+ * @author Martin
+ *
+ */
 public class FormAddRecipePage extends JPanel {
 
 	private static final long serialVersionUID = 1L;

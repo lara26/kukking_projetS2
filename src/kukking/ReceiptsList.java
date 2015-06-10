@@ -10,6 +10,11 @@ import jxl.read.biff.BiffException;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 
+/**
+ * allow to manage list of receipts of application (delete, add ...)
+ * @author RO
+ *
+ */
 public class ReceiptsList {
 	
 	private Application application;

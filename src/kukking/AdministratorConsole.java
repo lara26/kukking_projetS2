@@ -6,6 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
+/**
+ * old class (when the beginning of application was test in console
+ * @author RO
+ *
+ */
 public class AdministratorConsole implements IHM_Administrator {
 
 	@Override

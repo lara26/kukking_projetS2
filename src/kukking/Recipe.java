@@ -14,6 +14,11 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
+/**
+ * class to get every eelments recipe and write in (to favoris)
+ * @author RO
+ *
+ */
 public class Recipe {
 	public final static String sourcePath = "./receipts.xls";
 	private String nameSheetRecipe;	

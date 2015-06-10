@@ -7,7 +7,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/**
+ * Interface who allow user to delete/add any recipe
+ * @author Martin
+ *
+ */
 public class AddDeleteRecipePage extends JPanel
 {
 	private static final long serialVersionUID = 1L;

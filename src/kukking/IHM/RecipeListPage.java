@@ -7,6 +7,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
+/**
+ * class where is the user if he research a list of receipts
+ * @author RO
+ *
+ */
 public class RecipeListPage extends JPanel {
 
 	
