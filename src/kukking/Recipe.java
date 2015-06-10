@@ -111,7 +111,7 @@ public class Recipe {
 		try {
 			Workbook workbook = Workbook.getWorkbook(new File(sourcePath));
 			Sheet recipe = workbook.getSheet(this.nameSheetRecipe);
-			if (!recipe.getCell("F8").getContents().equals("")) return recipe.getCell("F6").getContents();
+			if (!recipe.getCell("F8").getContents().equals("")) return recipe.getCell("F8").getContents();
 		} catch (BiffException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} 
 		return "aucun";
 	}

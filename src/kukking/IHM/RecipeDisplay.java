@@ -170,10 +170,6 @@ public class RecipeDisplay extends JPanel implements ActionListener{
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.insets = new Insets(0, 0, 0, 0);
 		recipe.add(new JLabel(recipeToDisplay.getCost()), gbc);
-		gbc.gridx=8;
-		gbc.gridy=8;
-		gbc.anchor = GridBagConstraints.WEST;
-		recipe.add(new JLabel(" €"), gbc);
 		
 	/* preparation */
 		preparation.setFont(new Font("Century Gothic", Font.PLAIN, 14));
